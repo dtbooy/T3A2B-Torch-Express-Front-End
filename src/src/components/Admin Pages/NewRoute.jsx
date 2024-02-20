@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { useState } from 'react'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import { useNavigate } from 'react-router-dom'
 
-const NewRoute = ({addService}) => {
+const NewRoute = () => {
 
-  const [inputForm, setinputForm] = useState({
+  const [inputForm, setInputForm] = useState({
     eventName: "",
     collectionTime: "",
     estimatedTravelTime: "",
@@ -13,9 +14,11 @@ const NewRoute = ({addService}) => {
     dropoffLocation: "",
   })
 
+  const nav = useNavigate()
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setinputForm({
+    setInputForm({
       ...inputForm,
       [name]: value,
     });
@@ -23,12 +26,24 @@ const NewRoute = ({addService}) => {
 
   async function createBusService(e){
     e.preventDefault()
+    try {
+      const response = await fetch('http://localhost:4001/services/', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(inputForm)
+      });
 
-    await addService(inputForm)
-
-    console.log(inputForm);
-    // nav('/admin/services')
-  };
+      if (!response.ok) {
+          throw new Error('Failed to create service');
+      }
+  } catch (error) {
+      console.error('Error creating service:', error);
+  }
+    console.log(inputForm)
+    nav('/admin/services')
+  }
 
 
   return (
@@ -38,23 +53,23 @@ const NewRoute = ({addService}) => {
         <Form.Control type="text"
           placeholder="Enter name"
           name="eventName"
-          value={inputForm.name}
+          value={inputForm.eventName}
           onChange={handleChange} />
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Pick Up</Form.Label>
-        <Form.Control type="text"
+        <Form.Control type="datetime-local"
         placeholder="Select Date and Time"
         name="collectionTime"
-        value={inputForm.name}
+        value={inputForm.collectionTime}
         onChange={handleChange} />
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Travel Time</Form.Label>
-        <Form.Control type="text" 
-        placeholder="Select and Time"
+        <Form.Control type="number" 
+        placeholder="Select Time"
         name="estimatedTravelTime"
-        value={inputForm.name}
+        value={inputForm.estimatedTravelTime}
         onChange={handleChange}/>
       </Form.Group>
       <Form.Group className="mb-3">
@@ -62,7 +77,7 @@ const NewRoute = ({addService}) => {
         <Form.Control type="text" 
         placeholder="Select Location"
         name="pickupLocation"
-        value={inputForm.name}
+        value={inputForm.pickupLocation}
         onChange={handleChange}/>
       </Form.Group>
       <Form.Group className="mb-3">
@@ -70,15 +85,15 @@ const NewRoute = ({addService}) => {
         <Form.Control type="text" 
         placeholder="Select Location"
         name="dropoffLocation"
-        value={inputForm.name}
+        value={inputForm.dropoffLocation}
         onChange={handleChange}/>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Capacity</Form.Label>
-        <Form.Control type="text" 
+        <Form.Control type="number" 
         placeholder="Select Capacity"
         name="capacity"
-        value={inputForm.name}
+        value={inputForm.capacity}
         onChange={handleChange}/>
       </Form.Group>
 
@@ -89,6 +104,4 @@ const NewRoute = ({addService}) => {
   )
 }
   
-  
-
 export default NewRoute
