@@ -6,6 +6,7 @@ import Footer from './Footer'
 import '../styling/app.css'
 import Login from './Login'
 import Register from './Register'
+import Search from './Search'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
+        <Route path="/search" element={<Search/>}/>
       </Routes>
       <Footer/>
     </Router>
