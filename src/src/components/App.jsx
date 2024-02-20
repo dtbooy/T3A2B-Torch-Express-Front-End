@@ -6,6 +6,7 @@ import Footer from './Footer'
 import '../styling/app.css'
 import Login from './Login'
 import Register from './Register'
+import Search from './Search'
 import Services from './Admin Pages/Services'
 import NewRoute from './Admin Pages/NewRoute'
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
+        <Route path="/search" element={<Search/>}/>
         <Route path="/admin" element={<Outlet />}>
           <Route path="services" element={<Services/>}/>
           <Route path="services/new" element={<NewRoute/>}/>
