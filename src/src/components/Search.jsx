@@ -11,51 +11,15 @@ const Search = () => {
   const [dropoff, setDropoff] = useState();
   const [date, setDate] = useState("2032-07-26");
   const [results, setResults] = useState();
+  const [locations, setLocations] = useState([]);
 
-//   need to do a fetch request for this
-    const locations = [
-      {
-        _id: "65d2e730ff45cf961cc97865",
-        name: "South Bank",
-        address: "40 Melbourne St, Southbank QLD 4101",
-        directions:
-          "Cultural Center Bus Station on the corner of Melbourne St and Grey St",
-        reservations: [],
-        __v: 0,
-      },
-      {
-        _id: "65d2e730ff45cf961cc97866",
-        name: "Toowong",
-        address: "3 Sherwood Rd, Toowong QLD 4066",
-        directions: "Stop 23 on Sherwood Rd, near High St at Toowong Village",
-        reservations: [],
-        __v: 0,
-      },
-      {
-        _id: "65d2e730ff45cf961cc97867",
-        name: "The Gabba",
-        address: "Vulture St, Woolloongabba QLD 4102",
-        directions: "Stop 23 on Sherwood Rd, near High St at Toowong Village",
-        reservations: [],
-        __v: 0,
-      },
-      {
-        _id: "65d2e730ff45cf961cc97868",
-        name: "Suncorp Stadium",
-        address: "40 Castlemaine St, Milton QLD 4064",
-        directions: "Drop off point at 40 Castlemaine St",
-        reservations: [],
-        __v: 0,
-      },
-      {
-        _id: "65d2e730ff45cf961cc97869",
-        name: "Queensland Tennis Center",
-        address: "40 Castlemaine St, Milton QLD 4064",
-        directions: "Drop off point at 40 Castlemaine St",
-        reservations: [],
-        __v: 0,
-      },
-    ];
+
+  useEffect(() => {fetch("http://localhost:4001/locations")
+        .then((res) => res.json())
+        .then((data) => setLocations(data))}
+    ,[]
+);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
