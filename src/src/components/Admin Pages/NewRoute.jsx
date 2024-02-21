@@ -23,17 +23,17 @@ const NewRoute = () => {
   }, [])
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     if (name === 'pickupLocation' || name === 'dropoffLocation') {
       setInputForm({
         ...inputForm,
         [name]: value,
-      });
+      })
     } else {
       setInputForm({
         ...inputForm,
         [name]: value,
-      });
+      })
     }
   }
   
@@ -47,13 +47,13 @@ const NewRoute = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(inputForm)
-      });
+      })
 
       if (!response.ok) {
-        throw new Error('Failed to create service');
+        throw new Error('Failed to create service')
       }
     } catch (error) {
-      console.error('Error creating service:', error);
+      console.error('Error creating service:', error)
     }
     console.log(inputForm)
     nav('/admin/services')

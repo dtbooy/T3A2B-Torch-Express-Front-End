@@ -10,6 +10,7 @@ import Search from './Search'
 import Services from './Admin Pages/Services'
 import NewRoute from './Admin Pages/NewRoute'
 import Users from './Admin Pages/Users'
+import Locations from './Admin Pages/Locations'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="services" element={<Services/>}/>
           <Route path="services/new" element={<NewRoute/>}/>
           <Route path="users" element={<Users/>}/>
+          <Route path="locations" element={<Locations/>}/>
         </Route>
       </Routes>
       <Footer/>
