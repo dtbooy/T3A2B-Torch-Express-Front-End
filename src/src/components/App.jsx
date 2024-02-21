@@ -11,6 +11,7 @@ import Services from './Admin Pages/Services'
 import NewRoute from './Admin Pages/NewRoute'
 import Users from './Admin Pages/Users'
 import Locations from './Admin Pages/Locations'
+import Reservations from './Admin Pages/Reservations'
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="services/new" element={<NewRoute/>}/>
           <Route path="users" element={<Users/>}/>
           <Route path="locations" element={<Locations/>}/>
+          <Route path="reservations" element={<Reservations/>}/>
         </Route>
       </Routes>
       <Footer/>

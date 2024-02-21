@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table, Button } from 'react-bootstrap'
 
-
+// Renders a table on the admin pages 
 const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit }) => {
     return (
         <Table striped bordered>

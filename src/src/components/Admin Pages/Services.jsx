@@ -1,4 +1,3 @@
-import React from 'react'
 import AdminPage from './AdminPage'
 import ServiceModal from './ServiceModal'
 import ServicesRow from './ServicesRow'
@@ -16,10 +15,11 @@ const Services = () => {
             collectionTime,
             estimatedTravelTime,
             capacity,
-            pickupLocation: pickupLocation?._id,
-            dropoffLocation: dropoffLocation?._id
+            pickupLocation: pickupLocation,
+            dropoffLocation: dropoffLocation
         }
     }
+
 
     return (
         <AdminPage

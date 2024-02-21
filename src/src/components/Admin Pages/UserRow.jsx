@@ -1,5 +1,3 @@
-
-
 const UserRow = ({ user }) => {
     const role = user.is_admin ? 'Admin' : 'User'
     const reservations = user.reservations.length
