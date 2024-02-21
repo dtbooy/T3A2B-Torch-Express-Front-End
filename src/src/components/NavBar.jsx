@@ -15,7 +15,7 @@ const NavigationBar = () => {
             <Nav.Link as={Link} to="/">My Trips</Nav.Link>
             <NavDropdown title="Admin" id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/admin/services">Routes</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/">Users</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/admin/users">Users</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/">Reservations</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/">Locations</NavDropdown.Item>
             </NavDropdown>

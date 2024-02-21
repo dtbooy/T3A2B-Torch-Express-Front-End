@@ -22,7 +22,7 @@ const Services = () => {
             .then(res => res.json())
             .then(data => setServices(data))
             .catch(error => console.error('Error fetching services:', error))
-    }, [services])
+    }, [])
 
     // Delete functionality 
     async function deleteService(id) {
