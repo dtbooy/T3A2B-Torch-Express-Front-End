@@ -1,4 +1,4 @@
-import AdminPage from './AdminPage'
+import AdminPage from '../AdminPage'
 import ServiceModal from './ServiceModal'
 import ServicesRow from './ServicesRow'
 

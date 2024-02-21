@@ -1,6 +1,6 @@
 import UserRow from './UserRow'
 import UserModal from './UserModal'
-import AdminPage from './AdminPage'
+import AdminPage from '../AdminPage'
 
 
 

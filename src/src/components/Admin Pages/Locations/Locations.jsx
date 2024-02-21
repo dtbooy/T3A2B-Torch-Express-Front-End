@@ -1,4 +1,4 @@
-import AdminPage from "./AdminPage"
+import AdminPage from "../AdminPage"
 import LocationModal from "./LocationModal"
 import LocationRow from "./LocationRow"
 

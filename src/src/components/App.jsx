@@ -7,11 +7,11 @@ import '../styling/app.css'
 import Login from './Login'
 import Register from './Register'
 import Search from './Search'
-import Services from './Admin Pages/Services'
-import NewRoute from './Admin Pages/NewRoute'
-import Users from './Admin Pages/Users'
-import Locations from './Admin Pages/Locations'
-import Reservations from './Admin Pages/Reservations'
+import Services from './Admin Pages/Services/Services'
+import NewRoute from './Admin Pages/Services/NewRoute'
+import Users from './Admin Pages/Users/Users.jsx'
+import Locations from './Admin Pages/Locations/Locations'
+import Reservations from './Admin Pages/Reservations/Reservations'
 
 function App() {
 
