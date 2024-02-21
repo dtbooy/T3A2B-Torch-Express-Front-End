@@ -4,12 +4,12 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import SearchResults from "./SearchResults";
-// import SearchForm from "./SearchForm";
+// import SearchForm from "./SearchForm";  // 
 
 const Search = () => {
   const [pickup, setPickup] = useState();
   const [dropoff, setDropoff] = useState();
-  const [date, setDate] = useState("2032-07-26");
+  const [date, setDate] = useState("2032-08-22");
   const [results, setResults] = useState();
   const [locations, setLocations] = useState([]);
 
@@ -23,7 +23,6 @@ const Search = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // e.stopPropagation();
     setResults("loading");
     const searchQuery = `?${pickup ? "pickup=" + pickup : ""}&${
       dropoff ? "dropoff=" + dropoff : ""
@@ -94,7 +93,7 @@ const Search = () => {
         </Form>
       </Container>
       <Container>
-        <SearchResults results={results} />
+        <SearchResults results={results} locations={locations} />
       </Container>
     </>
   );
