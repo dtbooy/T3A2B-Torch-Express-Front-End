@@ -6,15 +6,17 @@ import Footer from './Footer'
 import '../styling/app.css'
 import Login from './Login'
 import Register from './Register'
-import Search from './Search'
+import Search from './Search Page/Search'
 import Services from './Admin Pages/Services'
 import NewRoute from './Admin Pages/NewRoute'
+import { Container } from 'react-bootstrap'
 
 function App() {
 
   return (
     <Router>
       <NavigationBar/>
+      <Container>
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login/>}/>
@@ -25,6 +27,7 @@ function App() {
           <Route path="services/new" element={<NewRoute/>}/>
         </Route>
       </Routes>
+      </Container>
       <Footer/>
     </Router>
   )
