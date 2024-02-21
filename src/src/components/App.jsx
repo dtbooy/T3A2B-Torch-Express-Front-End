@@ -6,6 +6,12 @@ import Footer from './Footer'
 import '../styling/app.css'
 import Login from './Login'
 import Register from './Register'
+import Search from './Search'
+import Services from './Admin Pages/Services/Services'
+import NewRoute from './Admin Pages/Services/NewRoute'
+import Users from './Admin Pages/Users/Users.jsx'
+import Locations from './Admin Pages/Locations/Locations'
+import Reservations from './Admin Pages/Reservations/Reservations'
 import Search from './Search Page/Search'
 import Services from './Admin Pages/Services'
 import NewRoute from './Admin Pages/NewRoute'
@@ -30,6 +36,9 @@ function App() {
         <Route path="/admin" element={<Outlet />}>
           <Route path="services" element={<Services/>}/>
           <Route path="services/new" element={<NewRoute/>}/>
+          <Route path="users" element={<Users/>}/>
+          <Route path="locations" element={<Locations/>}/>
+          <Route path="reservations" element={<Reservations/>}/>
         </Route>
       </Routes>
       </Container>
