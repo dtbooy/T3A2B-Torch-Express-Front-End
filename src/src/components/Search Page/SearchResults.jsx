@@ -1,8 +1,21 @@
-import { Button, Card, Col, Row, Spinner } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Button, Card, Col, Container, Row, Spinner } from "react-bootstrap";
+import BookTicket from "./BookTicket";
+import { useState } from "react";
 
 const SearchResults = (params) => {
-  let { results, locations } = params;
+  let { results, locations, } = params;
+  const [bookingId, setBookingId] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
+
+   const handleClick = (e)=>{
+     console.log(e.target.id);
+     setBookingId(e.target.id);
+     setShow(true);
+   }
+
 
   // move this into a utility functions file
   function addTime(time, timeOffset) {
@@ -10,6 +23,8 @@ const SearchResults = (params) => {
     newTime.setMinutes(newTime.getMinutes() + parseInt(timeOffset));
     return newTime;
   }
+
+
 
   if (results && results.length === 0) {
     return <h4> No Matches found... </h4>;
@@ -26,6 +41,7 @@ const SearchResults = (params) => {
     )
   } else {
     return (
+        <>
       <Row>
         {results.map((result) => {
           return (
@@ -56,15 +72,16 @@ const SearchResults = (params) => {
                     (est)
                   </Card.Text>
                   <Card.Text>Tickets remaining: {result.capacity - result.reservations}</Card.Text>
-                  <Link to={`/Book:${result._id}`}>
-                  <Button variant="primary">Book a seat</Button>
-                  </Link>
+                  <Button id={result._id} onClick={(e)=> handleClick(e)} variant="primary">Book a seat</Button>
                 </Card.Body>
               </Card>
             </Col>
           );
         })}
+        <BookTicket show={show} setShow={setShow} bookingId={results.filter((res)=>res._id==bookingId)}/>
       </Row>
+      </>
+
     );
   }
 };
