@@ -1,4 +1,5 @@
 import { Button, Card, Col, Row, Spinner } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const SearchResults = (params) => {
   let { results, locations } = params;
@@ -55,7 +56,9 @@ const SearchResults = (params) => {
                     (est)
                   </Card.Text>
                   <Card.Text>Tickets remaining: {result.capacity - result.reservations}</Card.Text>
+                  <Link to={`/Book:${result._id}`}>
                   <Button variant="primary">Book a seat</Button>
+                  </Link>
                 </Card.Body>
               </Card>
             </Col>
