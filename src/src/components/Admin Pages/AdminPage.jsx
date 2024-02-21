@@ -71,9 +71,11 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
     return (
         <div>
             <h1>{heading}</h1>
-            <Link to={newForm}>
-                <Button variant="success">New</Button>
-            </Link>
+            {newForm && (
+                <Link to={newForm}>
+                    <Button variant="success">New</Button>
+                </Link>
+            )}
             <AdminTable
                 tableHeaders={tableHeaders}
                 data={field}
