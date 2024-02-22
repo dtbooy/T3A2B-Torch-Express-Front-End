@@ -14,6 +14,7 @@ import Reservations from './Admin Pages/Reservations/Reservations'
 import Search from './Search Page/Search'
 import Mytrips from './Mytrips'
 import { Container } from 'react-bootstrap'
+import NewLocation from './Admin Pages/Locations/NewLocation.jsx'
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           <Route path="services/new" element={<NewRoute/>}/>
           <Route path="users" element={<Users/>}/>
           <Route path="locations" element={<Locations/>}/>
+          <Route path="locations/new" element={<NewLocation/>}/>
           <Route path="reservations" element={<Reservations/>}/>
         </Route>
       </Routes>

@@ -25,7 +25,7 @@ const Home = () => {
 
       <Container className="home-container">
         <HomeCards handleShow={handleShow} />
-
+        
         <h2 id="buses">Our Buses</h2>
         <Buses />
 
