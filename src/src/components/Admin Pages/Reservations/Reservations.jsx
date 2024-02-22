@@ -5,15 +5,7 @@ import ReservationRow from './ReservationRow'
 const Reservations = () => {
   const endpoint = 'reservations'
   const heading = 'Reservations'
-  const tableHeaders = ['User', 'Service']
-  const prepareServiceData = (editedField) => {
-      const { _id, user, busService} = editedField
-      return {
-          _id,
-          user,
-          busService
-      }
-  }
+  const tableHeaders = ['Reservation ID', 'User Name', 'User Email', 'Bus Number']
 
   return (
       <AdminPage
@@ -22,13 +14,14 @@ const Reservations = () => {
           newForm={null}
           tableHeaders={tableHeaders}
           modalComponent={null}
+          prepareServiceData={null}
           renderRow={(field) => (
               <ReservationRow
                   key={field._id}
                   reservation={field}
               />
           )}
-          prepareData={prepareServiceData} 
+          hideEditButton={true} 
       />
   )
 }

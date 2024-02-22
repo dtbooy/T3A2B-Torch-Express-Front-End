@@ -4,7 +4,7 @@ import { Button, Modal } from 'react-bootstrap'
 import AdminTable from './AdminTable'
 
 // Admin Page is a reusable component for all the different admin pages 
-const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, renderRow, prepareData }) => {
+const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, renderRow, prepareData, hideEditButton }) => {
     const [field, setField] = useState([])
     const [showEditModal, setShowEditModal] = useState(false)
     const [editedField, setEditedField] = useState({})
@@ -82,6 +82,7 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
                 renderRow={renderRow}
                 deleteField={deleteField}
                 handleEdit={handleEdit}
+                hideEditButton={hideEditButton}
             />
             <Modal show={showEditModal} onHide={handleCloseEditModal}>
                 <Modal.Header closeButton>

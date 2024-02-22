@@ -13,20 +13,26 @@ const ServiceModal = ({ editedField, handleChange }) => {
 
     const handleInputChange = (e, fieldName) => {
         const { value } = e.target
-    
-        if (fieldName === 'pickupLocation' || fieldName === 'dropoffLocation') {
-            const locationObject = locations.find(location => location._id === value)
-            handleChange(locationObject, fieldName)
-        } else {
-            handleChange(value, fieldName)
-        }
+        handleChange(value, fieldName)
+    }
+
+    const handlePickupLocationChange = (e) => {
+        const { value } = e.target;
+        const locationObject = locations.find(location => location._id === value);
+        handleChange(locationObject, 'pickupLocation')
+    }
+
+    const handleDropoffLocationChange = (e) => {
+        const { value } = e.target;
+        const locationObject = locations.find(location => location._id === value);
+        handleChange(locationObject, 'dropoffLocation')
     }
 
     return (
         <Form>
             <Form.Group>
-                <Form.Label>Event Name</Form.Label>
-                <Form.Control type="text" name="eventName" value={editedField?.eventName || ''} onChange={(e) => handleInputChange(e, 'eventName')} />
+                <Form.Label>Bus Number</Form.Label>
+                <Form.Control type="text" name="busNumber" value={editedField?.busNumber || ''} onChange={(e) => handleInputChange(e, 'busNumber')} />
             </Form.Group>
             <Form.Group>
                 <Form.Label>Collection Time</Form.Label>
@@ -42,7 +48,7 @@ const ServiceModal = ({ editedField, handleChange }) => {
             </Form.Group>
             <Form.Group>
                 <Form.Label>Pick Up Location</Form.Label>
-                <Form.Select value={editedField?.pickupLocation?._id || ''} onChange={(e) => handleInputChange(e, 'pickupLocation')}>
+                <Form.Select value={editedField?.pickupLocation?._id || ''} onChange={handlePickupLocationChange}>
                     <option value="">Select Pick Up Location</option>
                     {locations.map(location => (
                         <option key={location._id} value={location._id}>{location.name}</option>
@@ -51,7 +57,7 @@ const ServiceModal = ({ editedField, handleChange }) => {
             </Form.Group>
             <Form.Group>
                 <Form.Label>Drop Off Location</Form.Label>
-                <Form.Select value={editedField?.dropoffLocation?._id || ''} onChange={(e) => handleInputChange(e, 'dropoffLocation')}>
+                <Form.Select value={editedField?.dropoffLocation?._id || ''} onChange={handleDropoffLocationChange}>
                     <option value="">Select Drop Off Location</option>
                     {locations.map(location => (
                         <option key={location._id} value={location._id}>{location.name}</option>
