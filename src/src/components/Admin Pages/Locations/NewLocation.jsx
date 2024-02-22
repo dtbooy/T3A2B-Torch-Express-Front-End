@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import {useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { Link, useNavigate } from 'react-router-dom'
@@ -25,39 +25,39 @@ const NewLocation = () => {
     }
 
     const inputValidation = () => {
-        let valid = true;
-        const newErrors = { ...errors };
+        let valid = true
+        const newErrors = { ...errors }
 
         if (!inputForm.name) {
-            newErrors.name = "Name is required";
-            valid = false;
+            newErrors.name = "Name is required"
+            valid = false
         } else {
-            newErrors.name = "";
+            newErrors.name = ""
         }
 
         if (!inputForm.address) {
-            newErrors.address = "Address is required";
-            valid = false;
+            newErrors.address = "Address is required"
+            valid = false
         } else {
-            newErrors.address = "";
+            newErrors.address = ""
         }
 
         if (!inputForm.directions) {
-            newErrors.directions = "Directions are required";
-            valid = false;
+            newErrors.directions = "Directions are required"
+            valid = false
         } else {
-            newErrors.directions = "";
+            newErrors.directions = ""
         }
 
-        setErrors(newErrors);
-        return valid;
+        setErrors(newErrors)
+        return valid
     }
 
     async function createLocation(e) {
         e.preventDefault()
 
         if (!inputValidation()) {
-            return;
+            return
         }
 
         try {
