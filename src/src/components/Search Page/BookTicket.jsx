@@ -1,51 +1,102 @@
-import { useState } from 'react'
-import { Form, Button, Modal } from 'react-bootstrap';
+import { useState } from "react";
+import { Form, Button, Modal, Row, Col } from "react-bootstrap";
 
 function BookTicket(params) {
-    const { show, setShow, bookingId } = params
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const { show, setShowBooking, selectedService } = params;
   
-    return (
-      <>
-        <Button variant="primary" onClick={handleShow}>
-          Launch demo modal
-        </Button>
+  const [reservations, setReservations] = useState(0)
+
+
+
+  const handleClose = () => setShowBooking(false);
   
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Email address</Form.Label>
+
+
+  return (
+    <>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Book Tickets for {selectedService?.name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group
+              as={Row}
+              className="mb-3"
+              controlId="bookingPickupLocation"
+            >
+              <Form.Label column sm="4">
+                Pickup: 
+              </Form.Label>
+              <Col sm="8">
                 <Form.Control
-                  type="email"
-                  placeholder="name@example.com"
-                  autoFocus
+                  plaintext
+                  readOnly
+                  defaultValue={selectedService?.pickupLocation}
                 />
+              </Col>
+            </Form.Group>
+            <Form.Group
+              as={Row}
+              className="mb-3"
+              controlId="bookingDropoffLocation"
+            >
+              <Form.Label column sm="4">
+                Dropoff: 
+              </Form.Label>
+              <Col sm="8">
+                <Form.Control
+                  plaintext
+                  readOnly
+                  defaultValue={selectedService?.dropoffLocation}
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group
+              as={Row}
+              className="mb-3"
+              controlId="bookingDepartureTime"
+            >
+              <Form.Label column sm="4">
+                Departure Time: 
+              </Form.Label>
+              <Col sm="8">
+                <Form.Control
+                  plaintext
+                  readOnly
+                  defaultValue={selectedService?.collectionTime?.slice(11, 16) + ", " + (new Date(selectedService?.collectionTime).toDateString())}
+                />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Col} controlId="numberOfTickets">
+                <Form.Label>Number of Tickets</Form.Label>
+                <Form.Select
+                  value={reservations}
+                  onChange={(e)=>setReservations(e.target.value)}
+                >
+                  <option value={0}>0</option>
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                  <option value={3}>3</option>
+                  <option value={4}>4</option>
+                  
+                </Form.Select>
               </Form.Group>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlTextarea1"
-              >
-                <Form.Label>Example textarea</Form.Label>
-                <Form.Control as="textarea" rows={3} />
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </>
-    );
-  }
-  
-export default BookTicket
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Book Tickets
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+
+}
+
+export default BookTicket;

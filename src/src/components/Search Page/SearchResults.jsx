@@ -4,15 +4,19 @@ import { useState } from "react";
 
 const SearchResults = (params) => {
   let { results, locations, } = params;
-  const [bookingId, setBookingId] = useState(false);
+  const [selectedService, setSelectedService] = useState({});
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  
 
    const handleClick = (e)=>{
-     console.log(e.target.id);
-     setBookingId(e.target.id);
+    // load the service details into selected service 
+    let service = results.find((res)=>res._id==e.target.id)
+    service = {...service, 
+        dropoffLocation : locations.find((loc) => loc._id === service.dropoffLocation).name,
+        pickupLocation : locations.find((loc) => loc._id === service.pickupLocation).name,
+    }
+    console.log(service)
+     setSelectedService(service);
+     // Show the BookTicket Modal
      setShow(true);
    }
 
@@ -78,7 +82,7 @@ const SearchResults = (params) => {
             </Col>
           );
         })}
-        <BookTicket show={show} setShow={setShow} bookingId={results.filter((res)=>res._id==bookingId)}/>
+        <BookTicket show={show} setShow={setShow} selectedService={selectedService}/>
       </Row>
       </>
 
