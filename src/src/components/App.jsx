@@ -25,9 +25,12 @@ function App() {
   const [user, setUser] = useState([])
   const [accessToken, setAccessToken] = useState('')
 
-  useEffect(() => {
+
+  useEffect(() =>  {
     const token = Cookies.get('accessToken')
-    if (token) {
+    const user = Cookies.get('userData')
+    if (token && user) {
+      setUser(user)
       setAccessToken(token)
       setIsLoggedIn(true)
     }
@@ -38,11 +41,9 @@ function App() {
     Cookies.set('accessToken', token, { expires: 7 })
   }
 
-
-
   return (
     <Router>
-      <NavigationBar/>
+      <NavigationBar isLoggedIn={isLoggedIn}/>
       <Container>
       <Routes>
         <Route path="/" element={<Home/>}/>
@@ -51,10 +52,13 @@ function App() {
             element={<Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} updateAccessToken={updateAccessToken} />}
         />
         <Route path="/register" element={<Register/>}/>
+
         <Route path="/search" element={<Search/>}/>
-        <Route path='/user' element={<Outlet/>}>
-          <Route path="mytrips" element={<Mytrips />} /> 
-        </Route>
+        {isLoggedIn ? (
+          <Route path="/user" element={<Outlet />}>
+            <Route path="mytrips" element={<Mytrips />} />
+          </Route>
+        ) : null}
         <Route path="/admin" element={<Outlet />}>
           <Route path="services" element={<Services/>}/>
           <Route path="services/new" element={<NewRoute/>}/>
