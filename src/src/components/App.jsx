@@ -14,10 +14,31 @@ import Reservations from './Admin Pages/Reservations/Reservations'
 import Search from './Search Page/Search'
 import Mytrips from './Mytrips'
 import { Container } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
+import Cookies from 'js-cookie'
 import NewLocation from './Admin Pages/Locations/NewLocation.jsx'
 
 
+
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [user, setUser] = useState([])
+  const [accessToken, setAccessToken] = useState('')
+
+  useEffect(() => {
+    const token = Cookies.get('accessToken')
+    if (token) {
+      setAccessToken(token)
+      setIsLoggedIn(true)
+    }
+  }, [])
+
+  const updateAccessToken = (token) => {
+    setAccessToken(token)
+    Cookies.set('accessToken', token, { expires: 7 })
+  }
+
+
 
   return (
     <Router>
@@ -25,7 +46,10 @@ function App() {
       <Container>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/login" element={<Login/>}/>
+        <Route
+            path="/login"
+            element={<Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} updateAccessToken={updateAccessToken} />}
+        />
         <Route path="/register" element={<Register/>}/>
         <Route path="/search" element={<Search/>}/>
         <Route path='/user' element={<Outlet/>}>
