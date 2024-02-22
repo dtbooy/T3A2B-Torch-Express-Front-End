@@ -1,6 +1,6 @@
 import '../styling/app.css'
 import { BrowserRouter as Router, Routes, Route, Outlet} from 'react-router-dom'
-import Home from './Home'
+import Home from './Home Page/Home'
 import NavigationBar from './NavBar'
 import Footer from './Footer'
 import '../styling/app.css'
