@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import PasswordInput from './PasswordInput'
 
 const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
   const [errorMessage, setErrorMessage] = useState('')
@@ -29,20 +30,19 @@ const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
       // Check if login was successful
       if (res.status === 200) {
         // Store user data and access token in sessionStorage
-        updateAccessToken(data.accessToken)
-        sessionStorage.setItem('user', JSON.stringify(data.user))
+        console.log(data)
+        await updateAccessToken(data.token)
+        document.cookie = `userData=${JSON.stringify(data.user)}; max-age=604800; path=/`
         setUser(data.user)
         setIsLoggedIn(true)
         nav('/')
         
-      } else {
+      } else if (res.status === 401) {
         // Handle login error
         setErrorMessage(data.error)
         console.error(errorMessage)
-        alert(errorMessage)
       }
     } catch (err) {
-      console.error(err)
       setErrorMessage('An unexpected error occurred.')
     }
   }
@@ -54,12 +54,13 @@ const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
       <Form onSubmit={(e) => handleSubmit(e)}>
         <Form.Group className="mb-3" controlId="formEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" value={values.email} onChange={(e) => setValues({ ...values, email: e.target.value })} />
+          <Form.Control type="email" placeholder="Enter email" value={values.email} onChange={(e) => setValues({ ...values, email: e.target.value })} />  
         </Form.Group>
         <Form.Group className="mb-3" controlId="formPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" value={values.password} onChange={(e) => setValues({ ...values, password: e.target.value })} />
-        </Form.Group>
+            <Form.Label>Password</Form.Label>
+            <PasswordInput value={values.password} onChange={(e) => setValues({ ...values, password: e.target.value })} />
+            {/* {fieldErrors.password && <div className="error-message">{fieldErrors.password}</div>} */}
+          </Form.Group>
         <Button variant="primary" type="submit">
           Login
         </Button>

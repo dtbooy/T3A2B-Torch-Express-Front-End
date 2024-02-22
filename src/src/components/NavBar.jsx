@@ -2,7 +2,7 @@ import React from 'react'
 import { Navbar, Nav, NavDropdown, Button, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-const NavigationBar = () => {
+const NavigationBar = ({isLoggedIn}) => {
   return (
     <Navbar expand="lg">
       <Container>
@@ -11,8 +11,11 @@ const NavigationBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto">
             <Nav.Link as={Link} to="/">Buses</Nav.Link>
+            {isLoggedIn ? (
+          <Nav.Link as={Link} to="/user/mytrips">My Trips</Nav.Link>
+        ) : null}
             <Nav.Link as={Link} to="/">Plan Your Trip</Nav.Link>
-            <Nav.Link as={Link} to="/user/mytrips">My Trips</Nav.Link>
+            
             <NavDropdown title="Admin" id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/admin/services">Routes</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/">Users</NavDropdown.Item>
