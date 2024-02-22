@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 const NewRoute = () => {
   const [locations, setLocations] = useState([])
   const [inputForm, setInputForm] = useState({
-    eventName: "",
+    busNumber: "",
     collectionTime: "",
     estimatedTravelTime: "",
     capacity: "",
@@ -63,10 +63,10 @@ const NewRoute = () => {
     <Form onSubmit={createBusService}>
       <Form.Group className="mb-3">
         <Form.Label>Route Name</Form.Label>
-        <Form.Control type="text"
-          placeholder="Enter name"
-          name="eventName"
-          value={inputForm.eventName}
+        <Form.Control type="number"
+          placeholder="Enter Bus Number"
+          name="busNumber"
+          value={inputForm.busNumber}
           onChange={handleChange} />
       </Form.Group>
       <Form.Group className="mb-3">

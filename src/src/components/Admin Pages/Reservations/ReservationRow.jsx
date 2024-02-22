@@ -1,12 +1,13 @@
-import React from 'react'
+const ReservationRow = ({ reservation }) => {
 
-const ReservationRow = ({reservation}) => {
   return (
     <>
-        <td>{reservation.user}</td>
-        <td>{reservation.busService._id}</td>
+      <td>{reservation._id}</td>
+      <td>{reservation.user.name}</td>
+      <td>{reservation.user.email}</td>
+      <td>{reservation.busService.busNumber}</td>
     </>
-  )
-}
+  );
+};
 
-export default ReservationRow
+export default ReservationRow;

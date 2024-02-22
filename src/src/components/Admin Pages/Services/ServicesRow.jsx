@@ -1,7 +1,7 @@
 const ServicesRow = ({ service }) => {
     return (
         <>
-            <td>{service.eventName}</td>
+            <td>{service.busNumber}</td>
             <td>{new Date(service.collectionTime).toLocaleString()}</td>
             <td>{service.estimatedTravelTime}</td>
             <td>{service.pickupLocation?.name}</td>

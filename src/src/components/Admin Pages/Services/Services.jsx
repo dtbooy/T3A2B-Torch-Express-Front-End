@@ -6,17 +6,17 @@ const Services = () => {
     const endpoint = 'services'
     const heading = 'Services'
     const newForm = '/admin/services/new'
-    const tableHeaders = ['Event Name', 'Collection Time', 'Estimated Travel Time', 'Pick Up Location', 'Drop Off Location', 'Capacity']
+    const tableHeaders = ['Bus Number', 'Collection Time', 'Estimated Travel Time', 'Pick Up Location', 'Drop Off Location', 'Capacity']
     const prepareServiceData = (editedField) => {
-        const { _id, eventName, collectionTime, estimatedTravelTime, capacity, pickupLocation, dropoffLocation } = editedField
+        const { _id, busNumber, collectionTime, estimatedTravelTime, capacity, pickupLocation, dropoffLocation } = editedField
         return {
             _id,
-            eventName,
+            busNumber,
             collectionTime,
             estimatedTravelTime,
             capacity,
-            pickupLocation: pickupLocation,
-            dropoffLocation: dropoffLocation
+            pickupLocation,
+            dropoffLocation
         }
     }
 

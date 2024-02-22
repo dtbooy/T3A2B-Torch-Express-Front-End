@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, Button } from 'react-bootstrap'
 
 // Renders a table on the admin pages 
-const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit }) => {
+const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit, hideEditButton }) => {
     return (
         <Table striped bordered>
             <thead>
@@ -18,7 +18,12 @@ const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit }) 
                     <tr key={index}>
                         {renderRow(item)}
                         <td>
-                            <Button variant="warning" onClick={() => handleEdit(item)}>Edit</Button>
+                            {!hideEditButton && (
+                                <>
+                                    <Button variant="warning" onClick={() => handleEdit(item)}>Edit</Button>
+                                    {' '}
+                                </>
+                            )}
                             <Button variant="danger" onClick={() => deleteField(item._id)}>Delete</Button>
                         </td>
                     </tr>
@@ -29,3 +34,4 @@ const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit }) 
 }
 
 export default AdminTable
+
