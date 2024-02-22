@@ -22,7 +22,6 @@ const SearchResults = (params) => {
         (loc) => loc._id === service.pickupLocation
       ).name,
     };
-    console.log(service);
     setSelectedService(service);
     // Show the BookTicket Modal
     setShowBooking(true);

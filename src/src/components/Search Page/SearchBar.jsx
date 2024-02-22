@@ -21,7 +21,7 @@ const SearchBar = (params) => {
     }&${inputForm.dropoff ? "dropoff=" + inputForm.dropoff : ""}&${
       inputForm.date ? "date=" + inputForm.date : ""
     }`;
-    console.log(searchQuery);
+
     fetch("http://localhost:4001/services/search" + searchQuery)
       .then((res) => res.json())
       .then((data) => {
