@@ -41,24 +41,24 @@ const Services = () => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(editedService)
-            });
+            }) 
     
             if (!response.ok) {
-                throw new Error('Failed to update service');
+                throw new Error('Failed to update service') 
             }
     
-            const updatedService = await response.json();
+            const updatedService = await response.json() 
     
             setServices(prevServices => prevServices.map(service => {
                 if (service._id === updatedService._id) {
-                    return updatedService;
+                    return updatedService 
                 }
-                return service;
-            }));
+                return service 
+            })) 
             
-            handleCloseEditModal();
+            handleCloseEditModal() 
         } catch (error) {
-            console.error('Error updating service:', error);
+            console.error('Error updating service:', error) 
         }
     }
     

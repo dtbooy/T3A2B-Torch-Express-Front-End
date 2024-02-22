@@ -17,11 +17,11 @@ const NewRoute = () => {
   const nav = useNavigate()
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target 
     setInputForm({
       ...inputForm,
       [name]: value,
-    });
+    }) 
   }
 
   async function createBusService(e){
@@ -33,13 +33,13 @@ const NewRoute = () => {
               'Content-Type': 'application/json'
           },
           body: JSON.stringify(inputForm)
-      });
+      }) 
 
       if (!response.ok) {
-          throw new Error('Failed to create service');
+          throw new Error('Failed to create service') 
       }
   } catch (error) {
-      console.error('Error creating service:', error);
+      console.error('Error creating service:', error) 
   }
     console.log(inputForm)
     nav('/admin/services')

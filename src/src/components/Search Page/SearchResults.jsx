@@ -1,20 +1,20 @@
-import { Button, Card, Col, Row, Spinner } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Button, Card, Col, Row, Spinner } from "react-bootstrap" 
+import { Link } from "react-router-dom" 
 
 const SearchResults = (params) => {
-  let { results, locations } = params;
+  let { results, locations } = params 
 
   // move this into a utility functions file
   function addTime(time, timeOffset) {
-    let newTime = new Date(time);
-    newTime.setMinutes(newTime.getMinutes() + parseInt(timeOffset));
-    return newTime;
+    let newTime = new Date(time) 
+    newTime.setMinutes(newTime.getMinutes() + parseInt(timeOffset)) 
+    return newTime 
   }
 
   if (results && results.length === 0) {
-    return <h4> No Matches found... </h4>;
+    return <h4> No Matches found... </h4> 
   } else if (!results) {
-    return <></>;
+    return <></> 
   } else if (results == "loading") {
     return (
       <>
@@ -62,11 +62,11 @@ const SearchResults = (params) => {
                 </Card.Body>
               </Card>
             </Col>
-          );
+          ) 
         })}
       </Row>
-    );
+    ) 
   }
-};
+} 
 
-export default SearchResults;
+export default SearchResults 
