@@ -1,3 +1,7 @@
+// TO DO: 
+// Link user to Auth profile
+// Add confirmation / error Modal to confirm tickets reserved
+
 import { useState } from "react";
 import { Form, Button, Modal, Row, Col } from "react-bootstrap";
 
@@ -5,8 +9,8 @@ function BookTicket(params) {
   const { showBooking, setShowBooking, selectedService } = params;
   // Stores number of tickets booked
   const [reservations, setReservations] = useState(0);
-  // UserId needs to be gotten from Auth
-  const user = "65d2e730ff45cf961cc9786b";
+  // UserId needs to be gotten from Auth-------------------------------------------DEBUG
+  const user = "65d6c4b918b39fedca4ddd33";
 
   // on cancel / close of Booking modal - reset ticket selection
   const handleClose = () => {

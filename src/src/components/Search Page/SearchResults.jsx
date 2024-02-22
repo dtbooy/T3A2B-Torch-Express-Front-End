@@ -52,12 +52,12 @@ const SearchResults = (params) => {
   } else {
     return (
       <>
-        <Row>
+        <Row className="row-gap-4">
           {results.map((result) => {
             return (
               <Col key={result._id} sm={12} md={6} xl={4}>
                 <Card>
-                  <Card.Body>
+                  <Card.Body className="flex-column align-items-start ">
                     <Card.Title>{result.eventName}</Card.Title>
                     <Card.Text>
                       Date: {new Date(result.collectionTime).toDateString()}
