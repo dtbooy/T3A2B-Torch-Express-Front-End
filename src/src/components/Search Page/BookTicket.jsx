@@ -1,21 +1,51 @@
 import { useState } from "react";
 import { Form, Button, Modal, Row, Col } from "react-bootstrap";
 
+
+
+
 function BookTicket(params) {
-  const { show, setShowBooking, selectedService } = params;
-  
+  const { showBooking, setShowBooking, selectedService } = params;
+  // Stores number of tickets booked
   const [reservations, setReservations] = useState(0)
+  // UserId needs to be gotten from Auth
+  const user = "65d2e730ff45cf961cc9786b"
+
+  // on cancel / close of Booking modal - reset ticket selection
+  const handleClose = () => {
+    setReservations(1);
+    setShowBooking(false);
+  }
+
+  // On booking selection, 
+  const handleBooking = async () => {
+    // Need to add AUTHENTICATION to this event
+    const tickets = {
+        user : user,
+        busService : selectedService._id,
+        numberOfTickets : reservations
+    }
+    try {
+    const response = await fetch(`http://localhost:4001/reservations`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(tickets)
+    })
+    } catch(error) {
+        console.error('Error booking tickets:', error)
+    }
 
 
 
-  const handleClose = () => setShowBooking(false);
-  
+    //Close Modal
+    handleClose()
+  }
 
 
   return (
     <>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={showBooking} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Book Tickets for {selectedService?.name}</Modal.Title>
         </Modal.Header>
@@ -75,7 +105,6 @@ function BookTicket(params) {
                   value={reservations}
                   onChange={(e)=>setReservations(e.target.value)}
                 >
-                  <option value={0}>0</option>
                   <option value={1}>1</option>
                   <option value={2}>2</option>
                   <option value={3}>3</option>
@@ -86,10 +115,10 @@ function BookTicket(params) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="danger" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleBooking}>
             Book Tickets
           </Button>
         </Modal.Footer>

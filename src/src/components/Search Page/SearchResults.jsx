@@ -4,8 +4,10 @@ import { useState } from "react";
 
 const SearchResults = (params) => {
   let { results, locations, } = params;
+  // holds the service selected for booking
   const [selectedService, setSelectedService] = useState({});
-  const [show, setShow] = useState(false);
+  // controls the booking Modal visibility
+  const [showBooking, setShowBooking] = useState(false);
 
    const handleClick = (e)=>{
     // load the service details into selected service 
@@ -17,7 +19,7 @@ const SearchResults = (params) => {
     console.log(service)
      setSelectedService(service);
      // Show the BookTicket Modal
-     setShow(true);
+     setShowBooking(true);
    }
 
 
@@ -82,7 +84,7 @@ const SearchResults = (params) => {
             </Col>
           );
         })}
-        <BookTicket show={show} setShow={setShow} selectedService={selectedService}/>
+        <BookTicket showBooking={showBooking} setShowBooking={setShowBooking} selectedService={selectedService}/>
       </Row>
       </>
 

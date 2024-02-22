@@ -5,13 +5,15 @@ import { Container } from "react-bootstrap";
 // import Form from "react-bootstrap/Form";
 import SearchResults from "./SearchResults";
 import SearchBar from "./SearchBar";
-import BookTicket from "./BookTicket";
 // import SearchForm from "./SearchForm";  // 
 
 const Search = () => {
+  // stores the location names
   const [locations, setLocations] = useState([]);
+  // stores the search Results
   const [results, setResults] = useState();
   
+  // Get locations from API
   useEffect(() => {fetch("http://localhost:4001/locations")
         .then((res) => res.json())
         .then((data) => setLocations(data))}
