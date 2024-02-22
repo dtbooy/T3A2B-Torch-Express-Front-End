@@ -1,50 +1,43 @@
 import { useState } from "react";
 import { Form, Button, Modal, Row, Col } from "react-bootstrap";
 
-
-
-
 function BookTicket(params) {
   const { showBooking, setShowBooking, selectedService } = params;
   // Stores number of tickets booked
-  const [reservations, setReservations] = useState(0)
+  const [reservations, setReservations] = useState(0);
   // UserId needs to be gotten from Auth
-  const user = "65d2e730ff45cf961cc9786b"
+  const user = "65d2e730ff45cf961cc9786b";
 
   // on cancel / close of Booking modal - reset ticket selection
   const handleClose = () => {
     setReservations(1);
     setShowBooking(false);
-  }
+  };
 
-  // On booking selection, 
+  // On booking selection,
   const handleBooking = async () => {
     // Need to add AUTHENTICATION to this event
     const tickets = {
-        user : user,
-        busService : selectedService._id,
-        numberOfTickets : reservations
-    }
+      user: user,
+      busService: selectedService._id,
+      numberOfTickets: reservations,
+    };
     try {
-    const response = await fetch(`http://localhost:4001/reservations`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(tickets)
-    })
-    } catch(error) {
-        console.error('Error booking tickets:', error)
+      const response = await fetch(`http://localhost:4001/reservations`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(tickets),
+      });
+    } catch (error) {
+      console.error("Error booking tickets:", error);
     }
-
-
 
     //Close Modal
-    handleClose()
-  }
-
+    handleClose();
+  };
 
   return (
     <>
-
       <Modal show={showBooking} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Book Tickets for {selectedService?.name}</Modal.Title>
@@ -57,7 +50,7 @@ function BookTicket(params) {
               controlId="bookingPickupLocation"
             >
               <Form.Label column sm="4">
-                Pickup: 
+                Pickup:
               </Form.Label>
               <Col sm="8">
                 <Form.Control
@@ -73,7 +66,7 @@ function BookTicket(params) {
               controlId="bookingDropoffLocation"
             >
               <Form.Label column sm="4">
-                Dropoff: 
+                Dropoff:
               </Form.Label>
               <Col sm="8">
                 <Form.Control
@@ -89,29 +82,32 @@ function BookTicket(params) {
               controlId="bookingDepartureTime"
             >
               <Form.Label column sm="4">
-                Departure Time: 
+                Departure Time:
               </Form.Label>
               <Col sm="8">
                 <Form.Control
                   plaintext
                   readOnly
-                  defaultValue={selectedService?.collectionTime?.slice(11, 16) + ", " + (new Date(selectedService?.collectionTime).toDateString())}
+                  defaultValue={
+                    selectedService?.collectionTime?.slice(11, 16) +
+                    ", " +
+                    new Date(selectedService?.collectionTime).toDateString()
+                  }
                 />
               </Col>
             </Form.Group>
             <Form.Group as={Col} controlId="numberOfTickets">
-                <Form.Label>Number of Tickets</Form.Label>
-                <Form.Select
-                  value={reservations}
-                  onChange={(e)=>setReservations(e.target.value)}
-                >
-                  <option value={1}>1</option>
-                  <option value={2}>2</option>
-                  <option value={3}>3</option>
-                  <option value={4}>4</option>
-                  
-                </Form.Select>
-              </Form.Group>
+              <Form.Label>Number of Tickets</Form.Label>
+              <Form.Select
+                value={reservations}
+                onChange={(e) => setReservations(e.target.value)}
+              >
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
+                <option value={4}>4</option>
+              </Form.Select>
+            </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -125,7 +121,6 @@ function BookTicket(params) {
       </Modal>
     </>
   );
-
 }
 
 export default BookTicket;
