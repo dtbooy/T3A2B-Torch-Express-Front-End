@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react' 
 import { Navbar, Nav, NavDropdown, Button, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
@@ -27,7 +27,7 @@ const NavigationBar = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  );
+  ) 
 }
 
 export default NavigationBar

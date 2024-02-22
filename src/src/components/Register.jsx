@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import PasswordInput from './PasswordInput'
 
 const Register = () => {
   const nav = useNavigate()
@@ -11,11 +12,13 @@ const Register = () => {
     name: '',
     email: '',
     password: '',
+    confirmPassword: '',
     DOB: ''
   })
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    
     try {
       const res = await fetch("http://localhost:4001/users/", {
         method: 'POST',
@@ -32,7 +35,7 @@ const Register = () => {
         password: '',
         DOB: ''
       })
-      nav('/login')
+      nav('../')
 
     } else if (res.status === 400) {
       setFieldErrors(data.errors)
@@ -69,8 +72,13 @@ const Register = () => {
           </Form.Group>
           <Form.Group className="mb-3" controlId="formPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" value={values.password} onChange={(e) => setValues({ ...values, password: e.target.value })} />
+            <PasswordInput value={values.password} onChange={(e) => setValues({ ...values, password: e.target.value })} />
             {fieldErrors.password && <div className="error-message">{fieldErrors.password}</div>}
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formPassword">
+            <Form.Label>Confirm Password</Form.Label>
+            <PasswordInput value={values.confirmPassword} onChange={(e) => setValues({ ...values, confirmPassword: e.target.value })} />
+            {values.password !== values.confirmPassword && <div className="error-message">Passwords don't match</div>}
           </Form.Group>
           <Form.Group className="mb-3" controlId="formDOB">
             <Form.Label>Date of Birth</Form.Label>
