@@ -24,17 +24,32 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [user, setUser] = useState([])
   const [accessToken, setAccessToken] = useState('')
+  const [isInitialized, setIsInitialized] = useState(false)
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = Cookies.get('accessToken')
+        const userData = Cookies.get('userData')
 
-  useEffect(() =>  {
-    const token = Cookies.get('accessToken')
-    const user = Cookies.get('userData')
-    if (token && user) {
-      setUser(user)
-      setAccessToken(token)
-      setIsLoggedIn(true)
+        if (token && userData) {
+          setUser(JSON.parse(userData))
+          setAccessToken(token)
+          setIsLoggedIn(true)
+        }
+        setIsInitialized(true) // Set initialization status to true after fetching data
+      } catch (error) {
+        console.error("Error fetching data:", error)
+      }
     }
+
+    fetchData()
   }, [])
+
+  if (!isInitialized) {
+    // Render loading indicator or placeholder while fetching data
+    return <div>Loading...</div>
+  }
 
   const updateAccessToken = (token) => {
     setAccessToken(token)
@@ -43,7 +58,7 @@ function App() {
 
   return (
     <Router>
-      <NavigationBar isLoggedIn={isLoggedIn}/>
+      <NavigationBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} isAdmin={user.is_admin}/>
       <Container>
       <Routes>
         <Route path="/" element={<Home/>}/>
@@ -59,6 +74,7 @@ function App() {
             <Route path="mytrips" element={<Mytrips />} />
           </Route>
         ) : null}
+<<<<<<< HEAD
         <Route path="/admin" element={<Outlet />}>
           <Route path="services" element={<Services/>}/>
           <Route path="services/new" element={<NewRoute/>}/>
@@ -67,6 +83,14 @@ function App() {
           <Route path="locations/new" element={<NewLocation/>}/>
           <Route path="reservations" element={<Reservations/>}/>
         </Route>
+=======
+        {isLoggedIn && user.is_admin && (
+            <Route path="/admin" element={<Outlet />}>
+              <Route path="services" element={<Services />} />
+              <Route path="services/new" element={<NewRoute />} />
+            </Route>
+          )}
+>>>>>>> 0dd0e92 (added route protection depending on if user cookies grant login, added a logout button)
       </Routes>
       </Container>
       <Footer/>
