@@ -10,7 +10,7 @@ function BookTicket(params) {
   // Stores number of tickets booked
   const [reservations, setReservations] = useState(0);
   // UserId needs to be gotten from Auth-------------------------------------------DEBUG
-  const user = "65d6c4b918b39fedca4ddd33";
+  const user = "65d6f5b0ff14f7493a8974b9";
 
   // on cancel / close of Booking modal - reset ticket selection
   const handleClose = () => {

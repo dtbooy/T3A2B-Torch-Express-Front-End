@@ -1,4 +1,3 @@
-import React from 'react'
 import AdminPage from '../AdminPage'
 import ReservationRow from './ReservationRow'
 
@@ -6,6 +5,7 @@ const Reservations = () => {
   const endpoint = 'reservations'
   const heading = 'Reservations'
   const tableHeaders = ['Reservation ID', 'User Name', 'User Email', 'Bus Number']
+  const propertyPaths = ["_id", "user.name", "user.email", "busService.busNumber"]  // this can probably be refactored into tableHeaders & allow the Row files to become generic
 
   return (
       <AdminPage
@@ -22,6 +22,7 @@ const Reservations = () => {
               />
           )}
           hideEditButton={true} 
+          propertyPaths={propertyPaths}
       />
   )
 }

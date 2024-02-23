@@ -8,6 +8,7 @@ const Users = () => {
     const endpoint = 'users'
     const heading = 'Users'
     const tableHeaders = ['Name', 'Email', 'Role', 'Reservations']
+    const propertyPaths = ['name', 'email', 'is_admin', 'reservations']
     const prepareServiceData = (editedField) => {
         const { _id, name, email, is_admin, reservations} = editedField
         return {
@@ -33,6 +34,7 @@ const Users = () => {
                 />
             )}
             prepareData={prepareServiceData} 
+            propertyPaths={propertyPaths}
         />
     )
 }

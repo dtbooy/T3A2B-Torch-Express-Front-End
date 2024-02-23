@@ -16,6 +16,8 @@ import Mytrips from './Mytrips'
 import { Container } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
+import UserProfile from './User Profile/UserProfile'
+
 import NewLocation from './Admin Pages/Locations/NewLocation.jsx'
 
 
@@ -74,11 +76,14 @@ function App() {
             <Route path="mytrips" element={<Mytrips />} />
           </Route>
         ) : null}
-
         {isLoggedIn && user.is_admin && (
             <Route path="/admin" element={<Outlet />}>
               <Route path="services" element={<Services />} />
               <Route path="services/new" element={<NewRoute />} />
+              <Route path="users" element={<Users/>}/>
+              <Route path="locations" element={<Locations/>}/>
+              <Route path="locations/new" element={<NewLocation/>}/>
+              <Route path="reservations" element={<Reservations/>}/>
             </Route>
           )}
       </Routes>

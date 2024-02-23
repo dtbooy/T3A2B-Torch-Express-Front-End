@@ -10,17 +10,18 @@ const NavigationBar = ({setIsLoggedIn, isLoggedIn, isAdmin }) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto">
-            <Nav.Link as={Link} to="/">Buses</Nav.Link>
+          <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/search">Buses</Nav.Link>
             {isLoggedIn && <Nav.Link as={Link} to="/user/mytrips">My Trips</Nav.Link>}
-            <Nav.Link as={Link} to="/">Plan Your Trip</Nav.Link>
-            {isLoggedIn && isAdmin && (
-              <NavDropdown title="Admin" id="basic-nav-dropdown">
-                <NavDropdown.Item as={Link} to="/admin/services">Routes</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/">Users</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/">Reservations</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/">Locations</NavDropdown.Item>
-              </NavDropdown>
+            {isLoggedIn && <Nav.Link as={Link} to="/user/profile">Profile</Nav.Link>}
+             {isLoggedIn && isAdmin && (<NavDropdown title="Admin" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/admin/services">Routes</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/admin/users">Users</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/admin/reservations">Reservations</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/admin/locations">Locations</NavDropdown.Item>
+            </NavDropdown>
             )}
+
           </Nav>
           <Nav className="ml-auto">
           {isLoggedIn && <Logout setIsLoggedIn={setIsLoggedIn} />}
