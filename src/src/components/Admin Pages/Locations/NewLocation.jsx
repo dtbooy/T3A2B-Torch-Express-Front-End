@@ -112,7 +112,7 @@ const NewLocation = () => {
                 Create New Location
             </Button>
             <Link to="/admin/locations">
-                <Button variant="secondary" type="submit">
+                <Button variant="secondary">
                     Cancel
                 </Button>
             </Link>
