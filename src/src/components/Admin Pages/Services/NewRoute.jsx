@@ -13,6 +13,14 @@ const NewRoute = () => {
     pickupLocation: "",
     dropoffLocation: "",
   })
+  const [errors, setErrors] = useState({
+    busNumber: "",
+    collectionTime: "",
+    estimatedTravelTime: "",
+    capacity: "",
+    pickupLocation: "",
+    dropoffLocation: "",
+  })
   const nav = useNavigate()
 
   useEffect(() => {
@@ -36,10 +44,64 @@ const NewRoute = () => {
       })
     }
   }
+
+  const inputValidation = () => {
+    let valid = true
+    const newErrors = { ...errors }
+
+    if (!inputForm.busNumber) {
+        newErrors.busNumber = "Bus Number is required"
+        valid = false
+    } else {
+        newErrors.busNumber = ""
+    }
+
+    if (!inputForm.collectionTime) {
+        newErrors.collectionTime = "Date and Time are required"
+        valid = false
+    } else {
+        newErrors.collectionTime = ""
+    }
+
+    if (!inputForm.estimatedTravelTime) {
+        newErrors.estimatedTravelTime = "Time is required"
+        valid = false
+    } else {
+        newErrors.estimatedTravelTime = ""
+    }
+
+    if (!inputForm.capacity) {
+      newErrors.capacity = "Capacity is required"
+      valid = false
+  } else {
+      newErrors.capacity = ""
+  }
+
+  if (!inputForm.pickupLocation) {
+    newErrors.pickupLocation = "Location is required"
+    valid = false
+} else {
+    newErrors.pickupLocation = ""
+}
+
+if (!inputForm.dropoffLocation) {
+  newErrors.dropoffLocation = "Location is required"
+  valid = false
+} else {
+  newErrors.dropoffLocation = ""
+}
+    setErrors(newErrors)
+    return valid
+}
+
   
 
   async function createBusService(e) {
     e.preventDefault()
+    if (!inputValidation()) {
+      return
+  }
+
     try {
       const response = await fetch('http://localhost:4001/services/', {
         method: 'POST',
@@ -68,6 +130,7 @@ const NewRoute = () => {
           name="busNumber"
           value={inputForm.busNumber}
           onChange={handleChange} />
+          <Form.Text className="text-danger">{errors.busNumber}</Form.Text>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Pick Up</Form.Label>
@@ -76,6 +139,7 @@ const NewRoute = () => {
           name="collectionTime"
           value={inputForm.collectionTime}
           onChange={handleChange} />
+          <Form.Text className="text-danger">{errors.collectionTime}</Form.Text>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Travel Time</Form.Label>
@@ -84,6 +148,7 @@ const NewRoute = () => {
           name="estimatedTravelTime"
           value={inputForm.estimatedTravelTime}
           onChange={handleChange} />
+          <Form.Text className="text-danger">{errors.estimatedTravelTime}</Form.Text>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Select Pick Up Location</Form.Label>
@@ -93,6 +158,7 @@ const NewRoute = () => {
             <option key={location._id} value={location._id}>{location.name}</option>
           ))}
         </Form.Select>
+        <Form.Text className="text-danger">{errors.pickupLocation}</Form.Text>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Select Drop Off Location</Form.Label>
@@ -102,6 +168,7 @@ const NewRoute = () => {
             <option key={location._id} value={location._id}>{location.name}</option>
           ))}
         </Form.Select>
+        <Form.Text className="text-danger">{errors.dropoffLocation}</Form.Text>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Capacity</Form.Label>
@@ -110,6 +177,7 @@ const NewRoute = () => {
           name="capacity"
           value={inputForm.capacity}
           onChange={handleChange} />
+          <Form.Text className="text-danger">{errors.capacity}</Form.Text>
       </Form.Group>
       <Button variant="primary" type="submit">
         Create New Service

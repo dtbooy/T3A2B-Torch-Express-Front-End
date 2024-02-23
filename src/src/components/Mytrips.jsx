@@ -7,7 +7,9 @@ const Mytrips = () => {
 
   const [reservations, setReservations] = useState([])
 
+  
   const userId = "65d6f5b0ff14f7493a8974b9"
+
 
 
   useEffect(() => {
