@@ -58,16 +58,14 @@ function App() {
 
   return (
     <Router>
-      <NavigationBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} isAdmin={user.is_admin} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} isAdmin={user.is_admin}/>
+      <NavigationBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} isAdmin={user.is_admin}/>
       <Container>
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route
            
             path="/login"
-           
-            element={<Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} updateAccessToken={updateAccessToken}  setIsLoggedIn={setIsLoggedIn} setUser={setUser} updateAccessToken={updateAccessToken} />}
-        
+            element={<Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} updateAccessToken={updateAccessToken} />}
         />
         <Route path="/register" element={<Register/>}/>
         <Route path="/search" element={<Search/>}/>

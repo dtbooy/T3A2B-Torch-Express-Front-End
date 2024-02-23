@@ -31,7 +31,7 @@ const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
         // Store user data and access token in sessionStorage
         console.log(data)
         await updateAccessToken(data.token)
-        document.cookie = `userData=${JSON.stringify(data.user)} max-age=604800 path=/`
+        document.cookie = `userData=${JSON.stringify(data.user)}`
         setUser(data.user)
         setIsLoggedIn(true)
         nav('/')
