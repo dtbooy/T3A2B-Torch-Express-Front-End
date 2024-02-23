@@ -10,8 +10,8 @@ const NavigationBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto">
+          <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/search">Buses</Nav.Link>
-            <Nav.Link as={Link} to="/">Plan Your Trip</Nav.Link>
             <Nav.Link as={Link} to="/user/mytrips">My Trips</Nav.Link>
             <Nav.Link as={Link} to="/user/profile">Profile</Nav.Link>
             <NavDropdown title="Admin" id="basic-nav-dropdown">
