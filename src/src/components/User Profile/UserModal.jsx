@@ -1,10 +1,12 @@
-// UserModal.js
 import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 
 const UserModal = ({ user, updateUser, handleCloseEditModal }) => {
+    
+    // State for form data 
     const [userData, setUserData] = useState(user)
 
+    // Functionality to handle form input
     const handleChange = (e) => {
         const { name, value } = e.target
         setUserData({
@@ -13,6 +15,7 @@ const UserModal = ({ user, updateUser, handleCloseEditModal }) => {
         })
     }
 
+    // Functionality to handle form submission
     const handleSubmit = () => {
         updateUser(userData)
         handleCloseEditModal()

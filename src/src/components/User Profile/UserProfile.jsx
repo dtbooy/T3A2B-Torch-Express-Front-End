@@ -1,14 +1,14 @@
-// UserProfile.js
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button, Card, Modal } from 'react-bootstrap'
 import UserModal from './UserModal'
 import { useNavigate } from 'react-router-dom'
 
 const UserProfile = () => {
+    // Hard Coded User - needs to be changed 
     const userId = "65d7e54a0fe29ba79e27e5bf"
-    const [user, setUser] = useState({})
-    const [showEditModal, setShowEditModal] = useState(false)
 
+    // Get User
+    const [user, setUser] = useState({})
     useEffect(() => {
         fetch(`http://localhost:4001/users/${userId}`)
             .then(res => res.json())
@@ -16,15 +16,19 @@ const UserProfile = () => {
             .catch(error => console.error('Error fetching User:', error))
     }, [])
 
+    // Privacy for Password
     const hidePassword = () => '*'.repeat(10)
 
+    // Delete User Functionality 
     const nav = useNavigate()
 
     async function deleteUser(id) {
+        // Prompt for confirmation of deletion
         const confirmDelete = window.confirm('Are you sure you want to delete this account?')
         if (confirmDelete) {
             try {
                 await fetch(`http://localhost:4001/users/${id}`, { method: 'DELETE' })
+                // Navigate to home page on deletion
                 nav('/')
                 
             } catch (error) {
@@ -34,6 +38,7 @@ const UserProfile = () => {
 
     }
 
+    // Update User Functionality
     async function updateUser(updatedUser) {
         try {
             const response = await fetch(`http://localhost:4001/users/${userId}`, {
@@ -52,10 +57,13 @@ const UserProfile = () => {
         }
     }
 
+    // Modal Functionality 
+    const [showEditModal, setShowEditModal] = useState(false)
+
     const handleEdit = () => {
         setShowEditModal(true)
     }
-
+     
     const handleCloseEditModal = () => {
         setShowEditModal(false)
     }
@@ -82,6 +90,7 @@ const UserProfile = () => {
                 </Card.Body>
             </Card>
 
+            {/* Modal Component */}
             <Modal show={showEditModal} onHide={handleCloseEditModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Profile</Modal.Title>
