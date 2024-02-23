@@ -5,15 +5,16 @@ import AdminTable from './AdminTable'
 import AdminFilter from './AdminFilter'
 
 // Admin Page is a reusable component for all the different admin pages 
-const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, renderRow, prepareData, hideEditButton }) => {
+const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, renderRow, prepareData, hideEditButton, propertyPaths }) => {
     const [field, setField] = useState([])
     const [showEditModal, setShowEditModal] = useState(false)
     const [editedField, setEditedField] = useState({})
     // generic filter 
     const [filter, setFilter] = useState({})
     // filtered data
-    // const [filterdField, setFilterdField] = useState
+    const [filterdField, setFilterdField] = useState([])
 
+    // Fetch Data from API
     useEffect(() => {
         fetch(`http://localhost:4001/${endpoint}`)
             .then(res => res.json())
@@ -21,6 +22,7 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
             .catch(error => console.error(`Error fetching ${endpoint}:`, error))
     }, [])
 
+    // Delete
     async function deleteField(id) {
         try {
             await fetch(`http://localhost:4001/${endpoint}/${id}`,
@@ -30,6 +32,12 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
             console.error('Error deleting:', error)
         }
     }
+
+    // Filter fields on change of filter State
+    useEffect(() => {setFilterdField(field.filter((row)=> Object.entries(filter).every(([key, value]) => value === undefined || JSON.stringify(row[key]).toLowerCase().includes(value.toString().toLowerCase()))
+    )) 
+// console.log(field)
+}, [field, filter])
 
     const handleEdit = (field) => {
         setEditedField(field)
@@ -85,13 +93,13 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
                 tableHeaders={tableHeaders}
                 filter={filter} // do I need this?
                 setFilter={setFilter}
-                endpoint={endpoint}
-
+                filterProps={propertyPaths}
+                
 
             />
             <AdminTable
                 tableHeaders={tableHeaders}
-                data={field}
+                data={filterdField}
                 renderRow={renderRow}
                 deleteField={deleteField}
                 handleEdit={handleEdit}

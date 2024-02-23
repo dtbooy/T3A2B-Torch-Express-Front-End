@@ -7,7 +7,7 @@ const Mytrips = () => {
 
   const [reservations, setReservations] = useState([])
 
-  const userId = "65d54532aa75712f7af36747"
+  const userId = "65d6f5b0ff14f7493a8974b9"
 
 
   useEffect(() => {
@@ -28,26 +28,30 @@ const Mytrips = () => {
     }
   }
 
-
+if(reservations.length === 0){
+  return<></>
+}else{
+  console.log(reservations)
   return (
     <>
       <h1>My Trips</h1>
       <div className="card-container">
         {reservations.map((reservation) => (
+          
           <Card key={reservation._id}>
             
             <Card.Body>
-              <Card.Title>Reservation for {new Date(reservation.busService.collectionTime).toLocaleDateString('en-GB', { day: '2-digit', month: 'long' })}</Card.Title>
+              <Card.Title>Reservation for {new Date(reservation?.busService?.collectionTime).toLocaleDateString('en-GB', { day: '2-digit', month: 'long' })}</Card.Title>
               <div className="card-body">
                 <div>
                   <Card.Text>
                     Passenger: {reservation.user.name}
                     <br />
-                    Event: {reservation.busService.eventName}
+                    Event: {reservation?.busService?.eventName}
                     <br />
-                    Route: {reservation.busService.pickupLocation.name} - {reservation.busService.dropoffLocation.name}
+                    Route: {reservation?.busService?.pickupLocation?.name} - {reservation?.busService?.dropoffLocation?.name}
                     <br />
-                    Collection Time: {new Date(reservation.busService.collectionTime).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
+                    Collection Time: {new Date(reservation?.busService?.collectionTime).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
                   </Card.Text>
                 </div>
                 <div style={{ height: "auto", margin: "0 auto", maxWidth: 64, width: "100%" }}>
@@ -76,5 +80,5 @@ const Mytrips = () => {
     </>
   )
 }
-
+}
 export default Mytrips
