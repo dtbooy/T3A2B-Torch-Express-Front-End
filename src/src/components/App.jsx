@@ -14,6 +14,7 @@ import Reservations from './Admin Pages/Reservations/Reservations'
 import Search from './Search Page/Search'
 import Mytrips from './Mytrips'
 import { Container } from 'react-bootstrap'
+import UserProfile from './User Profile/UserProfile'
 
 
 function App() {
@@ -28,7 +29,8 @@ function App() {
         <Route path="/register" element={<Register/>}/>
         <Route path="/search" element={<Search/>}/>
         <Route path='/user' element={<Outlet/>}>
-          <Route path="mytrips" element={<Mytrips />} /> 
+          <Route path="mytrips" element={<Mytrips />} />
+          <Route path="profile" element={<UserProfile />} /> 
         </Route>
         <Route path="/admin" element={<Outlet />}>
           <Route path="services" element={<Services/>}/>
