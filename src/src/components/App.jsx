@@ -55,40 +55,6 @@ function App() {
     setAccessToken(token)
     Cookies.set('accessToken', token, { expires: 7 })
   }
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [user, setUser] = useState([])
-  const [accessToken, setAccessToken] = useState('')
-  const [isInitialized, setIsInitialized] = useState(false)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = Cookies.get('accessToken')
-        const userData = Cookies.get('userData')
-
-        if (token && userData) {
-          setUser(JSON.parse(userData))
-          setAccessToken(token)
-          setIsLoggedIn(true)
-        }
-        setIsInitialized(true) // Set initialization status to true after fetching data
-      } catch (error) {
-        console.error("Error fetching data:", error)
-      }
-    }
-
-    fetchData()
-  }, [])
-
-  if (!isInitialized) {
-    // Render loading indicator or placeholder while fetching data
-    return <div>Loading...</div>
-  }
-
-  const updateAccessToken = (token) => {
-    setAccessToken(token)
-    Cookies.set('accessToken', token, { expires: 7 })
-  }
 
   return (
     <Router>
@@ -104,36 +70,13 @@ function App() {
         
         />
         <Route path="/register" element={<Register/>}/>
-
-
         <Route path="/search" element={<Search/>}/>
         {isLoggedIn ? (
           <Route path="/user" element={<Outlet />}>
             <Route path="mytrips" element={<Mytrips />} />
           </Route>
         ) : null}
-<<<<<<< HEAD
-        <Route path="/admin" element={<Outlet />}>
-          <Route path="services" element={<Services/>}/>
-          <Route path="services/new" element={<NewRoute/>}/>
-          <Route path="users" element={<Users/>}/>
-          <Route path="locations" element={<Locations/>}/>
-          <Route path="locations/new" element={<NewLocation/>}/>
-          <Route path="reservations" element={<Reservations/>}/>
-        </Route>
-=======
-        {isLoggedIn && user.is_admin && (
-            <Route path="/admin" element={<Outlet />}>
-              <Route path="services" element={<Services />} />
-              <Route path="services/new" element={<NewRoute />} />
-            </Route>
-          )}
->>>>>>> 0dd0e92 (added route protection depending on if user cookies grant login, added a logout button)
-        {isLoggedIn ? (
-          <Route path="/user" element={<Outlet />}>
-            <Route path="mytrips" element={<Mytrips />} />
-          </Route>
-        ) : null}
+
         {isLoggedIn && user.is_admin && (
             <Route path="/admin" element={<Outlet />}>
               <Route path="services" element={<Services />} />
