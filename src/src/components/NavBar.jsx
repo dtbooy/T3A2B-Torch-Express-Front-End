@@ -13,6 +13,7 @@ const NavigationBar = () => {
             <Nav.Link as={Link} to="/search">Buses</Nav.Link>
             <Nav.Link as={Link} to="/">Plan Your Trip</Nav.Link>
             <Nav.Link as={Link} to="/user/mytrips">My Trips</Nav.Link>
+            <Nav.Link as={Link} to="/user/profile">Profile</Nav.Link>
             <NavDropdown title="Admin" id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/admin/services">Routes</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/admin/users">Users</NavDropdown.Item>
