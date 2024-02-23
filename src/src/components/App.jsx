@@ -38,6 +38,7 @@ function App() {
           setUser(JSON.parse(userData))
           setAccessToken(token)
           setIsLoggedIn(true)
+          let userId = user._id
         }
         setIsInitialized(true) // Set initialization status to true after fetching data
       } catch (error) {
@@ -60,7 +61,7 @@ function App() {
 
   return (
     <Router>
-      <NavigationBar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} isAdmin={user.is_admin}/>
+      <NavigationBar setIsLoggedIn={setIsLoggedIn} userId={user._id} isLoggedIn={isLoggedIn} isAdmin={user.is_admin}/>
       <Container>
       <Routes>
         <Route path="/" element={<Home/>}/>
@@ -73,7 +74,7 @@ function App() {
         <Route path="/search" element={<Search/>}/>
         {isLoggedIn ? (
           <Route path="/user" element={<Outlet />}>
-            <Route path="mytrips" element={<Mytrips />} />
+            <Route path={'mytrips/:userId'} element={<Mytrips />} />
           </Route>
         ) : null}
         {isLoggedIn && user.is_admin && (
