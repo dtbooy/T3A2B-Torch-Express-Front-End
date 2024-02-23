@@ -1,8 +1,8 @@
-import React from 'react';
 import { Navbar, Nav, NavDropdown, Button, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import Logout from './Logout'
 
-const NavigationBar = () => {
+const NavigationBar = ({setIsLoggedIn, isLoggedIn, isAdmin }) => {
   return (
     <Navbar expand="lg">
       <Container>
@@ -12,23 +12,35 @@ const NavigationBar = () => {
           <Nav className="mx-auto">
           <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/search">Buses</Nav.Link>
-            <Nav.Link as={Link} to="/user/mytrips">My Trips</Nav.Link>
-            <Nav.Link as={Link} to="/user/profile">Profile</Nav.Link>
-            <NavDropdown title="Admin" id="basic-nav-dropdown">
+            {isLoggedIn && <Nav.Link as={Link} to="/user/mytrips">My Trips</Nav.Link>}
+            {isLoggedIn && <Nav.Link as={Link} to="/user/profile">Profile</Nav.Link>}
+             {isLoggedIn && isAdmin && (<NavDropdown title="Admin" id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/admin/services">Routes</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/admin/users">Users</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/admin/reservations">Reservations</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/admin/locations">Locations</NavDropdown.Item>
             </NavDropdown>
+            )}
+
           </Nav>
           <Nav className="ml-auto">
-          <Nav.Link as={Link} to="/register"><Button variant="outline-primary">Sign Up</Button></Nav.Link>
-          <Nav.Link as={Link} to="/login"><Button variant="outline-info">Login</Button></Nav.Link>
+          {isLoggedIn && <Logout setIsLoggedIn={setIsLoggedIn} />}
+            {!isLoggedIn && (
+              <>
+                {isLoggedIn && <Logout setIsLoggedIn={setIsLoggedIn} />}
+            {!isLoggedIn && (
+              <>
+                <Nav.Link as={Link} to="/register"><Button variant="outline-primary">Sign Up</Button></Nav.Link>
+                      <Nav.Link as={Link} to="/login"><Button variant="outline-info">Login</Button></Nav.Link>
+              </>
+            )}
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  );
+  )
 }
 
 export default NavigationBar

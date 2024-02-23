@@ -1,20 +1,40 @@
-import { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
-import SearchResults from "./SearchResults";
-import SearchBar from "./SearchBar";
+import { useEffect, useState } from "react" 
+import { Container, Row } from "react-bootstrap" 
+import Button from "react-bootstrap/Button" 
+import Col from "react-bootstrap/Col" 
+import Form from "react-bootstrap/Form" 
+import SearchResults from "./SearchResults" 
+// import SearchForm from "./SearchForm"   // 
 
 const Search = () => {
-  // stores the location names
-  const [locations, setLocations] = useState([]);
-  // stores the search Results
-  const [results, setResults] = useState();
+  const [pickup, setPickup] = useState() 
+  const [dropoff, setDropoff] = useState() 
+  const [date, setDate] = useState("2032-08-22") 
+  const [results, setResults] = useState() 
+  const [locations, setLocations] = useState([]) 
 
-  // Get locations from API
-  useEffect(() => {
-    fetch("http://localhost:4001/locations")
+
+  useEffect(() => {fetch("http://localhost:4001/locations")
+        .then((res) => res.json())
+        .then((data) => setLocations(data))}
+    ,[]
+) 
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault() 
+    setResults("loading") 
+    const searchQuery = `?${pickup ? "pickup=" + pickup : ""}&${
+      dropoff ? "dropoff=" + dropoff : ""
+    }&${date ? "date=" + date : ""}` 
+    console.log(searchQuery) 
+    fetch("http://localhost:4001/services/search" + searchQuery)
       .then((res) => res.json())
-      .then((data) => setLocations(data));
-  }, []);
+      .then((data) => {
+        setResults(data) 
+        console.log(data) 
+      }) 
+  } 
 
   return (
     <>
@@ -24,7 +44,7 @@ const Search = () => {
         <SearchResults results={results} locations={locations} />
       </Container>
     </>
-  );
-};
+  ) 
+} 
 
-export default Search;
+export default Search 

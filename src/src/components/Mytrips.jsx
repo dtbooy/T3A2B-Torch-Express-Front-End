@@ -23,10 +23,10 @@ const Mytrips = () => {
 
   const cancelReservation = async id => {
     try {
-      await fetch(`http://localhost:4001/users/${userId}/reservations/${id}`, { method: 'delete' });
-      setReservations(prevReservations => prevReservations.filter(reservation => reservation._id !== id));
+      await fetch(`http://localhost:4001/users/${userId}/reservations/${id}`, { method: 'delete' }) 
+      setReservations(prevReservations => prevReservations.filter(reservation => reservation._id !== id)) 
     } catch (error) {
-      console.error('Error canceling reservation:', error);
+      console.error('Error canceling reservation:', error) 
     }
   }
 
