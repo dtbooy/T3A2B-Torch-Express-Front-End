@@ -17,7 +17,6 @@ import { Container } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import UserProfile from './User Profile/UserProfile'
-
 import NewLocation from './Admin Pages/Locations/NewLocation.jsx'
 
 
@@ -75,6 +74,8 @@ function App() {
         {isLoggedIn ? (
           <Route path="/user" element={<Outlet />}>
             <Route path={'mytrips/:userId'} element={<Mytrips />} />
+            <Route path="profile" element={<UserProfile />} />
+
           </Route>
         ) : null}
         {isLoggedIn && user.is_admin && (
