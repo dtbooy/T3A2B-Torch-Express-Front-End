@@ -7,6 +7,7 @@ const Services = () => {
     const heading = 'Services'
     const newForm = '/admin/services/new'
     const tableHeaders = ['Bus Number', 'Collection Time', 'Estimated Travel Time', 'Pick Up Location', 'Drop Off Location', 'Capacity']
+    const propertyPaths = ["busNumber", "collectionTime", "estimatedTravelTime", "pickupLocation.name", "dropoffLocation.name", "capacity"]
     const prepareServiceData = (editedField) => {
         const { _id, busNumber, collectionTime, estimatedTravelTime, capacity, pickupLocation, dropoffLocation } = editedField
         return {
@@ -35,6 +36,7 @@ const Services = () => {
                 />
             )}
             prepareData={prepareServiceData} 
+            propertyPaths={propertyPaths}
         />
     )
 }
