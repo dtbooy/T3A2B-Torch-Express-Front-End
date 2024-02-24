@@ -110,16 +110,9 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
                     <Modal.Title>Edit {heading}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {modalComponent && React.createElement(modalComponent, { editedField, handleChange })}
+                    {modalComponent && React.createElement(modalComponent, { editedField, handleChange, updateField, handleCloseEditModal })}
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseEditModal}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={updateField}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
+
             </Modal>
         </div>
     )
