@@ -11,16 +11,12 @@ function BookTicket(params) {
   // Stores number of tickets booked
   const [reservations, setReservations] = useState(0);
   // Stores Offcanvas variables
-  const [showOffcanvas, setShowOffcanvas] = useState(false);
-
   const [offcanvasProps, setOffcanvasProps] = useState({
     show : false,
     returned : false,
     message: "Processing...",
-    error: false,
-    
+    error: false,    
   });
-  
   
   // UserId needs to be gotten from Auth-------------------------------------------DEBUG
   const user = "65d6f5b0ff14f7493a8974b9";
@@ -36,6 +32,7 @@ function BookTicket(params) {
   
   // On booking selection,
   const handleBooking = async () => {
+    // Show processing Offcanvas
     setOffcanvasProps({
       ...offcanvasProps, 
       show:true, 
@@ -44,13 +41,15 @@ function BookTicket(params) {
       name: "Processing",
       alertType: "info",
       } )
+
     // Need to add AUTHENTICATION to this event
     const tickets = {
       user: user,
       busService: selectedService._id,
       numberOfTickets: reservations,
     };
-    setShowOffcanvas(true)
+
+    // Send req to API
     try {
       const response = await fetch(`http://localhost:4001/reservations`, {
         method: "POST",
@@ -59,7 +58,8 @@ function BookTicket(params) {
       });
     } catch (error) {
       console.error("Error booking tickets:", error);
-      // set Error Messgage
+
+      // set Error Message
       setOffcanvasProps({
         ...offcanvasProps, 
         show:true, 
@@ -67,9 +67,7 @@ function BookTicket(params) {
         name: "Error",
         returned : true, 
         alertType: "warning",
-        props: {
-          ...offcanvasProps.props, 
-          }} )
+      })
     }
     // set success offcanvasProps
     setOffcanvasProps({
@@ -78,7 +76,7 @@ function BookTicket(params) {
       message: "Success, tickets booked!",
       returned : true, 
       alertType: "success",
-      name: "Successs",
+      name: "Success",
       })
 
     //Close Modal
@@ -168,21 +166,7 @@ function BookTicket(params) {
           </Button>
         </Modal.Footer>
       </Modal>
-      <ConfirmationOffcanvas offcanvasProps={offcanvasProps} setOffcanvasProps={setOffcanvasProps} showOffcanvas={showOffcanvas}/>
-      {/* <>
-      <Button variant="primary" onClick={()=>setOffcanvasProps({...offcanvasProps, show : true})}>
-            TEST
-          </Button>
-            <Offcanvas show={offcanvasProps.show} onHide={handleOffcanvasClose} {...offcanvasProps.props}>
-   
-              <Offcanvas.Header closeButton>  
-                <Offcanvas.Title>{offcanvasProps.name}</Offcanvas.Title>
-              </Offcanvas.Header>
-              <Offcanvas.Body>
-                {offcanvasProps.message}
-              </Offcanvas.Body>
-            </Offcanvas>
-          </> */}
+      <ConfirmationOffcanvas offcanvasProps={offcanvasProps} setOffcanvasProps={setOffcanvasProps}/>
     </>
   );
 }

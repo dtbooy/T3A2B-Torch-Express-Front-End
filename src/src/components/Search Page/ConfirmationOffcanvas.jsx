@@ -1,19 +1,22 @@
-import { Alert, Button, Offcanvas } from 'react-bootstrap'
+import { Offcanvas } from 'react-bootstrap'
 
 const ConfirmationOffcanvas = ({offcanvasProps, setOffcanvasProps}) => {
-  
+  // To use this component need to set a State in the call component and set:
+  // name: Title
+  // message: message content
+  // alertType: bootstrap alert type (styling) 
+  // show: boolean controller to show / hide the alert
+
+
   const handleOffcanvasClose = () => {
     // close OffCanvas, reset state
-    setOffcanvasProps({props : {...offcanvasProps.props}, show : false})
+    setOffcanvasProps({show : false})
   };
+
         return (
           <>
-          <Button variant="primary" onClick={()=>setOffcanvasProps({...offcanvasProps, show : true})}>   TEST
-          </Button>
-
-
-          <Offcanvas show={offcanvasProps.show} onHide={handleOffcanvasClose} {...offcanvasProps.props}>
-              <div className={`alert alert-${offcanvasProps.alertType}`}>
+          <Offcanvas show={offcanvasProps.show} onHide={handleOffcanvasClose} scroll={true} backdrop={false} placement='top'>
+              <div style={{height : "100%"}} className={`alert alert-${offcanvasProps.alertType} my-0 overflow-scroll`}>
               <Offcanvas.Header className="py-0" closeButton={offcanvasProps.returned}> 
               <Offcanvas.Title >{offcanvasProps.name}</Offcanvas.Title>
               </Offcanvas.Header>
@@ -24,36 +27,6 @@ const ConfirmationOffcanvas = ({offcanvasProps, setOffcanvasProps}) => {
             </Offcanvas>
           </>
         );
-      // } else if (error){
-      //   return (
-      //     <>
-      //       <Offcanvas show={show} onHide={handleClose} {...props}>
-      //         <Offcanvas.Header closeButton>
-      //           <Offcanvas.Title>Error - Operation Failed</Offcanvas.Title>
-      //         </Offcanvas.Header>
-      //         <Offcanvas.Body>
-      //         <Alert variant={"warning"}>
-      //       {message}
-      //   </Alert>
-      //       </Offcanvas.Body>
-      //       </Offcanvas>
-      //     </>
-      //   );
-      // } else {
-      //   <>
-      //   <Offcanvas show={show} onHide={handleClose} {...props}>
-      //     <Offcanvas.Header closeButton>
-      //       <Offcanvas.Title>Success!</Offcanvas.Title>
-      //     </Offcanvas.Header>
-      //     <Offcanvas.Body>
-      //     <Alert variant={"success"}>
-      //       {message}
-      //   </Alert>
-            
-      //     </Offcanvas.Body>
-      //   </Offcanvas>
-      // </>
-      // }
     }
       
       
