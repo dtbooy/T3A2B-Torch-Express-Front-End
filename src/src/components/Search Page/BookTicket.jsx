@@ -1,4 +1,4 @@
-// TO DO: 
+// TO DO:
 // Link user to Auth profile
 // Add confirmation / error Modal to confirm tickets reserved
 
@@ -12,12 +12,12 @@ function BookTicket(params) {
   const [reservations, setReservations] = useState(0);
   // Stores Offcanvas variables
   const [offcanvasProps, setOffcanvasProps] = useState({
-    show : false,
-    returned : false,
+    show: false,
+    returned: false,
     message: "Processing...",
-    error: false,    
+    error: false,
   });
-  
+
   // UserId needs to be gotten from Auth-------------------------------------------DEBUG
   const user = "65d6f5b0ff14f7493a8974b9";
 
@@ -29,18 +29,19 @@ function BookTicket(params) {
     setShowBooking(false);
   };
 
-  
   // On booking selection,
   const handleBooking = async () => {
+    //Close Modal
+    handleClose();
     // Show processing Offcanvas
     setOffcanvasProps({
-      ...offcanvasProps, 
-      show:true, 
+      ...offcanvasProps,
+      show: true,
       message: "Processing...",
-      returned : false, 
+      returned: false,
       name: "Processing",
       alertType: "info",
-      } )
+    });
 
     // Need to add AUTHENTICATION to this event
     const tickets = {
@@ -61,23 +62,23 @@ function BookTicket(params) {
 
       // set Error Message
       setOffcanvasProps({
-        ...offcanvasProps, 
-        show:true, 
+        ...offcanvasProps,
+        show: true,
         message: `Error booking tickets ${error.message}`,
         name: "Error",
-        returned : true, 
+        returned: true,
         alertType: "warning",
-      })
+      });
     }
     // set success offcanvasProps
     setOffcanvasProps({
-      ...offcanvasProps, 
-      show:true, 
+      ...offcanvasProps,
+      show: true,
       message: "Success, tickets booked!",
-      returned : true, 
+      returned: true,
       alertType: "success",
       name: "Success",
-      })
+    });
 
     //Close Modal
     handleClose();
@@ -166,7 +167,10 @@ function BookTicket(params) {
           </Button>
         </Modal.Footer>
       </Modal>
-      <ConfirmationOffcanvas offcanvasProps={offcanvasProps} setOffcanvasProps={setOffcanvasProps}/>
+      <ConfirmationOffcanvas
+        offcanvasProps={offcanvasProps}
+        setOffcanvasProps={setOffcanvasProps}
+      />
     </>
   );
 }
