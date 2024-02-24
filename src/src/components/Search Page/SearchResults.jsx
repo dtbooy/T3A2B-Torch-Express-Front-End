@@ -101,12 +101,12 @@ const SearchResults = (params) => {
               </Col>
             );
           })}
-          <BookTicket
+        </Row>
+        <BookTicket
             showBooking={showBooking}
             setShowBooking={setShowBooking}
             selectedService={selectedService}
           />
-        </Row>
       </>
     );
   }
