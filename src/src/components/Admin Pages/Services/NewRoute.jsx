@@ -1,184 +1,161 @@
 import { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const NewRoute = () => {
+  // get locations for pickup and dropoff 
   const [locations, setLocations] = useState([])
-  const [inputForm, setInputForm] = useState({
-    busNumber: "",
-    collectionTime: "",
-    estimatedTravelTime: "",
-    capacity: "",
-    pickupLocation: "",
-    dropoffLocation: "",
-  })
-  const [errors, setErrors] = useState({
-    busNumber: "",
-    collectionTime: "",
-    estimatedTravelTime: "",
-    capacity: "",
-    pickupLocation: "",
-    dropoffLocation: "",
-  })
-  const nav = useNavigate()
 
   useEffect(() => {
-    fetch("http://localhost:4001/locations")
+    fetch('http://localhost:4001/locations')
       .then((res) => res.json())
       .then((data) => setLocations(data))
-      .catch(error => console.error('Error fetching locations:', error))
+      .catch((error) => console.error('Error fetching locations:', error))
   }, [])
 
+  // state for form input values
+  const [inputForm, setInputForm] = useState({
+    busNumber: '',
+    collectionTime: '',
+    estimatedTravelTime: '',
+    capacity: '',
+    pickupLocation: '',
+    dropoffLocation: '',
+  })
+
+  // state for form validation errors 
+  const [errors, setErrors] = useState({})
+  const nav = useNavigate()
+
+  // handle input change on form fields 
   const handleChange = (e) => {
     const { name, value } = e.target
-    if (name === 'pickupLocation' || name === 'dropoffLocation') {
-      setInputForm({
-        ...inputForm,
-        [name]: value,
-      })
-    } else {
-      setInputForm({
-        ...inputForm,
-        [name]: value,
-      })
-    }
+    setInputForm({
+      ...inputForm,
+      [name]: value,
+    })
+    // clear error message when field changes
+    setErrors({ ...errors, [name]: '' })
   }
 
-  const inputValidation = () => {
-    let valid = true
-    const newErrors = { ...errors }
-
-    if (!inputForm.busNumber) {
-        newErrors.busNumber = "Bus Number is required"
-        valid = false
-    } else {
-        newErrors.busNumber = ""
-    }
-
-    if (!inputForm.collectionTime) {
-        newErrors.collectionTime = "Date and Time are required"
-        valid = false
-    } else {
-        newErrors.collectionTime = ""
-    }
-
-    if (!inputForm.estimatedTravelTime) {
-        newErrors.estimatedTravelTime = "Time is required"
-        valid = false
-    } else {
-        newErrors.estimatedTravelTime = ""
-    }
-
-    if (!inputForm.capacity) {
-      newErrors.capacity = "Capacity is required"
-      valid = false
-  } else {
-      newErrors.capacity = ""
-  }
-
-  if (!inputForm.pickupLocation) {
-    newErrors.pickupLocation = "Location is required"
-    valid = false
-} else {
-    newErrors.pickupLocation = ""
-}
-
-if (!inputForm.dropoffLocation) {
-  newErrors.dropoffLocation = "Location is required"
-  valid = false
-} else {
-  newErrors.dropoffLocation = ""
-}
-    setErrors(newErrors)
-    return valid
-}
-
-  
-
-  async function createBusService(e) {
+  // handle form submit
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!inputValidation()) {
-      return
-  }
+    const requiredFields = ['busNumber', 'collectionTime', 'estimatedTravelTime', 'capacity', 'pickupLocation', 'dropoffLocation']
+    const newErrors = {}
 
-    try {
-      const response = await fetch('http://localhost:4001/services/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(inputForm)
-      })
-
-      if (!response.ok) {
-        throw new Error('Failed to create service')
+    // validation that there is no blank field
+    requiredFields.forEach(fieldName => {
+      if (!inputForm[fieldName]) {
+        newErrors[fieldName] = 'This Field is Required'
       }
-    } catch (error) {
-      console.error('Error creating service:', error)
+    })
+
+    // set validation error
+    setErrors(newErrors)
+
+    // if no validation errors then submit the form and create new service 
+    if (Object.keys(newErrors).length === 0) {
+      try {
+        const response = await fetch('http://localhost:4001/services/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(inputForm)
+        })
+
+        if (!response.ok) {
+          throw new Error('Failed to create service')
+        } else {
+          nav('/admin/services')
+        }
+      } catch (error) {
+        console.error('Error creating service:', error)
+      }
     }
-    console.log(inputForm)
-    nav('/admin/services')
   }
 
   return (
-    <Form onSubmit={createBusService}>
+    <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3">
         <Form.Label>Route Name</Form.Label>
-        <Form.Control type="number"
+        <Form.Control
+          type="number"
           placeholder="Enter Bus Number"
           name="busNumber"
           value={inputForm.busNumber}
-          onChange={handleChange} />
-          <Form.Text className="text-danger">{errors.busNumber}</Form.Text>
+          onChange={handleChange}
+          isInvalid={!!errors.busNumber}
+        />
+        <Form.Control.Feedback type="invalid">{errors.busNumber}</Form.Control.Feedback>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Pick Up</Form.Label>
-        <Form.Control type="datetime-local"
+        <Form.Control
+          type="datetime-local"
           placeholder="Select Date and Time"
           name="collectionTime"
           value={inputForm.collectionTime}
-          onChange={handleChange} />
-          <Form.Text className="text-danger">{errors.collectionTime}</Form.Text>
+          onChange={handleChange}
+          isInvalid={!!errors.collectionTime}
+        />
+        <Form.Control.Feedback type="invalid">{errors.collectionTime}</Form.Control.Feedback>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Travel Time</Form.Label>
-        <Form.Control type="number"
+        <Form.Control
+          type="number"
           placeholder="Select Time"
           name="estimatedTravelTime"
           value={inputForm.estimatedTravelTime}
-          onChange={handleChange} />
-          <Form.Text className="text-danger">{errors.estimatedTravelTime}</Form.Text>
+          onChange={handleChange}
+          isInvalid={!!errors.estimatedTravelTime}
+        />
+        <Form.Control.Feedback type="invalid">{errors.estimatedTravelTime}</Form.Control.Feedback>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Select Pick Up Location</Form.Label>
-        <Form.Select name="pickupLocation" value={inputForm.pickupLocation} onChange={handleChange} >
-          <option value="" >Select Pick Up Location</option>
+        <Form.Select name="pickupLocation" value={inputForm.pickupLocation} onChange={handleChange} isInvalid={!!errors.pickupLocation}>
+          <option value="">Select Pick Up Location</option>
           {locations.map((location) => (
-            <option key={location._id} value={location._id}>{location.name}</option>
+            <option key={location._id} value={location._id}>
+              {location.name}
+            </option>
           ))}
         </Form.Select>
-        <Form.Text className="text-danger">{errors.pickupLocation}</Form.Text>
+        <Form.Control.Feedback type="invalid">{errors.pickupLocation}</Form.Control.Feedback>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Select Drop Off Location</Form.Label>
-        <Form.Select name="dropoffLocation" value={inputForm.dropoffLocation} onChange={handleChange} >
+        <Form.Select name="dropoffLocation" value={inputForm.dropoffLocation} onChange={handleChange} isInvalid={!!errors.dropoffLocation}>
           <option value="">Select Drop Off Location</option>
           {locations.map((location) => (
-            <option key={location._id} value={location._id}>{location.name}</option>
+            <option key={location._id} value={location._id}>
+              {location.name}
+            </option>
           ))}
         </Form.Select>
-        <Form.Text className="text-danger">{errors.dropoffLocation}</Form.Text>
+        <Form.Control.Feedback type="invalid">{errors.dropoffLocation}</Form.Control.Feedback>
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Capacity</Form.Label>
-        <Form.Control type="number"
+        <Form.Control
+          type="number"
           placeholder="Select Capacity"
           name="capacity"
           value={inputForm.capacity}
-          onChange={handleChange} />
-          <Form.Text className="text-danger">{errors.capacity}</Form.Text>
+          onChange={handleChange}
+          isInvalid={!!errors.capacity}
+        />
+        <Form.Control.Feedback type="invalid">{errors.capacity}</Form.Control.Feedback>
       </Form.Group>
+      <Link to="/admin/services">
+        <Button variant="secondary">
+          Cancel
+        </Button>
+      </Link>
       <Button variant="primary" type="submit">
         Create New Service
       </Button>

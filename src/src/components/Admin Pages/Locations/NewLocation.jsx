@@ -1,42 +1,48 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 
-const NewLocation = ({ createLocation }) => {
+const NewLocation = () => {
+    // set state for form input values
     const [inputForm, setInputForm] = useState({
         name: "",
         address: "",
         directions: "",
     })
-    const [errors, setErrors] = useState({})
 
+    // state for form validation errors 
+    const [errors, setErrors] = useState({})
+    const nav = useNavigate()
+
+    // handle input change on form fields 
     const handleChange = (e) => {
         const { name, value } = e.target
         setInputForm({
             ...inputForm,
-            [name]: value,
+            [name]: value.trim(), 
         })
+        // clear error message when field changes
         setErrors({ ...errors, [name]: '' })
     }
 
-    const nav = useNavigate()
-
+    // handle form submit
     const handleSubmit = async (e) => {
         e.preventDefault()
+        const requiredFields = ['name', 'address', 'directions']
         const newErrors = {}
-        if (!inputForm.name.trim()) {
-            newErrors.name = 'Name is required'
-        }
-        if (!inputForm.address.trim()) {
-            newErrors.address = 'Address is required'
-        }
-        if (!inputForm.directions.trim()) {
-            newErrors.directions = 'Directions are required'
-        }
 
-        if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors)
-        } else {
+        // validation that there is no blank field 
+        requiredFields.forEach(fieldName => {
+            if (!inputForm[fieldName]) {
+                newErrors[fieldName] = 'This Field is Required'
+            }
+        })
+
+        // set validation error 
+        setErrors(newErrors)
+
+        // if no validation errors then submit the form and create new location 
+        if (Object.keys(newErrors).length === 0) {
             try {
                 const response = await fetch('http://localhost:4001/locations/', {
                     method: 'POST',
@@ -47,12 +53,12 @@ const NewLocation = ({ createLocation }) => {
                 })
 
                 if (!response.ok) {
-                    throw new Error('Failed to create service')
+                    throw new Error('Failed to create location')
                 } else {
                     nav('/admin/locations')
                 }
             } catch (error) {
-                console.error('Error creating service:', error)
+                console.error('Error creating location:', error)
             }
         }
     }
@@ -61,7 +67,8 @@ const NewLocation = ({ createLocation }) => {
         <Form onSubmit={handleSubmit}>
             <Form.Group>
                 <Form.Label>Location Name</Form.Label>
-                <Form.Control type="text"
+                <Form.Control
+                    type="text"
                     placeholder="Enter Location Name"
                     name="name"
                     value={inputForm.name}
@@ -72,7 +79,8 @@ const NewLocation = ({ createLocation }) => {
             </Form.Group>
             <Form.Group>
                 <Form.Label>Location Address</Form.Label>
-                <Form.Control type="text"
+                <Form.Control
+                    type="text"
                     placeholder="Enter Address"
                     name="address"
                     value={inputForm.address}
@@ -83,7 +91,8 @@ const NewLocation = ({ createLocation }) => {
             </Form.Group>
             <Form.Group>
                 <Form.Label>Directions</Form.Label>
-                <Form.Control type="text"
+                <Form.Control
+                    type="text"
                     placeholder="Enter Directions"
                     name="directions"
                     value={inputForm.directions}

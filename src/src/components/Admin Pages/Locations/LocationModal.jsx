@@ -2,30 +2,34 @@ import React, { useState } from 'react'
 import { Button, Modal, Form } from 'react-bootstrap'
 
 const LocationModal = ({ editedField, handleChange, handleCloseEditModal, updateField }) => {
+    // state for form validation errors 
     const [errors, setErrors] = useState({})
 
+    // handle input change on form fields 
     const handleInputChange = (e, fieldName) => {
         const { value } = e.target
         handleChange(value, fieldName)
+        // clear error message when field changes
         setErrors({ ...errors, [fieldName]: '' })
     }
 
+    // handle form submit
     const handleSubmit = (e) => {
         e.preventDefault()
+        const requiredFields = ['name', 'address', 'directions']
         const newErrors = {}
-        if (!editedField.name) {
-            newErrors.name = 'Name is required'
-        }
-        if (!editedField.address) {
-            newErrors.address = 'Address is required'
-        }
-        if (!editedField.directions) {
-            newErrors.directions = 'Directions are required'
-        }
 
-        if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors)
-        } else {
+        // validation that there is no blak field 
+        requiredFields.forEach(fieldName => {
+            if (!editedField[fieldName]) {
+                newErrors[fieldName] = 'This Field is Required'
+            }
+        })
+        // set valitation error
+        setErrors(newErrors)
+        
+        // if no validation errors then update the field/s and close modal 
+        if (Object.keys(newErrors).length === 0) {
             updateField()
             handleCloseEditModal()
         }
