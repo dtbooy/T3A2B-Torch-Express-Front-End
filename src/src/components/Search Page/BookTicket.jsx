@@ -18,11 +18,7 @@ function BookTicket(params) {
     returned : false,
     message: "Processing...",
     error: false,
-    props: {
-      scroll: true,
-      backdrop: false,
-      placement: 'top'
-    }
+    
   });
   
   
@@ -82,9 +78,8 @@ function BookTicket(params) {
       message: "Success, tickets booked!",
       returned : true, 
       alertType: "success",
-      props: {
-        ...offcanvasProps.props, 
-        name: "Successs"}} )
+      name: "Successs",
+      })
 
     //Close Modal
     handleClose();

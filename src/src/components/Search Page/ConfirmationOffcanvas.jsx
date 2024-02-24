@@ -1,6 +1,7 @@
 import { Alert, Button, Offcanvas } from 'react-bootstrap'
 
 const ConfirmationOffcanvas = ({offcanvasProps, setOffcanvasProps}) => {
+  
   const handleOffcanvasClose = () => {
     // close OffCanvas, reset state
     setOffcanvasProps({props : {...offcanvasProps.props}, show : false})
@@ -12,13 +13,14 @@ const ConfirmationOffcanvas = ({offcanvasProps, setOffcanvasProps}) => {
 
 
           <Offcanvas show={offcanvasProps.show} onHide={handleOffcanvasClose} {...offcanvasProps.props}>
-              {/* ={offcanvasProps.returned} */}
-              <Offcanvas.Header closeButton>  
-                <Offcanvas.Title>{offcanvasProps.name}</Offcanvas.Title>
+              <div className={`alert alert-${offcanvasProps.alertType}`}>
+              <Offcanvas.Header className="py-0" closeButton={offcanvasProps.returned}> 
+              <Offcanvas.Title >{offcanvasProps.name}</Offcanvas.Title>
               </Offcanvas.Header>
-              <Offcanvas.Body>
-                {offcanvasProps.message}
-              </Offcanvas.Body>
+              <Offcanvas.Body className="py-0">
+               {offcanvasProps.message}
+               </Offcanvas.Body>
+               </div>
             </Offcanvas>
           </>
         );
