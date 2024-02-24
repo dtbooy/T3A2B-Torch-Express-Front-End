@@ -3,29 +3,58 @@
 // Add confirmation / error Modal to confirm tickets reserved
 
 import { useState } from "react";
-import { Form, Button, Modal, Row, Col } from "react-bootstrap";
+import { Form, Button, Modal, Row, Col, Offcanvas } from "react-bootstrap";
+import ConfirmationOffcanvas from "./ConfirmationOffcanvas";
 
 function BookTicket(params) {
   const { showBooking, setShowBooking, selectedService } = params;
   // Stores number of tickets booked
   const [reservations, setReservations] = useState(0);
+  // Stores Offcanvas variables
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+
+  const [offcanvasProps, setOffcanvasProps] = useState({
+    show : false,
+    returned : false,
+    message: "Processing...",
+    error: false,
+    props: {
+      scroll: true,
+      backdrop: false,
+      placement: 'top'
+    }
+  });
+  
+  
   // UserId needs to be gotten from Auth-------------------------------------------DEBUG
   const user = "65d6f5b0ff14f7493a8974b9";
 
   // on cancel / close of Booking modal - reset ticket selection
   const handleClose = () => {
+    // reset ticket selection
     setReservations(1);
+    // close modal
     setShowBooking(false);
   };
 
+  
   // On booking selection,
   const handleBooking = async () => {
+    setOffcanvasProps({
+      ...offcanvasProps, 
+      show:true, 
+      message: "Processing...",
+      returned : false, 
+      name: "Processing",
+      alertType: "info",
+      } )
     // Need to add AUTHENTICATION to this event
     const tickets = {
       user: user,
       busService: selectedService._id,
       numberOfTickets: reservations,
     };
+    setShowOffcanvas(true)
     try {
       const response = await fetch(`http://localhost:4001/reservations`, {
         method: "POST",
@@ -34,7 +63,28 @@ function BookTicket(params) {
       });
     } catch (error) {
       console.error("Error booking tickets:", error);
+      // set Error Messgage
+      setOffcanvasProps({
+        ...offcanvasProps, 
+        show:true, 
+        message: `Error booking tickets ${error.message}`,
+        name: "Error",
+        returned : true, 
+        alertType: "warning",
+        props: {
+          ...offcanvasProps.props, 
+          }} )
     }
+    // set success offcanvasProps
+    setOffcanvasProps({
+      ...offcanvasProps, 
+      show:true, 
+      message: "Success, tickets booked!",
+      returned : true, 
+      alertType: "success",
+      props: {
+        ...offcanvasProps.props, 
+        name: "Successs"}} )
 
     //Close Modal
     handleClose();
@@ -123,6 +173,21 @@ function BookTicket(params) {
           </Button>
         </Modal.Footer>
       </Modal>
+      <ConfirmationOffcanvas offcanvasProps={offcanvasProps} setOffcanvasProps={setOffcanvasProps} showOffcanvas={showOffcanvas}/>
+      {/* <>
+      <Button variant="primary" onClick={()=>setOffcanvasProps({...offcanvasProps, show : true})}>
+            TEST
+          </Button>
+            <Offcanvas show={offcanvasProps.show} onHide={handleOffcanvasClose} {...offcanvasProps.props}>
+   
+              <Offcanvas.Header closeButton>  
+                <Offcanvas.Title>{offcanvasProps.name}</Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>
+                {offcanvasProps.message}
+              </Offcanvas.Body>
+            </Offcanvas>
+          </> */}
     </>
   );
 }
