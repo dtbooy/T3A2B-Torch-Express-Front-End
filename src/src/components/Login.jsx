@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import PasswordInput from './PasswordInput'
+import Cookies from 'js-cookie'
 
 const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
   const [errorMessage, setErrorMessage] = useState('')
@@ -31,7 +32,7 @@ const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
         // Store user data and access token in sessionStorage
         console.log(data)
         await updateAccessToken(data.token)
-        document.cookie = `userData=${JSON.stringify(data.user)}`
+        Cookies.set('userData', JSON.stringify(data.user), { sameSite: 'None', secure: true })
         setUser(data.user)
         setIsLoggedIn(true)
         nav('/')

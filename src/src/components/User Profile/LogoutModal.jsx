@@ -2,8 +2,7 @@ import Cookies from 'js-cookie'
 import { Modal, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
-const LogoutModal = ({ show, onHide, setIsLoggedIn, user }) => {
-    const firstName = user.name.split(' ')[0]
+const LogoutModal = ({ show, onHide, setIsLoggedIn }) => {
     const nav = useNavigate()
 
     const handleLogout = () => {
@@ -26,7 +25,7 @@ const LogoutModal = ({ show, onHide, setIsLoggedIn, user }) => {
                     Cancel
                 </Button>
                 <Button variant="outline-danger" onClick={handleLogout}>
-                    Logout {firstName} 
+                    Logout
                 </Button>
             </Modal.Footer>
         </Modal>
