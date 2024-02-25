@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Button, Card, Modal } from 'react-bootstrap'
 import UserModal from './UserModal'
 import { useNavigate } from 'react-router-dom'
-import { formatDOB } from '../Formatting'
 
 const UserProfile = ({user}) => {
     let userId = user._id
@@ -74,7 +73,7 @@ const UserProfile = ({user}) => {
                         Password: {hidePassword(user.password)}
                     </Card.Text>
                     <Card.Text>
-                        D.O.B: {formatDOB(user.DOB)}
+                        D.O.B: {new Date(user.DOB).toLocaleDateString()}
                     </Card.Text>
                     <Button variant="primary" onClick={handleEdit}>Edit Profile</Button>
                     <Button variant="danger" onClick={() => deleteUser(user._id)}>Delete Account</Button>
