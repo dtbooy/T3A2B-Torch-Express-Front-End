@@ -1,26 +1,14 @@
-import { useEffect, useState } from "react";
-import { Col, Form, Row } from "react-bootstrap";
+import { useEffect, useState } from "react"
+import { Col, Form, Row } from "react-bootstrap"
 
 const AdminFilter = ({ tableHeaders, filter, setFilter, filterProps }) => {
   // Set form control State
-  const [searchTerms, setSearchTerms] = useState({});
-  
-    
-    //DELETE
-    // const headerProps = tableHeaders.map((header, index)=>{
-    // let path = filterProps[index].split(".")
-    // if (path.length >1) { 
-    //     return {[header] : {[path[0]] : path[1]}};
-    //     } else {
-    //         return {[header] : filterProps[index]}}})
-    // console.log(headerProps);    
-    
+  const [searchTerms, setSearchTerms] = useState({})
     
   // On Searchterm change update Filter State
   useEffect(() => {
-    setFilter({ ...filter, ...searchTerms });
-    // console.log(filter)
-  }, [searchTerms]);
+    setFilter({ ...filter, ...searchTerms })
+  }, [searchTerms])
 
   if (filter) {
     return (
@@ -30,10 +18,9 @@ const AdminFilter = ({ tableHeaders, filter, setFilter, filterProps }) => {
             return (
               <Col key={head}>
                 <Form.Group>
-                  <Form.Label>{head}</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder={head}
+                    placeholder='Search'
                     value={filter[head]}
                     onChange={(e) =>{
                         let path = filterProps[index].split(".")
@@ -51,14 +38,12 @@ const AdminFilter = ({ tableHeaders, filter, setFilter, filterProps }) => {
                   />
                 </Form.Group>
               </Col>
-            );
+            )
           })}
         </Row>
       </Form>
-    );
-  } else {
-    return <>Loading...</>;
+    )
   }
-};
+}
 
-export default AdminFilter;
+export default AdminFilter

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Modal } from 'react-bootstrap'
 import AdminTable from './AdminTable'
-import AdminFilter from './AdminFilter'
 
 // Admin Page is a reusable component for all the different admin pages 
 const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, renderRow, prepareData, hideEditButton, propertyPaths }) => {
@@ -92,14 +91,7 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
                     <Button variant="success">New</Button>
                 </Link>
             )}
-            <AdminFilter
-                tableHeaders={tableHeaders}
-                filter={filter} // do I need this?
-                setFilter={setFilter}
-                filterProps={propertyPaths}
-                
 
-            />
             <AdminTable
                 tableHeaders={tableHeaders}
                 data={filterdField}
@@ -107,6 +99,9 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
                 deleteField={deleteField}
                 handleEdit={handleEdit}
                 hideEditButton={hideEditButton}
+                filter={filter} // do I need this?
+                setFilter={setFilter}
+                filterProps={propertyPaths}
             />
             <Modal show={showEditModal} onHide={handleCloseEditModal}>
                 <Modal.Header closeButton>
