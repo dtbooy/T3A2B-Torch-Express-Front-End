@@ -75,7 +75,6 @@ function App() {
           <Route path="/user" element={<Outlet />}>
             <Route path={'mytrips/:userId'} element={<Mytrips />} />
             <Route path="profile" element={<UserProfile user={user}/>} />
-
           </Route>
         ) : null}
         {isLoggedIn && user.is_admin && (
