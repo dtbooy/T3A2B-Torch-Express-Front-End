@@ -1,0 +1,43 @@
+.profile-dropdown .dropdown-toggle::after{
+    display: none
+}
+.profile-dropdown .dropdown-menu {
+    min-width: 20rem; 
+    right: 0 !important; 
+    left: auto !important; 
+    position: absolute !important;
+    
+  }
+  
+.profile-dropdown.show .dropdown-menu {
+    right: 0; 
+    left: auto;
+  }
+.profile-dropdown-item {
+    text-align: center; 
+    padding-top: -3px;
+
+}
+.profile-dropdown .dropdown-menu .logout-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logout-button {
+    width: 100%;
+}
+
+@media only screen and (max-width: 992px) {
+    .profile-dropdown .dropdown-menu {
+        left: 0; /* Align the dropdown menu with the left edge of the navbar */
+        width: 20rem; /* Set a specific width for the dropdown menu */
+        min-width: unset; /* Reset the minimum width */
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .profile-dropdown .dropdown-menu {
+        width: 100% !important; /* Set width to 100% for screens under 768px */
+    }
+}
