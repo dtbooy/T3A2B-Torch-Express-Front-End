@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { Table, Button, Container, Pagination } from 'react-bootstrap'
+import { FaTrashCan } from "react-icons/fa6"
+import { FiEdit } from "react-icons/fi"
 import AdminFilter from './AdminFilter'
+import DeleteModal from './DeleteModal'
 
 // Renders a table on the admin pages 
 const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit, hideEditButton, filter, setFilter, filterProps }) => {
@@ -16,12 +19,29 @@ const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit, hi
         setCurrentPage(page)
     }
 
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [selectedItemId, setSelectedItemId] = useState(null)
+
+    const handleDeleteConfirmation = (id) => {
+        setSelectedItemId(id)
+        setShowDeleteModal(true)
+    }
+
+    const handleDeleteConfirm = () => {
+        deleteField(selectedItemId)
+        setShowDeleteModal(false)
+    }
+
+    const handleDeleteCancel = () => {
+        setShowDeleteModal(false)
+    }
+
     // Check if there are no results after applying the filter
     const noResults = paginatedData.length === 0
 
     return (
         <Container fluid>
-            <Table striped bordered>
+            <Table striped bordered className="admin-table">
                 <thead>
                     {/* Header for each column */}
                     <tr>
@@ -60,11 +80,10 @@ const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit, hi
                             <td>
                                 {!hideEditButton && (
                                     <>
-                                        <Button variant="warning" onClick={() => handleEdit(item)}>Edit</Button>
-                                        {' '}
+                                    <FiEdit className="action-icon" onClick={() => handleEdit(item)}/>
                                     </>
                                 )}
-                                <Button variant="danger" onClick={() => deleteField(item._id)}>Delete</Button>
+                                <FaTrashCan className="action-icon" onClick={() => handleDeleteConfirmation(item._id)}/>
                             </td>
                         </tr>
                     ))}
@@ -79,6 +98,8 @@ const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit, hi
                     ))}
                 </Pagination>
             )}
+             <DeleteModal show={showDeleteModal} onHide={handleDeleteCancel} onDeleteConfirm={handleDeleteConfirm} />
+            
         </Container>
     )
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Modal } from 'react-bootstrap'
 import AdminTable from './AdminTable'
+import '../../styling/adminpages.scss'
 
 // Admin Page is a reusable component for all the different admin pages 
 const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, renderRow, prepareData, hideEditButton, propertyPaths }) => {
@@ -22,98 +23,96 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
     }, [])
 
     // Delete
-    async function deleteField(id) {
-            // Prompt for confirmation of deletion
-            const confirmDelete = window.confirm('Are you sure you want to delete this entry? - This cannot be undone.')
-            if (confirmDelete) {
-                try {
-            await fetch(`http://localhost:4001/${endpoint}/${id}`,
-                { method: 'Delete' })
-            setField(prevField => prevField.filter(item => item._id !== id))
-        } catch (error) {
-            console.error('Error deleting:', error)
-        }}
+    async function deleteField(id){
+    try {
+        await fetch(`http://localhost:4001/${endpoint}/${id}`,
+            { method: 'Delete' })
+        setField(prevField => prevField.filter(item => item._id !== id))
+    } catch (error) {
+        console.error('Error deleting:', error)
     }
+}
 
-    // Filter fields on change of filter State
-    useEffect(() => {setFilterdField(field.filter((row)=> Object.entries(filter).every(([key, value]) => value === undefined || JSON.stringify(row[key]).toLowerCase().includes(value.toString().toLowerCase()))
-    )) 
-// console.log(field)
+// Filter fields on change of filter State
+useEffect(() => {
+    setFilterdField(field.filter((row) => Object.entries(filter).every(([key, value]) => value === undefined || JSON.stringify(row[key]).toLowerCase().includes(value.toString().toLowerCase()))
+    ))
+    // console.log(field)
 }, [field, filter])
 
-    const handleEdit = (field) => {
-        setEditedField(field)
-        setShowEditModal(true)
-    }
+const handleEdit = (field) => {
+    setEditedField(field)
+    setShowEditModal(true)
+}
 
-    const handleCloseEditModal = () => {
-        setShowEditModal(false)
-        setEditedField({})
-    }
+const handleCloseEditModal = () => {
+    setShowEditModal(false)
+    setEditedField({})
+}
 
-    const updateField = async () => {
-        try {
-            const updatedFieldData = prepareData(editedField)
+const updateField = async () => {
+    try {
+        const updatedFieldData = prepareData(editedField)
 
-            const response = await fetch(`http://localhost:4001/${endpoint}/${editedField._id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(updatedFieldData)
-            })
+        const response = await fetch(`http://localhost:4001/${endpoint}/${editedField._id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedFieldData)
+        })
 
-            if (!response.ok) {
-                throw new Error('Failed to update')
-            }
-
-            const updatedField = await response.json()
-
-            setField(prevField => prevField.map(item => (item._id === updatedField._id ? updatedField : item)))
-            handleCloseEditModal()
-
-        } catch (error) {
-            console.error('Error updating:', error)
+        if (!response.ok) {
+            throw new Error('Failed to update')
         }
+
+        const updatedField = await response.json()
+
+        setField(prevField => prevField.map(item => (item._id === updatedField._id ? updatedField : item)))
+        handleCloseEditModal()
+
+    } catch (error) {
+        console.error('Error updating:', error)
     }
+}
 
-    const handleChange = (value, fieldName) => {
-        setEditedField(prevState => ({
-            ...prevState,
-            [fieldName]: value
-        }))
-    }
+const handleChange = (value, fieldName) => {
+    setEditedField(prevState => ({
+        ...prevState,
+        [fieldName]: value
+    }))
+}
 
 
-    return (
-        <div>
-            <h1>{heading}</h1>
-            {newForm && (
-                <Link to={newForm}>
-                    <Button variant="success">New</Button>
-                </Link>
-            )}
+return (
+    <div>
+        <h1>{heading}</h1>
+        {newForm && (
+            <Link to={newForm}>
+                <Button variant="success">New</Button>
+            </Link>
+        )}
 
-            <AdminTable
-                tableHeaders={tableHeaders}
-                data={filterdField}
-                renderRow={renderRow}
-                deleteField={deleteField}
-                handleEdit={handleEdit}
-                hideEditButton={hideEditButton}
-                filter={filter} // do I need this?
-                setFilter={setFilter}
-                filterProps={propertyPaths}
-            />
-            <Modal show={showEditModal} onHide={handleCloseEditModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Edit {heading}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    {modalComponent && React.createElement(modalComponent, { editedField, handleChange, updateField, handleCloseEditModal })}
-                </Modal.Body>
+        <AdminTable
+            tableHeaders={tableHeaders}
+            data={filterdField}
+            renderRow={renderRow}
+            deleteField={deleteField}
+            handleEdit={handleEdit}
+            hideEditButton={hideEditButton}
+            filter={filter} // do I need this?
+            setFilter={setFilter}
+            filterProps={propertyPaths}
+        />
+        <Modal show={showEditModal} onHide={handleCloseEditModal}>
+            <Modal.Header closeButton>
+                <Modal.Title>Edit {heading}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                {modalComponent && React.createElement(modalComponent, { editedField, handleChange, updateField, handleCloseEditModal })}
+            </Modal.Body>
 
-            </Modal>
-        </div>
-    )
+        </Modal>
+    </div>
+)
 }
 
 export default AdminPage

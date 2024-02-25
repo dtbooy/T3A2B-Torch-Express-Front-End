@@ -1,0 +1,17 @@
+$primary-color: #611140;
+$secondary-color: #BD3231;
+$success-color: #F98A26;
+$danger-color: #B28485;
+$danger-color: #F2ECC7;
+
+
+.admin-table {
+    td {
+        text-align: center;
+    }
+
+    .action-icon {
+        font-size: 50px; 
+        padding: 0.5rem;   
+    }
+}
