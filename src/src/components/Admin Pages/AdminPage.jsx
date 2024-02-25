@@ -24,13 +24,16 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
 
     // Delete
     async function deleteField(id) {
-        try {
+            // Prompt for confirmation of deletion
+            const confirmDelete = window.confirm('Are you sure you want to delete this entry? - This cannot be undone.')
+            if (confirmDelete) {
+                try {
             await fetch(`http://localhost:4001/${endpoint}/${id}`,
                 { method: 'Delete' })
             setField(prevField => prevField.filter(item => item._id !== id))
         } catch (error) {
             console.error('Error deleting:', error)
-        }
+        }}
     }
 
     // Filter fields on change of filter State

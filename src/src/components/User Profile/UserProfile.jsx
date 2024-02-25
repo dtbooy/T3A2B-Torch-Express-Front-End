@@ -25,7 +25,7 @@ const UserProfile = () => {
 
     async function deleteUser(id) {
         // Prompt for confirmation of deletion
-        const confirmDelete = window.confirm('Are you sure you want to delete this account?')
+        const confirmDelete = window.confirm('Are you sure you want to delete this account?  - This cannot be undone. ')
         if (confirmDelete) {
             try {
                 await fetch(`http://localhost:4001/users/${id}`, { method: 'DELETE' })
