@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Button, Card, Modal } from 'react-bootstrap'
 import UserModal from './UserModal'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+
 const UserProfile = ({user}) => {
-    let userId = user._id
+    let params = useParams()
     // Privacy for Password
     const hidePassword = () => '*'.repeat(10)
 
