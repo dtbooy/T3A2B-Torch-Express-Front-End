@@ -74,7 +74,7 @@ function App() {
         {isLoggedIn ? (
           <Route path="/user" element={<Outlet />}>
             <Route path={'mytrips/:userId'} element={<Mytrips />} />
-            <Route path="profile" element={<UserProfile />} />
+            <Route path={'profile/:userId'} element={<UserProfile />} />
 
           </Route>
         ) : null}
