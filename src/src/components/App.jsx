@@ -60,7 +60,7 @@ function App() {
 
   return (
     <Router>
-      <NavigationBar setIsLoggedIn={setIsLoggedIn} userId={user._id} isLoggedIn={isLoggedIn} isAdmin={user.is_admin}/>
+      <NavigationBar setIsLoggedIn={setIsLoggedIn} user={user} isLoggedIn={isLoggedIn} isAdmin={user.is_admin}/>
       <Container>
       <Routes>
         <Route path="/" element={<Home/>}/>
@@ -74,8 +74,7 @@ function App() {
         {isLoggedIn ? (
           <Route path="/user" element={<Outlet />}>
             <Route path={'mytrips/:userId'} element={<Mytrips />} />
-            <Route path={'profile/:userId'} element={<UserProfile />} />
-
+            <Route path="profile" element={<UserProfile user={user}/>} />
           </Route>
         ) : null}
         {isLoggedIn && user.is_admin && (

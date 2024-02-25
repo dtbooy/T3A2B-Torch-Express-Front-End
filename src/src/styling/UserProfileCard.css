@@ -1,0 +1,15 @@
+
+.user-profile-card {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.profile-icon {
+    margin-right: 1rem;
+}
+
+.profile-info {
+    width: 12rem;
+    text-align: center;
+}
