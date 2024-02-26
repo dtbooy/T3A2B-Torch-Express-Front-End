@@ -31,12 +31,12 @@ const SearchBar = (params) => {
   };
 
   return (
-    <Container>
+    <Container className="search-bar">
       <Form>
         <Row className="mb-3">
           <Col sm>
             <Form.Group as={Col} controlId="pickup">
-              <Form.Label>Pickup Location</Form.Label>
+              <Form.Label className="search-label">Pickup Location</Form.Label>
               <Form.Select
                 value={inputForm.pickup}
                 onChange={(e) => handleFormChange(e)}
@@ -52,7 +52,7 @@ const SearchBar = (params) => {
           </Col>
           <Col sm>
             <Form.Group as={Col} controlId="dropoff">
-              <Form.Label>Dropoff Location</Form.Label>
+              <Form.Label className="search-label">Dropoff Location</Form.Label>
               <Form.Select
                 value={inputForm.dropoff}
                 onChange={(e) => handleFormChange(e)}
@@ -68,7 +68,7 @@ const SearchBar = (params) => {
           </Col>
           <Col sm>
             <Form.Group as={Col} controlId="date">
-              <Form.Label>Travel Date</Form.Label>
+              <Form.Label className="search-label">Travel Date</Form.Label>
               <Form.Control
                 type="date"
                 value={inputForm.date}
@@ -77,9 +77,9 @@ const SearchBar = (params) => {
             </Form.Group>
           </Col>
         </Row>
-        <Row className="mb-3">
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
-            Submit
+        <Row className="mb-3 justify-content-center">
+          <Button className="search-button" type="submit" onClick={handleSubmit}>
+            Search
           </Button>
         </Row>
       </Form>

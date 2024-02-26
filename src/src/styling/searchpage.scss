@@ -1,0 +1,61 @@
+@import "variables";
+
+// Search bar Styling
+.search-button{
+    max-width: 250px;
+    background-color: $primary-color;
+    border: none;
+
+    &:hover{
+        background-color: darken($primary-color, 10%);
+    }
+
+    &:active{
+        background-color: $primary-color;
+    }
+}
+
+.search-label{
+    color: $primary-color;
+    font-weight: 400;
+}
+
+.search-bar{
+    border: 2px solid $primary-color;
+    border-radius: 25px;
+    padding: 20px;
+}
+
+// Search Results Styling 
+.search-result {
+    width: 400px;
+    border: 2px solid $primary-color;
+    border-radius: 25px;
+  }
+
+.booking-button{
+    background-color: $primary-color;
+    border: 1px solid $primary-color;
+
+    &:hover{
+        background-color: darken($primary-color, 10%);
+        border: none;
+    }
+}
+
+.bus-arrow{
+    color:$primary-color;
+}
+
+.bus-date, .bus-tickets{
+    color: $secondary-color;
+}
+
+.bus-arrow{
+    margin: 5px;
+}
+
+.ticket-label{
+    color: $primary-color;
+    font-weight: 600;
+}

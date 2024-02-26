@@ -60,13 +60,13 @@
   }
 
 // Edit User Modal Styling
-.form-label{
+.profile-label{
     color: $primary-color;
     position: relative;
     margin-bottom: 10px;
   }
   
-  .form-label::after {
+  .profile-label::after {
     content: "";
     position: absolute;
     bottom: 0;
