@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Modal } from 'react-bootstrap'
 import AdminTable from './AdminTable'
+import '../../styling/adminpages.scss'
 
 // Admin Page is a reusable component for all the different admin pages 
 const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, renderRow, prepareData, hideEditButton, propertyPaths }) => {
@@ -23,23 +24,21 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
 
     // Delete
     async function deleteField(id) {
-            // Prompt for confirmation of deletion
-            const confirmDelete = window.confirm('Are you sure you want to delete this entry? - This cannot be undone.')
-            if (confirmDelete) {
-                try {
+        try {
             await fetch(`http://localhost:4001/${endpoint}/${id}`,
                 { method: 'Delete' })
             setField(prevField => prevField.filter(item => item._id !== id))
         } catch (error) {
             console.error('Error deleting:', error)
-        }}
+        }
     }
 
     // Filter fields on change of filter State
-    useEffect(() => {setFilterdField(field.filter((row)=> Object.entries(filter).every(([key, value]) => value === undefined || JSON.stringify(row[key]).toLowerCase().includes(value.toString().toLowerCase()))
-    )) 
-// console.log(field)
-}, [field, filter])
+    useEffect(() => {
+        setFilterdField(field.filter((row) => Object.entries(filter).every(([key, value]) => value === undefined || JSON.stringify(row[key]).toLowerCase().includes(value.toString().toLowerCase()))
+        ))
+        // console.log(field)
+    }, [field, filter])
 
     const handleEdit = (field) => {
         setEditedField(field)
@@ -85,11 +84,13 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
 
     return (
         <div>
-            <h1>{heading}</h1>
+            <h1 className="admin-heading">{heading}</h1>
             {newForm && (
-                <Link to={newForm}>
-                    <Button variant="success">New</Button>
-                </Link>
+                <div className="new-button-container">
+                    <Link to={newForm}>
+                        <Button variant="success">New</Button>
+                    </Link>
+                </div>
             )}
 
             <AdminTable
@@ -104,7 +105,7 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
                 filterProps={propertyPaths}
             />
             <Modal show={showEditModal} onHide={handleCloseEditModal}>
-                <Modal.Header closeButton>
+                <Modal.Header className="modal-header" closeButton>
                     <Modal.Title>Edit {heading}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

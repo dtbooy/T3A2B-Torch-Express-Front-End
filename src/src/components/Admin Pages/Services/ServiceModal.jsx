@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Form, Button, Modal } from 'react-bootstrap'
+import { Form, Button, Modal, Row, Col } from 'react-bootstrap'
 
 const ServiceModal = ({ editedField, handleChange, handleCloseEditModal, updateField }) => {
     // get locations for pickup and dropoff 
@@ -51,27 +51,32 @@ const ServiceModal = ({ editedField, handleChange, handleCloseEditModal, updateF
 
     return (
         <Form onSubmit={handleSubmit}>
-            <Form.Group>
+            <Row className="mb-3">
+            <Form.Group as={Col} md={6}>
                 <Form.Label>Bus Number</Form.Label>
                 <Form.Control type="number" name="busNumber" value={editedField?.busNumber || ''} onChange={(e) => handleInputChange(e, 'busNumber')} isInvalid={!!errors.busNumber} />
                 <Form.Control.Feedback type="invalid">{errors.busNumber}</Form.Control.Feedback>
             </Form.Group>
-            <Form.Group>
+            <Form.Group as={Col} md={6}>
                 <Form.Label>Collection Time</Form.Label>
                 <Form.Control type="datetime-local" name="collectionTime" value={editedField?.collectionTime || ''} onChange={(e) => handleInputChange(e, 'collectionTime')} isInvalid={!!errors.collectionTime} />
                 <Form.Control.Feedback type="invalid">{errors.collectionTime}</Form.Control.Feedback>
             </Form.Group>
-            <Form.Group>
+            </Row>
+            <Row className="mb-3">
+            <Form.Group as={Col} md={6}>
                 <Form.Label>Estimated Travel Time</Form.Label>
                 <Form.Control type="number" name="estimatedTravelTime" value={editedField?.estimatedTravelTime || ''} onChange={(e) => handleInputChange(e, 'estimatedTravelTime')} isInvalid={!!errors.estimatedTravelTime} />
                 <Form.Control.Feedback type="invalid">{errors.estimatedTravelTime}</Form.Control.Feedback>
             </Form.Group>
-            <Form.Group>
+            <Form.Group as={Col} md={6}>
                 <Form.Label>Capacity</Form.Label>
                 <Form.Control type="number" name="capacity" value={editedField?.capacity || ''} onChange={(e) => handleInputChange(e, 'capacity')} isInvalid={!!errors.capacity} />
                 <Form.Control.Feedback type="invalid">{errors.capacity}</Form.Control.Feedback>
             </Form.Group>
-            <Form.Group>
+            </Row>
+            <Row className="mb-3">
+            <Form.Group as={Col} md={6}>
                 <Form.Label>Pick Up Location</Form.Label>
                 <Form.Select value={editedField?.pickupLocation?._id || ''} onChange={(e) => handleInputChange(e, 'pickupLocation')} isInvalid={!!errors.pickupLocation}>
                     <option value="">Select Pick Up Location</option>
@@ -81,7 +86,7 @@ const ServiceModal = ({ editedField, handleChange, handleCloseEditModal, updateF
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">{errors.pickupLocation}</Form.Control.Feedback>
             </Form.Group>
-            <Form.Group>
+            <Form.Group as={Col} md={6}>
                 <Form.Label>Drop Off Location</Form.Label>
                 <Form.Select value={editedField?.dropoffLocation?._id || ''} onChange={(e) => handleInputChange(e, 'dropoffLocation')} isInvalid={!!errors.dropoffLocation}>
                     <option value="">Select Drop Off Location</option>
@@ -91,12 +96,13 @@ const ServiceModal = ({ editedField, handleChange, handleCloseEditModal, updateF
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">{errors.dropoffLocation}</Form.Control.Feedback>
             </Form.Group>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleCloseEditModal}>
+            </Row>
+            <Modal.Footer className="d-flex justify-content-center">
+                <Button variant="outline-secondary" onClick={handleCloseEditModal}>
                     Close
                 </Button>
-                <Button variant="primary" type="submit">
-                    Save Changes
+                <Button variant="outline-success" type="submit">
+                    Save
                 </Button>
             </Modal.Footer>
         </Form>
