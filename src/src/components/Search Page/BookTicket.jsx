@@ -19,10 +19,8 @@ function BookTicket(params) {
     error: false,
   });
 
-  // UserId needs to be gotten from Auth-------------------------------------------DEBUG
+  // get user id & access token from cookies
   const user = JSON.parse(Cookies.get("userData"))._id;
-  // console.log(user._id);
-  console.log(user);
   const accessToken = Cookies.get("accessToken");
 
   // on cancel / close of Booking modal - reset ticket selection
@@ -60,7 +58,7 @@ function BookTicket(params) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          AuthoriSation: `${accessToken}`,
+          Authorisation: `${accessToken}`,
         },
         body: JSON.stringify(tickets),
       });
