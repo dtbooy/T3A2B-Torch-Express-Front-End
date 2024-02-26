@@ -5,6 +5,7 @@
 import { useState } from "react";
 import { Form, Button, Modal, Row, Col, Offcanvas } from "react-bootstrap";
 import ConfirmationOffcanvas from "./ConfirmationOffcanvas";
+import Cookies from "js-cookie";
 
 function BookTicket(params) {
   const { showBooking, setShowBooking, selectedService } = params;
@@ -19,7 +20,10 @@ function BookTicket(params) {
   });
 
   // UserId needs to be gotten from Auth-------------------------------------------DEBUG
-  const user = "65d6f5b0ff14f7493a8974b9";
+  const user = JSON.parse(Cookies.get("userData"))._id;
+  // console.log(user._id);
+  console.log(user);
+  const accessToken = Cookies.get("accessToken");
 
   // on cancel / close of Booking modal - reset ticket selection
   const handleClose = () => {
@@ -54,8 +58,25 @@ function BookTicket(params) {
     try {
       const response = await fetch(`http://localhost:4001/reservations`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          AuthoriSation: `${accessToken}`,
+        },
         body: JSON.stringify(tickets),
+      });
+      if (!response.ok) {
+        console.log(response)
+        console.log(response.body)
+        throw new Error(response.body.error);
+      }
+      // set success offcanvasProps
+      setOffcanvasProps({
+        ...offcanvasProps,
+        show: true,
+        message: "Success, tickets booked!",
+        returned: true,
+        alertType: "success",
+        name: "Success",
       });
     } catch (error) {
       console.error("Error booking tickets:", error);
@@ -64,21 +85,12 @@ function BookTicket(params) {
       setOffcanvasProps({
         ...offcanvasProps,
         show: true,
-        message: `Error booking tickets ${error.message}`,
+        message: `Error booking tickets: ${error.message}`,
         name: "Error",
         returned: true,
-        alertType: "warning",
+        alertType: "danger",
       });
     }
-    // set success offcanvasProps
-    setOffcanvasProps({
-      ...offcanvasProps,
-      show: true,
-      message: "Success, tickets booked!",
-      returned: true,
-      alertType: "success",
-      name: "Success",
-    });
 
     //Close Modal
     handleClose();
