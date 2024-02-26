@@ -55,7 +55,12 @@ function App() {
 
   const updateAccessToken = (token) => {
     setAccessToken(token)
-    Cookies.set('accessToken', token,{ sameSite: 'None', secure: true }, { expires: 7 })
+    Cookies.set('accessToken', token, { sameSite: 'None', secure: true }, { expires: 7 })
+  }
+
+  const updateUserCookie = (userData) => {
+    Cookies.set('userData', JSON.stringify(userData), { sameSite: 'None', secure: true })
+    console.log('Updated user cookie')
   }
 
   return (
@@ -74,7 +79,7 @@ function App() {
         {isLoggedIn ? (
           <Route path="/user" element={<Outlet />}>
             <Route path={'mytrips/:userId'} element={<Mytrips />} />
-            <Route path="profile" element={<UserProfile user={user}/>} />
+            <Route path="profile" element={<UserProfile user={user} setUser={setUser} updateUserCookie={updateUserCookie}/>} />
           </Route>
         ) : null}
         {isLoggedIn && user.is_admin && (

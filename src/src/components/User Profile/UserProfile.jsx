@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { Button, Card, Modal } from 'react-bootstrap'
 import UserModal from './UserModal'
 import { useNavigate } from 'react-router-dom'
-const UserProfile = ({user}) => {
+
+const UserProfile = ({user, setUser, updateUserCookie}) => {
     let userId = user._id
     // Privacy for Password
     const hidePassword = () => '*'.repeat(10)
@@ -29,7 +30,7 @@ const UserProfile = ({user}) => {
     // Update User Functionality
     async function updateUser(updatedUser) {
         try {
-            const response = await fetch(`http://localhost:4001/users/${params.userId}`, {
+            const response = await fetch(`http://localhost:4001/users/${userId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -40,6 +41,8 @@ const UserProfile = ({user}) => {
                 throw new Error('Failed to update user')
             }
             setUser(updatedUser)
+            updateUserCookie(updatedUser)
+            // i want to update my user cookie too!
         } catch (error) {
             console.error('Error Updating:', error)
         }

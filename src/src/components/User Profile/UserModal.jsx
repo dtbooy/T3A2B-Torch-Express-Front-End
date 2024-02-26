@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 
 const UserModal = ({ user, updateUser, handleCloseEditModal }) => {
+    const [confirmPassword, setConfirmPassword] = useState('')
 
+    const [passwordChanged, setPasswordChanged] = useState(false)
     // State for form data 
     const [userData, setUserData] = useState(user)
 
@@ -16,8 +18,17 @@ const UserModal = ({ user, updateUser, handleCloseEditModal }) => {
             ...userData,
             [name]: value,
         })
+        if (name === 'password' && value === '') {
+            setPasswordChanged(true)
+        }
+        if (name === 'confirmPassword') {
+            setConfirmPassword(value)
+        }
         // Clear error message when field changes
         setErrors({ ...errors, [name]: '' })
+        console.log(errors)
+        console.log(confirmPassword)
+        console.log(userData.password)
     }
 
     // Functionality to handle form submission
@@ -32,6 +43,11 @@ const UserModal = ({ user, updateUser, handleCloseEditModal }) => {
                 newErrors[fieldName] = 'This Field is Required'
             }
         })
+
+        // Add error for confirm password if passwords don't match
+        if (passwordChanged && userData.password !== confirmPassword) {
+            newErrors.confirmPassword = 'Passwords do not match' 
+        }
 
         // Set validation errors
         setErrors(newErrors)
@@ -61,6 +77,13 @@ const UserModal = ({ user, updateUser, handleCloseEditModal }) => {
                     <Form.Control type="password" name="password" value={userData.password} onChange={handleChange} isInvalid={!!errors.password} />
                     <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
                 </Form.Group>
+                {passwordChanged && ( // Render Confirm Password field only if password has been changed
+                    <Form.Group>
+                        <Form.Label>Confirm Password</Form.Label>
+                        <Form.Control type="password" name="confirmPassword" value={confirmPassword} onChange={handleChange} isInvalid={!!errors.confirmPassword} />
+                        <Form.Control.Feedback type="invalid">{errors.confirmPassword}</Form.Control.Feedback>
+                    </Form.Group>
+                )}
                 <Form.Group>
                     <Form.Label>Date of Birth</Form.Label>
                     <Form.Control type="date" name="DOB" value={userData.DOB} onChange={handleChange} isInvalid={!!errors.DOV} />
