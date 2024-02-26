@@ -1,17 +1,17 @@
 import React from 'react'
 import { Modal, Button } from 'react-bootstrap'
 
-const DeleteModal = ({ show, onHide, onDeleteConfirm }) => {
+const DeleteModal = ({ show, onHide, onDeleteConfirm, message }) => {
     return (
-        <Modal show={show} onHide={onHide}>
-            <Modal.Header closeButton>
-                <Modal.Title>Are you sure you want to delete? This cannot be undone.</Modal.Title>
+        <Modal className="delete-modal" show={show} onHide={onHide}>
+            <Modal.Header  className="delete-modal-header" closeButton>
+                <Modal.Title>{message}</Modal.Title>
             </Modal.Header>
             <Modal.Footer>
-                <Button variant="secondary" onClick={onHide}>
+                <Button variant="outline-secondary" onClick={onHide}>
                     Cancel
                 </Button>
-                <Button variant="outline-danger" onClick={onDeleteConfirm}>
+                <Button className="delete-button" onClick={onDeleteConfirm}>
                     Delete
                 </Button>
             </Modal.Footer>

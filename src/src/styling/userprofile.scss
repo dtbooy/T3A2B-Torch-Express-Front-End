@@ -1,0 +1,82 @@
+@import "variables";
+
+// User Card Styling
+.profile-card{
+    margin-top: 100px;
+    min-width: 400px;
+}
+
+.profile-header{
+    color: white;
+    background-color: $primary-color;
+}
+
+// Button Styling
+.edit-button {
+    background-color: white;
+    color: $primary-color;
+    border: 1px solid $primary-color ;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: darken($primary-color, 10%);
+      border: none;
+    }
+}
+
+.delete-button {
+    background-color: white;
+    color: $danger-color;
+    border: 1px solid $danger-color ;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: darken($danger-color, 10%);
+      border: none;
+    }
+}
+
+.info-header {
+    color: $primary-color;
+    position: relative;
+  }
+  
+  .info-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 33%;
+    height: 3px;
+    background-color: $primary-color;
+  }
+
+// Edit User Modal Styling
+.form-label{
+    color: $primary-color;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  
+  .form-label::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 33%;
+    height: 3px;
+    background-color: $primary-color;
+}
+
+// Delete Modal Syling 
+.delete-modal-header{
+    background-color: $danger-color;
+}

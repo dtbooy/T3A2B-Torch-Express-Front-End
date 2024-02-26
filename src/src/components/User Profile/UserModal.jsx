@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Modal } from 'react-bootstrap'
+import DeleteModal from '../Admin Pages/DeleteModal'
 
-const UserModal = ({ user, setUser, updateUser, handleCloseEditModal }) => {
+const UserModal = ({ user, setUser, updateUser, handleCloseEditModal, deleteUser }) => {
     const [confirmPassword, setConfirmPassword] = useState('')
 
     const [passwordChanged, setPasswordChanged] = useState(false)
@@ -46,7 +47,7 @@ const UserModal = ({ user, setUser, updateUser, handleCloseEditModal }) => {
 
         // Add error for confirm password if passwords don't match
         if (passwordChanged && userData.password !== confirmPassword) {
-            newErrors.confirmPassword = 'Passwords do not match' 
+            newErrors.confirmPassword = 'Passwords do not match'
         }
 
         // Set validation errors
@@ -59,45 +60,58 @@ const UserModal = ({ user, setUser, updateUser, handleCloseEditModal }) => {
             handleCloseEditModal()
         }
     }
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [selectedItemId, setSelectedItemId] = useState(null)
+
+    const handleDeleteConfirmation = (id) => {
+        setSelectedItemId(id)
+        setShowDeleteModal(true)
+    }
+
+    const handleDeleteConfirm = () => {
+        deleteUser(selectedItemId)
+        setShowDeleteModal(false)
+    }
+
+    const handleDeleteCancel = () => {
+        setShowDeleteModal(false)
+    }
 
     return (
         <>
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
-                    <Form.Label>Name</Form.Label>
+                    <Form.Label className="form-label">Name</Form.Label>
                     <Form.Control type="text" name="name" value={userData.name} onChange={handleChange} isInvalid={!!errors.name} />
                     <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label className="form-label">Email</Form.Label>
                     <Form.Control type="email" name="email" value={userData.email} onChange={handleChange} isInvalid={!!errors.email} />
                     <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label className="form-label">Password</Form.Label>
                     <Form.Control type="password" name="password" value={userData.password} onChange={handleChange} isInvalid={!!errors.password} />
                     <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
                 </Form.Group>
                 {passwordChanged && ( // Render Confirm Password field only if password has been changed
                     <Form.Group>
-                        <Form.Label>Confirm Password</Form.Label>
+                        <Form.Label className="form-label">Confirm Password</Form.Label>
                         <Form.Control type="password" name="confirmPassword" value={confirmPassword} onChange={handleChange} isInvalid={!!errors.confirmPassword} />
                         <Form.Control.Feedback type="invalid">{errors.confirmPassword}</Form.Control.Feedback>
                     </Form.Group>
                 )}
                 <Form.Group>
-                    <Form.Label>Date of Birth</Form.Label>
+                    <Form.Label className="form-label">Date of Birth</Form.Label>
                     <Form.Control type="date" name="DOB" value={userData.DOB} onChange={handleChange} isInvalid={!!errors.DOV} />
                     <Form.Control.Feedback type="invalid">{errors.DOB}</Form.Control.Feedback>
                 </Form.Group>
-
-                <Button variant="primary" type="submit">
-                    Save Changes
-                </Button>
-                <Button variant="secondary" onClick={handleCloseEditModal}>
-                    Close
-                </Button>
+                <Modal.Footer className="d-flex flex-column align-items-end">
+                <Button className="edit-button" type="submit">Save</Button>
+                <Button className="delete-button" onClick={() => handleDeleteConfirmation(user._id)}>Delete Account</Button></Modal.Footer>
             </Form>
+            <DeleteModal message="Are you sure you want to delete your account? This cannot be undone." show={showDeleteModal} onHide={handleDeleteCancel} onDeleteConfirm={handleDeleteConfirm} />
         </>
     )
 }
