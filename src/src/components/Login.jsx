@@ -5,6 +5,8 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import PasswordInput from './PasswordInput'
 import Cookies from 'js-cookie'
+import '../styling/authpages.scss'
+import { Card } from 'react-bootstrap'
 
 const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
   const [errorMessage, setErrorMessage] = useState('')
@@ -36,7 +38,7 @@ const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
         setUser(data.user)
         setIsLoggedIn(true)
         nav('/')
-        
+
       } else if (res.status === 401) {
         // Handle login error
         setErrorMessage(data.error)
@@ -48,26 +50,27 @@ const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
   }
 
   return (
-    <Container>
-      <h1>Login to Torch Express</h1>
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
-      <Form onSubmit={(e) => handleSubmit(e)}>
-        <Form.Group className="mb-3" controlId="formEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" value={values.email} onChange={(e) => setValues({ ...values, email: e.target.value })} />  
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formPassword">
+    <Container className="d-flex  justify-content-center align-items-center vh-100">
+      <Card className="login-card p-4">
+        <h1 className="text-center login-title">Login</h1>
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
+        <Form onSubmit={(e) => handleSubmit(e)}>
+          <Form.Group className="mb-3" controlId="formEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" placeholder="Enter email" value={values.email} onChange={(e) => setValues({ ...values, email: e.target.value })} />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formPassword">
             <Form.Label>Password</Form.Label>
             <PasswordInput value={values.password} onChange={(e) => setValues({ ...values, password: e.target.value })} />
-            {/* {fieldErrors.password && <div className="error-message">{fieldErrors.password}</div>} */}
           </Form.Group>
-        <Button variant="primary" type="submit">
-          Login
-        </Button>
-      </Form>
-      <div>
-        Don't have an account? <Link to="/register">Register</Link>
-      </div>
+          <Button type="submit" className="w-100 login-button">
+            Login
+          </Button>
+        </Form>
+        <div className="mt-3 text-center">
+          Don't have an account? <Link to="/register" className="login-link">Sign Up</Link>
+        </div>
+      </Card>
     </Container>
   )
 }

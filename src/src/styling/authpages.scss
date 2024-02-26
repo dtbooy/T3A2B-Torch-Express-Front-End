@@ -1,0 +1,38 @@
+@import "variables";    
+
+
+.login-button{
+    border: 1px solid $primary-color ;
+    background-color: #ffffff;
+    color: $primary-color;
+
+    &:hover{
+        background-color: $primary-color;
+        color: #ffffff;
+        border: 1px solid $primary-color ;
+    }
+}
+
+.login-link{
+    color: $primary-color
+}
+
+.form-control:focus, 
+.form-control:hover {
+  border-color: $primary-color; /* Change 'your-color' to the desired hover color */
+  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Change 'rgba(0, 123, 255, 0.25)' to the desired box-shadow color */
+}
+
+.login-title{
+    color: $primary-color
+}
+
+.login-container{
+    border-color: $primary-color;
+}
+
+.login-card{
+    max-width: 400px; 
+    width: 100%;
+    border-color: $primary-color;
+}
