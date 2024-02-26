@@ -21,23 +21,24 @@ const Home = () => {
   const handleShow = () => setShow(true)
 
   return (
-    <div>
-      <h1>Torch Transit</h1>
-      <Container className="home-banner ">
-      <Row className="align-items-center mx-4">
-        <div className="col-lg-7">
-          <h1>Get On Board!</h1>
-          <h2>Reserve Your Free Ride to the Olympics Now!</h2>
-          <Link to="/search" className="me-3">
-            <Button className="book-button">Book Now</Button>
-          </Link>
-        </div>
-        
-        <div className="col-lg-5 d-flex justify-content-end align-items-center">
-          <Image src="/Logo1.png" />
-        </div>
-      </Row>
-    </Container>
+<div>
+  <h1>Torch Transit</h1>
+  <Container className="home-banner">
+    <Row className="align-items-center mx-4">
+      <div className="col-lg-7">
+        <h1>Get On Board!</h1>
+        <h2>Reserve Your Free Ride to the Olympics Now!</h2>
+        <Link to="/search" className="me-3">
+          <Button className="book-button">Book Now</Button>
+        </Link>
+      </div>
+      
+      <div className="col-lg-5 d-flex justify-content-lg-end justify-content-center align-items-center">
+        <Image src="/Logo1.png" />
+      </div>
+    </Row>
+  </Container>
+
 
       <Container className="mt-4">
         <Row xs={1} md={2} lg={4} className="g-4">
@@ -96,18 +97,12 @@ const Home = () => {
         show={showBusesModal}
         handleClose={handleCloseBusesModal}
       />
-
-      {/* Modal for Locations */}
       <HomeModal
         title="Locations"
         content={<Locations />}
         show={showLocationsModal}
         handleClose={handleCloseLocationsModal}
       />
-
-
-
-        
 
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
