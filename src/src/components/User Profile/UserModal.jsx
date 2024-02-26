@@ -3,6 +3,9 @@ import { Form, Button } from 'react-bootstrap'
 import PasswordInput from '../PasswordInput'
 
 const UserModal = ({ user, updateUser, handleCloseEditModal }) => {
+
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [passwordChanged, setPasswordChanged] = useState(false)
     // State for form data 
     const [userData, setUserData] = useState({...user, password: ''})
     // state for form validation errors 
@@ -20,22 +23,18 @@ const UserModal = ({ user, updateUser, handleCloseEditModal }) => {
             ...userData,
             [name]: value,
         })
-
-        if (name === 'password') {
+      
+        if (name === 'password' && value === '') {
+            setPasswordChanged(true)
+        }
+        if (name === 'confirmPassword') {
             setConfirmPassword(value)
         }
-
-    // Clear error message when field changes
-    setErrors({ ...errors, [name]: '' })
-    }
-
-    // Functionality to handle password input
-    const handlePasswordChange = (e) => {
-        const { value } = e.target
-        setUserData({
-            ...userData,
-            password: value,
-        })
+        // Clear error message when field changes
+        setErrors({ ...errors, [name]: '' })
+        console.log(errors)
+        console.log(confirmPassword)
+        console.log(userData.password)
     }
 
     // Functionality to handle form submission
@@ -51,8 +50,9 @@ const UserModal = ({ user, updateUser, handleCloseEditModal }) => {
             }
         })
 
-        if (userData.password !== confirmPassword) {
-            newErrors.confirmPassword = 'Passwords do not match'
+        // Add error for confirm password if passwords don't match
+        if (passwordChanged && userData.password !== confirmPassword) {
+            newErrors.confirmPassword = 'Passwords do not match' 
         }
 
         // Set validation errors
@@ -89,6 +89,13 @@ const UserModal = ({ user, updateUser, handleCloseEditModal }) => {
                     />
                     <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
                 </Form.Group>
+                {passwordChanged && ( // Render Confirm Password field only if password has been changed
+                    <Form.Group>
+                        <Form.Label>Confirm Password</Form.Label>
+                        <Form.Control type="password" name="confirmPassword" value={confirmPassword} onChange={handleChange} isInvalid={!!errors.confirmPassword} />
+                        <Form.Control.Feedback type="invalid">{errors.confirmPassword}</Form.Control.Feedback>
+                    </Form.Group>
+                )}
                 <Form.Group>
                     <Form.Label>Confirm Updated Password</Form.Label>
                     <PasswordInput

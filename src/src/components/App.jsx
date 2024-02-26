@@ -54,7 +54,12 @@ function App() {
 
   const updateAccessToken = (token) => {
     setAccessToken(token)
-    Cookies.set('accessToken', token,{ sameSite: 'None', secure: true }, { expires: 7 })
+    Cookies.set('accessToken', token, { sameSite: 'None', secure: true }, { expires: 7 })
+  }
+
+  const updateUserCookie = (userData) => {
+    Cookies.set('userData', JSON.stringify(userData), { sameSite: 'None', secure: true })
+    console.log('Updated user cookie')
   }
 
   return (
