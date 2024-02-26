@@ -1,30 +1,45 @@
 import { Button, Card, Col, Row, Spinner } from "react-bootstrap";
 import BookTicket from "./BookTicket";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie'
 
 const SearchResults = (params) => {
   let { results, locations } = params;
-
   // holds the service selected for booking
   const [selectedService, setSelectedService] = useState({});
   // controls the booking Modal visibility
   const [showBooking, setShowBooking] = useState(false);
+  // Navigate hook  
+  const nav = useNavigate()
 
   // load the service details into selectedService state & show booking modal
   const handleClick = (e) => {
-    let service = results.find((res) => res._id == e.target.id);
-    service = {
-      ...service,
-      dropoffLocation: locations.find(
-        (loc) => loc._id === service.dropoffLocation
-      ).name,
-      pickupLocation: locations.find(
-        (loc) => loc._id === service.pickupLocation
-      ).name,
-    };
-    setSelectedService(service);
-    // Show the BookTicket Modal
-    setShowBooking(true);
+    // check if logged in 
+    if (Cookies.get('userData')) {
+      // store selected service details
+      let service = results.find((res) => res._id == e.target.id);
+      // replace location id's with location names
+      service = {
+        ...service,
+        dropoffLocation: locations.find(
+          (loc) => loc._id === service.dropoffLocation
+        ).name,
+        pickupLocation: locations.find(
+          (loc) => loc._id === service.pickupLocation
+        ).name,
+      };
+      // save service to SelectedService state
+      setSelectedService(service);
+      // Show the BookTicket Modal
+      setShowBooking(true);
+    } else {
+      //redirect to login page
+      nav("/login")
+    }
+
+
+
   };
 
   // move this into a utility functions file
@@ -89,6 +104,7 @@ const SearchResults = (params) => {
                     <Card.Text>
                       Tickets remaining: {result.capacity - result.reservations}
                     </Card.Text>
+                    
                     <Button
                       id={result._id}
                       onClick={(e) => handleClick(e)}
