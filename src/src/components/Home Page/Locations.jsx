@@ -13,7 +13,7 @@ const Locations = () => {
     <>
     {locations.map((loc, index) => (
         <Accordion key={index} defaultActiveKey={loc.name}>
-          <Accordion.Item eventKey={index}>
+          <Accordion.Item eventKey={index} className="accordion-item mb-3">
             <Accordion.Header>{loc.name}</Accordion.Header>
             <Accordion.Body>
               <p>Address: {loc.address}</p>

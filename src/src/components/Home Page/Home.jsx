@@ -1,36 +1,108 @@
 import React, {useState } from 'react'
-import {Button, Container, Modal, Row } from 'react-bootstrap'
+import {Button, Card, Col, Container, Image, Modal, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import "../../styling/home.css"
+import { GrNext } from "react-icons/gr";
 import Locations from './Locations'
 import Buses from './Buses'
-import HomeCards from './Cards'
+import '../../styling/home.scss'
+import HomeModal from './HomeModal';
 
 const Home = () => {
 
   const [show, setShow] = useState(false)
 
+  const [showBusesModal, setShowBusesModal] = useState(false);
+  const [showLocationsModal, setShowLocationsModal] = useState(false);
+
+  const handleCloseBusesModal = () => setShowBusesModal(false);
+  const handleCloseLocationsModal = () => setShowLocationsModal(false);
+
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
   return (
-    <div>
-      <h1>Torch Transit</h1>
-      <Container>
-        <Row className="justify-content-md-between align-items-center mx-4">
-          <h1 className="col-lg-7">Get On Board! Reserve Your Free Ride to the Olympics Now!</h1>
-          <Link to="/search"><Button className="col-lg-2 mt-3 mt-lg-1" variant="primary">Book Now</Button></Link>
+<div>
+  <h1>Torch Transit</h1>
+  <Container className="home-banner">
+    <Row className="align-items-center mx-4">
+      <div className="col-lg-7">
+        <h1>Get On Board!</h1>
+        <h2>Reserve Your Free Ride to the Olympics Now!</h2>
+        <Link to="/search" className="me-3">
+          <Button className="book-button">Book Now</Button>
+        </Link>
+      </div>
+      
+      <div className="col-lg-5 d-flex justify-content-lg-end justify-content-center align-items-center">
+        <Image src="/Logo1.png" />
+      </div>
+    </Row>
+  </Container>
+
+
+      <Container className="mt-4">
+        <Row xs={1} md={2} lg={4} className="g-4">
+          <Col>
+            <Card className="home-card">
+              <Card.Body className="d-flex flex-column align-items-center">
+                <Card.Title className="text-center">Our Buses</Card.Title>
+                <Card.Img src="/buslogo.png" className="homeicon" />
+                <Button onClick={() => setShowBusesModal(true)} className="mt-auto custom-button">
+                  <GrNext />
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col>
+            <Card className="home-card">
+              <Card.Body className="d-flex flex-column align-items-center">
+                <Card.Title className="text-center">Locations</Card.Title>
+                <Card.Img src="/locationicon.png" className="homeicon" />
+                <Button  onClick={() => setShowLocationsModal(true)} className="mt-auto custom-button">
+                  <GrNext />
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col>
+            <Card className="home-card">
+              <Card.Body className="d-flex flex-column align-items-center">
+                <Card.Title className="text-center">Q2023</Card.Title>
+                <Card.Img src="/olympicicon.png" className="homeicon" />
+                <Link to="https://q2032.au/">
+                  <Button className="mt-auto custom-button">
+                    <GrNext />
+                  </Button>
+                </Link>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col>
+            <Card className="home-card">
+              <Card.Body className="d-flex flex-column align-items-center">
+                <Card.Title className="text-center">Contact Us</Card.Title>
+                <Card.Img src="/contacticon.png" className="homeicon" />
+                <Button onClick={handleShow} className="mt-auto custom-button">
+                  <GrNext />
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
         </Row>
       </Container>
 
-      <Container className="home-container">
-        <HomeCards handleShow={handleShow} />
-        
-        <h2 id="buses">Our Buses</h2>
-        <Buses />
-
-        <h2 id="locations">Locations</h2>
-        <Locations />
+      <HomeModal
+        title="Our Buses"
+        content={<Buses />}
+        show={showBusesModal}
+        handleClose={handleCloseBusesModal}
+      />
+      <HomeModal
+        title="Locations"
+        content={<Locations />}
+        show={showLocationsModal}
+        handleClose={handleCloseLocationsModal}
+      />
 
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
@@ -42,13 +114,12 @@ const Home = () => {
             <p><strong>Address:</strong> 123 Sesame Street, City, Country</p>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="outline-secondary" onClick={handleClose}>
               Close
             </Button>
           </Modal.Footer>
         </Modal>
-      </Container>
-    </div>
+        </div>
   )
 }
 
