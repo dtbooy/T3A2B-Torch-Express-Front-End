@@ -1,9 +1,8 @@
-import '../styling/app.css'
 import { BrowserRouter as Router, Routes, Route, Outlet} from 'react-router-dom'
 import Home from './Home Page/Home'
 import NavigationBar from './NavBar'
 import Footer from './Footer'
-import '../styling/app.css'
+import '../styling/app.scss'
 import Login from './Login'
 import Register from './Register'
 import Services from './Admin Pages/Services/Services'
@@ -78,8 +77,8 @@ function App() {
         <Route path="/search" element={<Search/>}/>
         {isLoggedIn ? (
           <Route path="/user" element={<Outlet />}>
-            <Route path={'mytrips/:userId'} element={<Mytrips />} />
-            <Route path="profile" element={<UserProfile user={user} setUser={setUser} updateUserCookie={updateUserCookie}/>} />
+            <Route path={':userId/mytrips/'} element={<Mytrips />} />
+            <Route path={":userId/profile"} element={<UserProfile user={user}/>} />
           </Route>
         ) : null}
         {isLoggedIn && user.is_admin && (

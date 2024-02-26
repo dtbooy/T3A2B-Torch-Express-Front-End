@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 const UserProfile = ({user, setUser, updateUserCookie}) => {
     let userId = user._id
-    // Privacy for Password
+// Privacy for Password
     const hidePassword = () => '*'.repeat(10)
 
     // Delete User Functionality 

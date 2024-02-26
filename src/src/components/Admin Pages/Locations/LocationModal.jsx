@@ -52,12 +52,12 @@ const LocationModal = ({ editedField, handleChange, handleCloseEditModal, update
                 <Form.Control type="text" name="directions" value={editedField.directions} onChange={(e) => handleInputChange(e, 'directions')} isInvalid={!!errors.directions} />
                 <Form.Control.Feedback type="invalid">{errors.directions}</Form.Control.Feedback>
             </Form.Group>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleCloseEditModal}>
+            <Modal.Footer className="d-flex justify-content-center">
+                <Button variant="outline-secondary" onClick={handleCloseEditModal}>
                     Close
                 </Button>
-                <Button variant="primary" type="submit">
-                    Save Changes
+                <Button variant="outline-success" type="submit">
+                    Save
                 </Button>
             </Modal.Footer>
         </Form>

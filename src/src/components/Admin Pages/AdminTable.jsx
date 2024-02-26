@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
-import { Table, Button, Container, Pagination } from 'react-bootstrap'
+import { Table, Container, Pagination } from 'react-bootstrap'
+import { TiDelete } from "react-icons/ti"
+import { FiEdit } from "react-icons/fi"
 import AdminFilter from './AdminFilter'
+import DeleteModal from './DeleteModal'
+
 
 // Renders a table on the admin pages 
 const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit, hideEditButton, filter, setFilter, filterProps }) => {
@@ -16,19 +20,37 @@ const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit, hi
         setCurrentPage(page)
     }
 
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [selectedItemId, setSelectedItemId] = useState(null)
+
+    const handleDeleteConfirmation = (id) => {
+        setSelectedItemId(id)
+        setShowDeleteModal(true)
+    }
+
+    const handleDeleteConfirm = () => {
+        deleteField(selectedItemId)
+        setShowDeleteModal(false)
+    }
+
+    const handleDeleteCancel = () => {
+        setShowDeleteModal(false)
+    }
+
     // Check if there are no results after applying the filter
     const noResults = paginatedData.length === 0
 
     return (
         <Container fluid>
-            <Table striped bordered>
+            <div className="card-container">
+            <Table  className="admin-table">
                 <thead>
                     {/* Header for each column */}
-                    <tr>
+                    <tr >
                         {tableHeaders.map((header, index) => (
                             <th key={index}>{header}</th>
                         ))}
-                        <th>Action</th>
+                        <th></th>
                     </tr>
                     {/* Search bars for each column */}
                     <tr>
@@ -57,21 +79,22 @@ const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit, hi
                     {!noResults && paginatedData.map((item, index) => (
                         <tr key={index}>
                             {renderRow(item)}
-                            <td>
-                                {!hideEditButton && (
-                                    <>
-                                        <Button variant="warning" onClick={() => handleEdit(item)}>Edit</Button>
-                                        {' '}
-                                    </>
-                                )}
-                                <Button variant="danger" onClick={() => deleteField(item._id)}>Delete</Button>
+                            <td className="action-icons align-content-center">
+                                <div className="d-flex justify-content-center space-evenly m-4">
+                                    {!hideEditButton && (
+                                        <>
+                                        <FiEdit className="edit-icon" onClick={() => handleEdit(item)}/>
+                                        </>
+                                    )}
+                                    <TiDelete className="delete-icon" onClick={() => handleDeleteConfirmation(item._id)}/>
+                                </div>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
             {totalPages > 1 && (
-                <Pagination className="justify-content-center">
+                <Pagination className="pagination justify-content-end">
                     {[...Array(totalPages)].map((_, page) => (
                         <Pagination.Item key={page} active={currentPage === page + 1} onClick={() => handlePageChange(page + 1)}>
                             {page + 1}
@@ -79,6 +102,8 @@ const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit, hi
                     ))}
                 </Pagination>
             )}
+             <DeleteModal show={showDeleteModal} onHide={handleDeleteCancel} onDeleteConfirm={handleDeleteConfirm} />
+             </div>
         </Container>
     )
 }
