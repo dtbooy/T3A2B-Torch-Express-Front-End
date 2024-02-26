@@ -105,7 +105,7 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
                 filterProps={propertyPaths}
             />
             <Modal show={showEditModal} onHide={handleCloseEditModal}>
-                <Modal.Header closeButton>
+                <Modal.Header className="modal-header" closeButton>
                     <Modal.Title>Edit {heading}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

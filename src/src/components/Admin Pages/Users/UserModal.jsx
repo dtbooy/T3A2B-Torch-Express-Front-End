@@ -60,12 +60,12 @@ const UserModal = ({ editedField, handleChange, handleCloseEditModal, updateFiel
                     <option value="User">User</option>
                 </Form.Select>
             </Form.Group>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleCloseEditModal}>
+            <Modal.Footer className="d-flex justify-content-center">
+                <Button variant="outline-secondary" onClick={handleCloseEditModal}>
                     Close
                 </Button>
-                <Button variant="primary" type="submit">
-                    Save Changes
+                <Button variant="outline-success" type="submit">
+                    Save
                 </Button>
             </Modal.Footer>
         </Form>

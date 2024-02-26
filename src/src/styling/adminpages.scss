@@ -1,39 +1,39 @@
 @import "variables";
 
+// Admin Page Header
+.admin-heading {
+  color: $primary-color;
+  position: relative;
+}
 
-  // Admin Page Header 
-  .admin-heading {
-    color: $primary-color;
-    position: relative;
-  }
-  
-  .admin-heading::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 3%;
-    height: 3px;
-    background-color: $primary-color;
-  }
+.admin-heading::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 3%;
+  height: 3px;
+  background-color: $primary-color;
+}
 
-// Create new button styling 
+// Create new button styling
 .new-button-container {
-    display: flex;
-    justify-content: flex-end;
-    margin: 10px;
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px;
+}
+
+// New Location & New Route form Styling
+.newLocation,
+.newRoute {
+  border-color: #f98a26;
+
+  .card-header {
+    background-color: #f98a26;
+    color: #ffffff;
   }
-  
-  // New Location & New Route form Styling
-  .newLocation, .newRoute {
-    border-color: #f98a26;
-  
-    .card-header {
-      background-color: #f98a26;
-      color: #ffffff;
-    }
-  }
-  
+}
+
 // Table Styling
 .table {
   margin: 20px auto;
@@ -101,4 +101,7 @@
   }
 }
 
-
+.modal-header {
+  background-color: $primary-color;
+  color: #ffffff;
+}

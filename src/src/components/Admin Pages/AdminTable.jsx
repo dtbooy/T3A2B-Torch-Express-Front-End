@@ -50,7 +50,7 @@ const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit, hi
                         {tableHeaders.map((header, index) => (
                             <th key={index}>{header}</th>
                         ))}
-                        <th>Action</th>
+                        <th></th>
                     </tr>
                     {/* Search bars for each column */}
                     <tr>
