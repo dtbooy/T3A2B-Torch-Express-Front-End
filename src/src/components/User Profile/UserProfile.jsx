@@ -42,7 +42,6 @@ const UserProfile = ({user, setUser, updateUserCookie}) => {
             }
             setUser(updatedUser)
             updateUserCookie(updatedUser)
-            // i want to update my user cookie too!
         } catch (error) {
             console.error('Error Updating:', error)
         }
@@ -87,7 +86,7 @@ const UserProfile = ({user, setUser, updateUserCookie}) => {
                     <Modal.Title>Edit Profile</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <UserModal user={user} updateUser={updateUser} handleCloseEditModal={handleCloseEditModal} />
+                    <UserModal user={user} setUser={setUser} updateUser={updateUser} handleCloseEditModal={handleCloseEditModal} />
                 </Modal.Body>
             </Modal>
         </>

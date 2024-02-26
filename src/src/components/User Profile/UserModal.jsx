@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 
-const UserModal = ({ user, updateUser, handleCloseEditModal }) => {
+const UserModal = ({ user, setUser, updateUser, handleCloseEditModal }) => {
     const [confirmPassword, setConfirmPassword] = useState('')
 
     const [passwordChanged, setPasswordChanged] = useState(false)
@@ -55,6 +55,7 @@ const UserModal = ({ user, updateUser, handleCloseEditModal }) => {
         // If no validation errors, update the user data
         if (Object.keys(newErrors).length === 0) {
             updateUser(userData)
+            setUser(userData)
             handleCloseEditModal()
         }
     }
