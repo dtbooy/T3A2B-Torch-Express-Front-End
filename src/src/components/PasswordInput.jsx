@@ -3,7 +3,7 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import Form from 'react-bootstrap/Form'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
-const PasswordInput = ({ value, onChange }) => {
+const PasswordInput = ({ value, onChange, error }) => {
   const [showPassword, setShowPassword] = useState(false)
 
   const togglePasswordVisibility = () => {
@@ -17,14 +17,15 @@ const PasswordInput = ({ value, onChange }) => {
         placeholder="Password"
         value={value}
         onChange={onChange}
+        isInvalid={!!error}
       />
-      
-        <InputGroup.Text onClick={togglePasswordVisibility} style={{ cursor: 'pointer' }}>
-          {showPassword ? <FaEyeSlash /> : <FaEye />}
-        </InputGroup.Text>
-      </InputGroup>
-    
+      <InputGroup.Text onClick={togglePasswordVisibility} style={{ cursor: 'pointer' }}>
+        {showPassword ? <FaEyeSlash /> : <FaEye />}
+      </InputGroup.Text>
+      <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
+    </InputGroup>
   )
 }
 
 export default PasswordInput
+
