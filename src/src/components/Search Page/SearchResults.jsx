@@ -73,9 +73,8 @@ const SearchResults = (params) => {
                 <Card.Body>
                   <Row>
                       <Card.Title className="bus-date mb-3">{new Date(result.collectionTime).toDateString()}</Card.Title>
-                      <div className="d-flex justify-content-center align-items-center">
-                        <div>
-                          <Card.Text>
+                      <div className="d-flex justify-content-center">
+                          <Card.Text className="text-center">
                             {
                               locations.find(
                                 (loc) => loc._id === result.pickupLocation
@@ -83,12 +82,8 @@ const SearchResults = (params) => {
                             }{" "}
                             {result.collectionTime.slice(11, 16)} (EST)
                           </Card.Text>
-                        </div>
-                        <div className="bus-arrow">
-                          <FaArrowRight />
-                        </div>
-                        <div>
-                          <Card.Text>
+                          <FaArrowRight className="bus-arrow"/>
+                          <Card.Text className="text-center">
                             {
                               locations.find(
                                 (loc) => loc._id === result.dropoffLocation
@@ -102,7 +97,6 @@ const SearchResults = (params) => {
                               .slice(11, 16)}
                             (EST)
                           </Card.Text>
-                        </div>
                       </div>
                       <Card.Footer className="bus-tickets mt-3">
                         Tickets remaining: {result.capacity - result.reservations}
