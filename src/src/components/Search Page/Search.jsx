@@ -27,7 +27,7 @@ const Search = () => {
         <SearchBar locations={locations} setResults={setResults} />
       </div>
       <Container className="mt-4">
-        <SearchResults results={results} locations={locations} />
+        <SearchResults results={results} setResults={setResults} locations={locations} />
       </Container>
     </>
   );

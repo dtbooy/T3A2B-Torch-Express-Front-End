@@ -53,11 +53,11 @@ function App() {
 
   const updateAccessToken = (token) => {
     setAccessToken(token)
-    Cookies.set('accessToken', token, { sameSite: 'None'})
+    Cookies.set('accessToken', token)
   }
 
   const updateUserCookie = (userData) => {
-    Cookies.set('userData', JSON.stringify(userData), { sameSite: 'None'})
+    Cookies.set('userData', JSON.stringify(userData))
     console.log('Updated user cookie')
   }
 

@@ -5,19 +5,20 @@ import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'
 import { FaArrowRight } from "react-icons/fa6"
 
-const SearchResults = (params) => {
-  let { results, locations } = params;
+const SearchResults = ({ results, locations, setResults }) => {
+
   // holds the service selected for booking
   const [selectedService, setSelectedService] = useState({});
   // controls the booking Modal visibility
   const [showBooking, setShowBooking] = useState(false);
   // Navigate hook  
   const nav = useNavigate()
+  const user = Cookies.get('userData')
 
   // load the service details into selectedService state & show booking modal
   const handleClick = (e) => {
     // check if logged in 
-    if (Cookies.get('userData')) {
+    if (user) {
       // store selected service details
       let service = results.find((res) => res._id == e.target.id);
       // replace location id's with location names
@@ -68,7 +69,7 @@ const SearchResults = (params) => {
       <Container className="d-flex flex-wrap justify-content-center search-results">
           {results.map((result) => {
             return (
-              <Card className="search-result m-2"> 
+              <Card key={result._id} className="search-result m-2"> 
                 <Card.Body>
                   <Row>
                       <Card.Title className="bus-date mb-3">{new Date(result.collectionTime).toDateString()}</Card.Title>
@@ -106,7 +107,7 @@ const SearchResults = (params) => {
                           onClick={(e) => handleClick(e)}
                           className="booking-button"
                         >
-                          Book a seat
+                          {user ? "Book a seat" : "Login to Book"}
                         </Button>
                       </div>
                   </Row>
@@ -118,6 +119,7 @@ const SearchResults = (params) => {
           showBooking={showBooking}
           setShowBooking={setShowBooking}
           selectedService={selectedService}
+          setResults={setResults}
         />
       </Container>
     );
