@@ -3,12 +3,11 @@
 // Add confirmation / error Modal to confirm tickets reserved
 
 import { useState } from "react";
-import { Form, Button, Modal, Row, Col, Offcanvas } from "react-bootstrap";
+import { Form, Button, Modal, Row, Col } from "react-bootstrap";
 import ConfirmationOffcanvas from "./ConfirmationOffcanvas";
 import Cookies from "js-cookie";
 
-function BookTicket(params) {
-  const { showBooking, setShowBooking, selectedService } = params;
+function BookTicket({ showBooking, setShowBooking, selectedService, setResults }) {
   // Stores number of tickets booked
   const [reservations, setReservations] = useState(1);
   // Stores Offcanvas variables
@@ -89,9 +88,7 @@ function BookTicket(params) {
         alertType: "danger",
       });
     }
-
-    //Close Modal
-    handleClose();
+    setResults()
   };
 
   return (

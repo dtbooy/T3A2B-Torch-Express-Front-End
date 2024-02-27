@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'
 import { FaArrowRight } from "react-icons/fa6"
 
-const SearchResults = (params) => {
-  let { results, locations } = params;
+const SearchResults = ({ results, locations, setResults }) => {
+
   // holds the service selected for booking
   const [selectedService, setSelectedService] = useState({});
   // controls the booking Modal visibility
@@ -119,6 +119,7 @@ const SearchResults = (params) => {
           showBooking={showBooking}
           setShowBooking={setShowBooking}
           selectedService={selectedService}
+          setResults={setResults}
         />
       </Container>
     );
