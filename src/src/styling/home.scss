@@ -77,10 +77,15 @@ body{
 // Accordion styling in Modals
 .accordion-button:not(.collapsed) {
   color: white;
-  background-color: lighten($primary-color, 15%);
+  background-color: lighten($secondary-color, 15%);
 }
 
 .accordion-button:focus {
-  border-color: lighten($primary-color, 15%);
+  border-color: lighten($secondary-color, 15%);
   box-shadow: none;
+}
+
+.map-link{
+  color: $primary-color;
+  font-size: 50px;
 }

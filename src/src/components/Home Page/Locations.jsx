@@ -16,13 +16,13 @@ const Locations = () => {
         <Accordion key={index} defaultActiveKey={loc.name}>
           <Accordion.Item eventKey={index} className="accordion-item mb-3">
             <Accordion.Header>{loc.name}</Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className="text-center">
               <p>Address: {loc.address}</p>
               <a
                 href={`https://www.google.com/maps?q=${loc.address.split(', ').join('+')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-              ><FaMapMarkedAlt />
+              ><FaMapMarkedAlt className="map-link"/>
               </a>
 
             </Accordion.Body>
