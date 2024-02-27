@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button, Modal } from 'react-bootstrap'
 import AdminTable from './AdminTable'
 import '../../styling/adminpages.scss'
+import Cookies from 'js-cookie'
 
 // Admin Page is a reusable component for all the different admin pages 
 const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, renderRow, prepareData, hideEditButton, propertyPaths }) => {
@@ -16,7 +17,9 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
 
     // Fetch Data from API
     useEffect(() => {
-        fetch(`http://localhost:4001/${endpoint}`)
+        fetch(`http://localhost:4001/${endpoint}`,
+            {headers : {'Authorization': Cookies.get("accessToken")}}
+        )
             .then(res => res.json())
             .then(data => setField(data))
             .catch(error => console.error(`Error fetching ${endpoint}:`, error))
@@ -25,8 +28,10 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
     // Delete
     async function deleteField(id) {
         try {
-            await fetch(`http://localhost:4001/${endpoint}/${id}`,
-                { method: 'Delete' })
+            await fetch(`http://localhost:4001/${endpoint}/${id}`, { 
+                method: 'Delete',
+                headers : {'Authorization': Cookies.get("accessToken")}
+            })
             setField(prevField => prevField.filter(item => item._id !== id))
         } catch (error) {
             console.error('Error deleting:', error)
@@ -56,7 +61,7 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
 
             const response = await fetch(`http://localhost:4001/${endpoint}/${editedField._id}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'Authorization': Cookies.get("accessToken")},
                 body: JSON.stringify(updatedFieldData)
             })
 
