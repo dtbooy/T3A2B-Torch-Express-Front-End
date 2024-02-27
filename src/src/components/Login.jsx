@@ -27,7 +27,7 @@ const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
       })
       const data = await res.json()
       // console.log(data)
-      console.log(res.status)
+      // console.log(res.status)
 
       // Check if login was successful
       if (res.status === 200) {

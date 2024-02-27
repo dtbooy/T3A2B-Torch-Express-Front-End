@@ -58,7 +58,7 @@ function BookTicket(params) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorisation: `${accessToken}`,
+          Authorization: `${accessToken}`,
         },
         body: JSON.stringify(tickets),
       });
