@@ -1,8 +1,19 @@
 @import "variables";
 
+body{
+  background-color: black;
+  font-family: $global-font-family;
+}
+
+.hero-title {
+  font-size: 80px;
+  color: $primary-color;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+}
+
 // Banner Styling
 .home-banner {
-  background-color: $cream-color;
   color: $primary-color;
   border-radius: 25px;
 }
@@ -29,17 +40,16 @@
 }
 
 .home-card {
-  background-color: $cream-color;
+  background-color: white;
   min-width: 200px;
-  border: 2px solid $primary-color;
-  color: $primary-color;
+  border: 4px solid $primary-color;
+  color: $secondary-color;
   position: relative;
   transition: background-color 0.3s ease, transform 0.3s ease;
 
   &:hover {
-    background-color: lighten($primary-color, 15%);
     transform: scale(1.05);
-    color: white;
+    color: $primary-color
   }
 
   .mt-auto {
@@ -50,7 +60,7 @@
 }
 
 .custom-button {
-  background-color: $cream-color;
+  background-color: transparent;
   color: $primary-color;
   border: 1px solid $primary-color;
   padding: 10px 20px;
@@ -59,7 +69,7 @@
   cursor: pointer;
 
   &:hover {
-    background-color: darken($danger-color, 10%);
+    background-color: darken($secondary-color, 10%);
     border: none;
   }
 }

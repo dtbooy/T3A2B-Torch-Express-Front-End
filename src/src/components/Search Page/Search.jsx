@@ -19,7 +19,7 @@ const Search = () => {
 
   return (
     <>
-      <h2>Search</h2>
+      <h1 className="page-heading">Search</h1>
       <div className="d-flex justify-content-center mt-4">
         <SearchBar locations={locations} setResults={setResults} />
       </div>

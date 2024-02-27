@@ -111,7 +111,7 @@ const UserModal = ({ user, setUser, updateUser, handleCloseEditModal, deleteUser
                 <Button className="edit-button" type="submit">Save</Button>
                 <Button className="delete-button" onClick={() => handleDeleteConfirmation(user._id)}>Delete Account</Button></Modal.Footer>
             </Form>
-            <DeleteModal message="Are you sure you want to delete your account? This cannot be undone." show={showDeleteModal} onHide={handleDeleteCancel} onDeleteConfirm={handleDeleteConfirm} />
+            <DeleteModal message="Are you sure you want to delete your account?" show={showDeleteModal} onHide={handleDeleteCancel} onDeleteConfirm={handleDeleteConfirm} />
         </>
     )
 }

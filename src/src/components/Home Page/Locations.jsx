@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Accordion } from 'react-bootstrap'
+import { FaMapMarkedAlt } from "react-icons/fa";
 
 const Locations = () => {
     const [locations, setLocations] = useState([])
@@ -17,6 +18,13 @@ const Locations = () => {
             <Accordion.Header>{loc.name}</Accordion.Header>
             <Accordion.Body>
               <p>Address: {loc.address}</p>
+              <a
+                href={`https://www.google.com/maps?q=${loc.address.split(', ').join('+')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              ><FaMapMarkedAlt />
+              </a>
+
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>

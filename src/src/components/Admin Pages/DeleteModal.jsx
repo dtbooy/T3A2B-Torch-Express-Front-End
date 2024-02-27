@@ -7,6 +7,7 @@ const DeleteModal = ({ show, onHide, onDeleteConfirm, message }) => {
             <Modal.Header  className="delete-modal-header" closeButton>
                 <Modal.Title>{message}</Modal.Title>
             </Modal.Header>
+            <Modal.Body>This cannot be undone</Modal.Body>
             <Modal.Footer>
                 <Button variant="outline-secondary" onClick={onHide}>
                     Cancel
