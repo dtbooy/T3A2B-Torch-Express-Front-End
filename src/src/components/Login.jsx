@@ -52,7 +52,9 @@ const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
           setIsLoggedIn(true)
           nav('/')
         } else if (res.status === 401) {
-          setErrorMessage('Invalid email or password')
+          setErrorMessage('Invalid Email')
+        } else if (res.status === 403) {
+          setErrorMessage('Invalid Password')
         }
       } catch (err) {
         setErrorMessage('An unexpected error occurred.')

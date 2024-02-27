@@ -42,7 +42,6 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
     useEffect(() => {
         setFilterdField(field.filter((row) => Object.entries(filter).every(([key, value]) => value === undefined || JSON.stringify(row[key]).toLowerCase().includes(value.toString().toLowerCase()))
         ))
-        // console.log(field)
     }, [field, filter])
 
     const handleEdit = (field) => {
@@ -93,7 +92,7 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
             {newForm && (
                 <div className="new-button-container">
                     <Link to={newForm}>
-                        <Button variant="outline-success">New</Button>
+                        <Button variant="success">New</Button>
                     </Link>
                 </div>
             )}

@@ -51,14 +51,12 @@
     background-color: $primary-color;
     color: $secondary-color;
     font-size: 1rem;
-    text-align: center;
-    align-content: center;
     vertical-align: middle;
   }
 
   td {
-    text-align: center;
     vertical-align: middle;
+    min-width: 100px;
   }
 
   tr {
@@ -109,4 +107,12 @@
 .modal-header {
   background-color: $primary-color;
   color: #ffffff;
+}
+
+.date-filter{
+  border: 1px solid $primary-color;
+}
+.table-filter{
+  width: 100px;
+  border: 1px solid $primary-color;
 }
