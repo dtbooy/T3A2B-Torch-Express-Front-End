@@ -68,6 +68,10 @@ const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
         setErrorMessage('An unexpected error occurred.')
       }
     }
+  } catch (err) {
+    // Error: Unhandled exception in API call
+    setErrorMessage('An unexpected error occurred.')
+  }
   }
 
   return (
