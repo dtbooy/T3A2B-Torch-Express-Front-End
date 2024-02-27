@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { Card, Button, Container, Row, Col } from 'react-bootstrap'
 import QRCode from "react-qr-code"
-import '../styling/Mytrip.css'
 import { useParams } from "react-router-dom"
 import Cookies from "js-cookie"
 import DeleteModal from "./Admin Pages/DeleteModal"
@@ -65,12 +64,13 @@ const Mytrips = () => {
           {reservations.map((reservation) => (
             <Card key={reservation._id} className="reservation-card mb-3">
               <Card.Body>
-              <Card.Title as="h3" className="company-title text-center">Torch Transit</Card.Title>
+              <Card.Img src="/Torch Transit.png"></Card.Img>
               <Card.Header as="h3" className="reservation-date text-center">{new Date(reservation?.busService?.collectionTime).toLocaleDateString('en-GB', { day: '2-digit', month: 'long' })} at {new Date(reservation?.busService?.collectionTime).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</Card.Header>
                 <Card.Text className="qr-code text-center mt-3">
                   <QRCode
                     size={200}
                     value={reservation._id}
+                    className="QRCode"
                   />
                 </Card.Text>
                 <Card.Text className="reservation-locations text-center">{reservation?.busService?.pickupLocation?.name} to {reservation?.busService?.dropoffLocation?.name}</Card.Text>
@@ -79,10 +79,10 @@ const Mytrips = () => {
                   <Col><Card.Text>Bus Number: {reservation?.busService?.busNumber}</Card.Text></Col>
                   <Col><Card.Text>Name: {reservation.user.name}</Card.Text></Col>
                 </Row>
-                <Card.Footer>
+              </Card.Body>
+              <Card.Footer>
                   <Button className="delete-button"onClick={() => handleDeleteConfirmation(reservation._id)}>Cancel Booking</Button>
                 </Card.Footer>
-              </Card.Body>
             </Card>
           ))}
           <DeleteModal message="Cancel Booking?" show={showDeleteModal} onHide={handleDeleteCancel} onDeleteConfirm={handleDeleteConfirm} />

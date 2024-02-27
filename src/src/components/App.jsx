@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route, Outlet} from 'react-router-dom'
 import Home from './Home Page/Home'
 import NavigationBar from './NavBar'
 import Footer from './Footer'
-import '../styling/app.scss'
 import Login from './Login'
 import Register from './Register'
 import Services from './Admin Pages/Services/Services'
@@ -12,7 +11,7 @@ import Locations from './Admin Pages/Locations/Locations'
 import Reservations from './Admin Pages/Reservations/Reservations'
 import Search from './Search Page/Search'
 import Mytrips from './Mytrips'
-import { Container } from 'react-bootstrap'
+import { Container, Spinner } from 'react-bootstrap'
 import { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import UserProfile from './User Profile/UserProfile'
@@ -49,7 +48,7 @@ function App() {
 
   if (!isInitialized) {
     // Render loading indicator or placeholder while fetching data
-    return <div>Loading...</div>
+    return <div className="loading-bar"><Spinner animation="border" variant="warning" /></div>
   }
 
   const updateAccessToken = (token) => {

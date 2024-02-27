@@ -21,7 +21,7 @@ const LogoutModal = ({ show, onHide, setIsLoggedIn }) => {
                 <Modal.Title>Are you sure you want to logout?</Modal.Title>
             </Modal.Header>
             <Modal.Footer>
-                <Button variant="secondary" onClick={onHide}>
+                <Button variant="outline-secondary" onClick={onHide}>
                     Cancel
                 </Button>
                 <Button variant="outline-danger" onClick={handleLogout}>

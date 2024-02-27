@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 import { useState } from 'react'
-import { Form, Button, Card } from 'react-bootstrap'
+import { Form, Button, Card, Container } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 
 const NewLocation = () => {
@@ -66,55 +66,57 @@ const NewLocation = () => {
     }
 
     return (
-        <Card className="newLocation" style={{ maxWidth: "500px", margin: "auto" }}>
-            <Card.Header>New Location</Card.Header>
-            <Card.Body>
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Location Name</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Enter Name"
-                            name="name"
-                            value={inputForm.name}
-                            onChange={handleChange}
-                            isInvalid={!!errors.name}
-                        />
-                        <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Location Address</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Enter Address"
-                            name="address"
-                            value={inputForm.address}
-                            onChange={handleChange}
-                            isInvalid={!!errors.address}
-                        />
-                        <Form.Control.Feedback type="invalid">{errors.address}</Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Directions</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Enter Directions"
-                            name="directions"
-                            value={inputForm.directions}
-                            onChange={handleChange}
-                            isInvalid={!!errors.directions}
-                        />
-                        <Form.Control.Feedback type="invalid">{errors.directions}</Form.Control.Feedback>
-                    </Form.Group>
-                    <div className="d-flex justify-content-center">
-                        <Link to="/admin/locations" className="me-2">
-                            <Button variant="outline-secondary">Cancel</Button>
-                        </Link>
-                        <Button variant="outline-success" type="submit">Create</Button>
-                    </div>
-                </Form>
-            </Card.Body>
-        </Card>
+        <Container className='d-flex justify-content-center'>
+            <Card className="newLocation m-5" >
+                <Card.Header>New Location</Card.Header>
+                <Card.Body>
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Location Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter Name"
+                                name="name"
+                                value={inputForm.name}
+                                onChange={handleChange}
+                                isInvalid={!!errors.name}
+                            />
+                            <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Location Address</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter Address"
+                                name="address"
+                                value={inputForm.address}
+                                onChange={handleChange}
+                                isInvalid={!!errors.address}
+                            />
+                            <Form.Control.Feedback type="invalid">{errors.address}</Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Directions</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter Directions"
+                                name="directions"
+                                value={inputForm.directions}
+                                onChange={handleChange}
+                                isInvalid={!!errors.directions}
+                            />
+                            <Form.Control.Feedback type="invalid">{errors.directions}</Form.Control.Feedback>
+                        </Form.Group>
+                        <div className="d-flex justify-content-center">
+                            <Link to="/admin/locations" className="me-2">
+                                <Button variant="outline-secondary">Cancel</Button>
+                            </Link>
+                            <Button variant="outline-success" type="submit">Create</Button>
+                        </div>
+                    </Form>
+                </Card.Body>
+            </Card>
+        </Container>
 
     )
 }

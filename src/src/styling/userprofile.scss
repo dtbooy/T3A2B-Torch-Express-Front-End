@@ -4,6 +4,7 @@
 .profile-card{
     margin-top: 100px;
     min-width: 400px;
+    border: 4px solid $primary-color
 }
 
 .profile-header{
@@ -13,7 +14,7 @@
 
 // Button Styling
 .edit-button {
-    background-color: white;
+    background-color: transparent;
     color: $primary-color;
     border: 1px solid $primary-color ;
     padding: 10px;
@@ -27,6 +28,7 @@
       border: none;
     }
 }
+
 
 .delete-button {
     background-color: transparent;
@@ -46,35 +48,15 @@
 
 .info-header {
     color: $primary-color;
-    position: relative;
   }
-  
-  .info-header::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 33%;
-    height: 3px;
-    background-color: $primary-color;
-  }
+
 
 // Edit User Modal Styling
 .profile-label{
     color: $primary-color;
-    position: relative;
     margin-bottom: 10px;
   }
   
-  .profile-label::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 33%;
-    height: 3px;
-    background-color: $primary-color;
-}
 
 // Delete Modal Syling 
 .delete-modal-header{

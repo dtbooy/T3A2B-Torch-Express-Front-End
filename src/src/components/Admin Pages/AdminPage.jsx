@@ -93,7 +93,7 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
             {newForm && (
                 <div className="new-button-container">
                     <Link to={newForm}>
-                        <Button variant="success">New</Button>
+                        <Button variant="outline-success">New</Button>
                     </Link>
                 </div>
             )}

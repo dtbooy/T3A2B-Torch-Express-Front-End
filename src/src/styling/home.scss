@@ -1,7 +1,7 @@
 @import "variables";
 
 body{
-  background-color: black;
+  background-color: $secondary-color;
   font-family: $global-font-family;
 }
 
@@ -40,7 +40,7 @@ body{
 }
 
 .home-card {
-  background-color: white;
+  background-color: $cream-color;
   min-width: 200px;
   border: 4px solid $primary-color;
   color: $secondary-color;
@@ -77,10 +77,15 @@ body{
 // Accordion styling in Modals
 .accordion-button:not(.collapsed) {
   color: white;
-  background-color: lighten($primary-color, 15%);
+  background-color: lighten($secondary-color, 15%);
 }
 
 .accordion-button:focus {
-  border-color: lighten($primary-color, 15%);
+  border-color: lighten($secondary-color, 15%);
   box-shadow: none;
+}
+
+.map-link{
+  color: $primary-color;
+  font-size: 50px;
 }

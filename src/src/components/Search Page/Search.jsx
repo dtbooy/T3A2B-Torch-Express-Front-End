@@ -20,6 +20,9 @@ const Search = () => {
   return (
     <>
       <h1 className="page-heading">Search</h1>
+      <div className="d-flex justify-content-center">
+        <img src="/bris-skyline.png" alt="brisbane skyline" className="img-fluid bris-image"/>
+      </div>
       <div className="d-flex justify-content-center mt-4">
         <SearchBar locations={locations} setResults={setResults} />
       </div>

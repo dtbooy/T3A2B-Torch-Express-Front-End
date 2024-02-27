@@ -1,11 +1,11 @@
 import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
-import { Card, Col, Row } from 'react-bootstrap'
+import { Card, Col, Container, Row } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { Link, useNavigate } from 'react-router-dom'
 
-const NewRoute = ({accessToken}) => {
+const NewRoute = ({ accessToken }) => {
   // get locations for pickup and dropoff 
   const [locations, setLocations] = useState([])
 
@@ -84,99 +84,101 @@ const NewRoute = ({accessToken}) => {
   }
 
   return (
-<Card className="newRoute" style={{ maxWidth: "500px", margin: "auto" }}>
-  <Card.Header>New Service</Card.Header>
-  <Card.Body>
-    <Form onSubmit={handleSubmit}>
-      <Row className="mb-3">
-        <Form.Group as={Col} md={6}>
-          <Form.Label>Bus Number</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Enter Bus Number"
-            name="busNumber"
-            value={inputForm.busNumber}
-            onChange={handleChange}
-            isInvalid={!!errors.busNumber}
-          />
-          <Form.Control.Feedback type="invalid">{errors.busNumber}</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group as={Col} md={6}>
-          <Form.Label>Pick Up</Form.Label>
-          <Form.Control
-            type="datetime-local"
-            placeholder="Select Date and Time"
-            name="collectionTime"
-            value={inputForm.collectionTime}
-            onChange={handleChange}
-            isInvalid={!!errors.collectionTime}
-          />
-          <Form.Control.Feedback type="invalid">{errors.collectionTime}</Form.Control.Feedback>
-        </Form.Group>
-      </Row>
-      <Row className="mb-3">
-        <Form.Group as={Col} md={6}>
-          <Form.Label>Travel Time</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Select Time"
-            name="estimatedTravelTime"
-            value={inputForm.estimatedTravelTime}
-            onChange={handleChange}
-            isInvalid={!!errors.estimatedTravelTime}
-          />
-          <Form.Control.Feedback type="invalid">{errors.estimatedTravelTime}</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group as={Col} md={6}>
-          <Form.Label>Capacity</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Select Capacity"
-            name="capacity"
-            value={inputForm.capacity}
-            onChange={handleChange}
-            isInvalid={!!errors.capacity}
-          />
-          <Form.Control.Feedback type="invalid">{errors.capacity}</Form.Control.Feedback>
-        </Form.Group>
-        
-      </Row>
-      <Row className="mb-3">
-      <Form.Group as={Col} md={6}>
-          <Form.Label>Select Pick Up Location</Form.Label>
-          <Form.Select name="pickupLocation" value={inputForm.pickupLocation} onChange={handleChange} isInvalid={!!errors.pickupLocation}>
-            <option value="">Select Pick Up Location</option>
-            {locations.map((location) => (
-              <option key={location._id} value={location._id}>
-                {location.name}
-              </option>
-            ))}
-          </Form.Select>
-          <Form.Control.Feedback type="invalid">{errors.pickupLocation}</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group as={Col} md={6}>
-          <Form.Label>Select Drop Off Location</Form.Label>
-          <Form.Select name="dropoffLocation" value={inputForm.dropoffLocation} onChange={handleChange} isInvalid={!!errors.dropoffLocation}>
-            <option value="">Select Drop Off Location</option>
-            {locations.map((location) => (
-              <option key={location._id} value={location._id}>
-                {location.name}
-              </option>
-            ))}
-          </Form.Select>
-          <Form.Control.Feedback type="invalid">{errors.dropoffLocation}</Form.Control.Feedback>
-        </Form.Group>
-        
-      </Row>
-      <div className="d-flex justify-content-center">
-        <Link to="/admin/services" className="me-2">
-          <Button variant="outline-secondary">Cancel</Button>
-        </Link>
-        <Button variant="outline-success" type="submit">Create</Button>
-      </div>
-    </Form>
-  </Card.Body>
-</Card>
+    <Container className='d-flex justify-content-center'>
+      <Card className="newRoute m-5">
+        <Card.Header>New Service</Card.Header>
+        <Card.Body>
+          <Form onSubmit={handleSubmit}>
+            <Row className="mb-3">
+              <Form.Group as={Col} md={6}>
+                <Form.Label>Bus Number</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Enter Bus Number"
+                  name="busNumber"
+                  value={inputForm.busNumber}
+                  onChange={handleChange}
+                  isInvalid={!!errors.busNumber}
+                />
+                <Form.Control.Feedback type="invalid">{errors.busNumber}</Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md={6}>
+                <Form.Label>Pick Up</Form.Label>
+                <Form.Control
+                  type="datetime-local"
+                  placeholder="Select Date and Time"
+                  name="collectionTime"
+                  value={inputForm.collectionTime}
+                  onChange={handleChange}
+                  isInvalid={!!errors.collectionTime}
+                />
+                <Form.Control.Feedback type="invalid">{errors.collectionTime}</Form.Control.Feedback>
+              </Form.Group>
+            </Row>
+            <Row className="mb-3">
+              <Form.Group as={Col} md={6}>
+                <Form.Label>Travel Time</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Select Time"
+                  name="estimatedTravelTime"
+                  value={inputForm.estimatedTravelTime}
+                  onChange={handleChange}
+                  isInvalid={!!errors.estimatedTravelTime}
+                />
+                <Form.Control.Feedback type="invalid">{errors.estimatedTravelTime}</Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md={6}>
+                <Form.Label>Capacity</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Select Capacity"
+                  name="capacity"
+                  value={inputForm.capacity}
+                  onChange={handleChange}
+                  isInvalid={!!errors.capacity}
+                />
+                <Form.Control.Feedback type="invalid">{errors.capacity}</Form.Control.Feedback>
+              </Form.Group>
+
+            </Row>
+            <Row className="mb-3">
+              <Form.Group as={Col} md={6}>
+                <Form.Label>Select Pick Up Location</Form.Label>
+                <Form.Select name="pickupLocation" value={inputForm.pickupLocation} onChange={handleChange} isInvalid={!!errors.pickupLocation}>
+                  <option value="">Select Pick Up Location</option>
+                  {locations.map((location) => (
+                    <option key={location._id} value={location._id}>
+                      {location.name}
+                    </option>
+                  ))}
+                </Form.Select>
+                <Form.Control.Feedback type="invalid">{errors.pickupLocation}</Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md={6}>
+                <Form.Label>Select Drop Off Location</Form.Label>
+                <Form.Select name="dropoffLocation" value={inputForm.dropoffLocation} onChange={handleChange} isInvalid={!!errors.dropoffLocation}>
+                  <option value="">Select Drop Off Location</option>
+                  {locations.map((location) => (
+                    <option key={location._id} value={location._id}>
+                      {location.name}
+                    </option>
+                  ))}
+                </Form.Select>
+                <Form.Control.Feedback type="invalid">{errors.dropoffLocation}</Form.Control.Feedback>
+              </Form.Group>
+
+            </Row>
+            <div className="d-flex justify-content-center">
+              <Link to="/admin/services" className="me-2">
+                <Button variant="outline-secondary">Cancel</Button>
+              </Link>
+              <Button variant="outline-success" type="submit">Create</Button>
+            </div>
+          </Form>
+        </Card.Body>
+      </Card>
+    </Container>
 
   )
 }

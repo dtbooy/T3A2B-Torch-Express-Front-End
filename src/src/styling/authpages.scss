@@ -3,7 +3,7 @@
 
 .login-button{
     border: 1px solid $primary-color ;
-    background-color: #ffffff;
+    background-color: transparent;
     color: $primary-color;
 
     &:hover{
@@ -20,7 +20,7 @@
 .form-control:focus, 
 .form-control:hover {
   border-color: $primary-color;
-  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25)
 }
 
 .login-title{
@@ -34,7 +34,8 @@
 .login-card{
     max-width: 400px; 
     width: 100%;
-    border-color: $primary-color;
+    border: 4px solid $primary-color;
+    background-color: $cream-color;
 }
 
 .error-message{

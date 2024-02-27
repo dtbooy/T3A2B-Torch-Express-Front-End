@@ -1,19 +1,6 @@
 @import "variables";
 
 
-.access-button {
-    padding: 8px 15px; 
-    min-width: 100px;
-    color: $secondary-color; 
-    border-color: $secondary-color;
-    &:hover { // Add this part for hover styles
-        background-color: $secondary-color; // Change to your desired background color on hover
-        color: $cream-color; 
-        border-color: $cream-color;
-    }
-}
-
-
 .nav-bar {
     border-color: $secondary-color;
     background-color: $primary-color;
@@ -27,12 +14,41 @@
     .nav-link {
         color: $secondary-color;
         margin: 0 15px;
-        // min-width: 120px;
+        font-size: 18px;
+
+        &:hover{
+            text-decoration: underline;
+        }
       }
-    
+}
+
+.access-button {
+    padding: 8px 15px; 
+    min-width: 100px;
+    background-color: transparent !important; 
+    color: $secondary-color !important; 
+    border-color: $secondary-color !important; 
+}
+
+.access-button:hover { 
+    background-color: $secondary-color !important; 
+    color: $cream-color !important; 
+    border-color: $cream-color !important; 
+}
+
+.access-button:active {
+    background-color: $secondary-color !important; 
+    border-color: $cream-color !important; 
 }
 
 
+.dropdown-menu {
+    background-color: $cream-color;
+}
+
+.dropdown-item:hover{
+    background-color: $primary-color;
+}
 
 .logout-button {
     border-color: $danger-color;
@@ -45,9 +61,9 @@
 }
 
 .navbar-nav .nav-link:not(.logout-button):hover {
-    /* Reset hover effect for elements other than the logout button */
+
     background-color: transparent;
-    color: $secondary-color; /* Or any color you want */
+    color: $secondary-color; 
 }
 
 .profile-dropdown .dropdown-toggle::after{
@@ -99,6 +115,35 @@
 
 .logout-button {
     width: 100%;
+}
+
+.icon-container {
+    display: flex; 
+    align-items: center;
+    font-size: 24px;
+}
+
+
+.user-profile-card {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.profile-icon {
+    margin-right: 1rem;
+}
+
+.profile-info {
+    width: 12rem;
+    text-align: center;
+}
+
+.footer {
+    margin-top: 10px;
+    color: $primary-color;
+    width: 100%;
+    text-align: center;
 }
 
 @media only screen and (max-width: 992px) {
