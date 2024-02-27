@@ -3,17 +3,18 @@ import { Card, Button } from 'react-bootstrap'
 import QRCode from "react-qr-code"
 import '../styling/Mytrip.css'
 import { useParams } from "react-router-dom"
+import Cookies from "js-cookie"
 
 const Mytrips = () => {
   const params = useParams()
   const [reservations, setReservations] = useState([])
 
   useEffect(() => {
-    fetch(`http://localhost:4001/users/${params.userId}/reservations/`)
+    fetch(`http://localhost:4001/users/${params.userId}/reservations/`, {
+      headers: {'Authorization': Cookies.get("accessToken")}
+    })
         .then(res => res.json())
-        .then(data => {
-          setReservations(data)
-        console.log(data)})
+        .then(data => setReservations(data))
         .catch(error => console.error('Error fetching Reservations:', error))
     
 }, []) 
@@ -21,8 +22,11 @@ const Mytrips = () => {
 
   const cancelReservation = async id => {
     try {
-      await fetch(`http://localhost:4001/reservations/${id}`, { method: 'delete' }) 
-      console.log(id)
+      await fetch(`http://localhost:4001/reservations/${id}`, { 
+        method: 'delete', 
+        headers: {'Authorization': Cookies.get("accessToken")}
+      }) 
+      // console.log(id)
       setReservations(prevReservations => prevReservations.filter(reservation => reservation._id !== id)) 
     } catch (error) {
       console.error('Error canceling reservation:', error) 
@@ -32,7 +36,7 @@ const Mytrips = () => {
 if(reservations.length === 0){
   return<></>
 }else{
-  console.log(reservations)
+  // console.log(reservations)
   return (
     <>
       <h1>My Trips</h1>
