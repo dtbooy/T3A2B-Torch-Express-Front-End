@@ -6,7 +6,7 @@ import '../../styling/UserProfileCard.css'
 
 const UserProfileCard = ({ user }) => {
     return (
-        <Card>
+        <Card className='card-div'>
             <div className='user-profile-card'> 
                 <BsPerson size={50} className='profile-icon' />
                 <div className='profile-info'>
