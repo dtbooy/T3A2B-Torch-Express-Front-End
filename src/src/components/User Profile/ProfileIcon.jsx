@@ -1,5 +1,4 @@
 import { BsPersonFill } from 'react-icons/bs'
-import '../../styling/ProfileIcon.css';;
 
 const ProfileIcon = ({ user }) => {
     const firstName = user.name.split(' ')[0]

@@ -22,8 +22,7 @@ const Home = () => {
 
   return (
 <div>
-  <h1 className="hero-title">Torch Transit</h1>
-  <Container className="home-banner">
+  <Container className="home-banner mt-3">
     <Row className="align-items-center mx-4">
       <div className="col-lg-7">
         <h1>Get On Board!</h1>

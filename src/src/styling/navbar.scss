@@ -101,6 +101,32 @@
     width: 100%;
 }
 
+.icon-container {
+    display: flex; 
+    align-items: center;
+    font-size: 24px;
+}
+
+
+.user-profile-card {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.profile-icon {
+    margin-right: 1rem;
+}
+
+.profile-info {
+    width: 12rem;
+    text-align: center;
+}
+
+.footer{
+    color: $primary-color;
+}
+
 @media only screen and (max-width: 992px) {
     .profile-dropdown .dropdown-menu {
         left: 0; /* Align the dropdown menu with the left edge of the navbar */

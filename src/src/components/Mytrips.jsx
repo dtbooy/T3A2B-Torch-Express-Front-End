@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { Card, Button, Container, Row, Col } from 'react-bootstrap'
 import QRCode from "react-qr-code"
-import '../styling/Mytrip.css'
 import { useParams } from "react-router-dom"
 import DeleteModal from "./Admin Pages/DeleteModal"
 import '../styling/reservationpage.scss'

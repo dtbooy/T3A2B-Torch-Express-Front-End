@@ -2,7 +2,6 @@
 
 import { Card } from 'react-bootstrap'
 import { BsPerson } from 'react-icons/bs'
-import '../../styling/UserProfileCard.css'
 
 const UserProfileCard = ({ user }) => {
     return (
