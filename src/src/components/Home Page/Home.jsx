@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
 <div>
-  <h1>Torch Transit</h1>
+  <h1 className="hero-title">Torch Transit</h1>
   <Container className="home-banner">
     <Row className="align-items-center mx-4">
       <div className="col-lg-7">

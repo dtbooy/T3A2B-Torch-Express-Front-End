@@ -1,8 +1,9 @@
-import { Button, Card, Col, Row, Spinner } from "react-bootstrap";
+import { Button, Card, Col, Container, Row, Spinner } from "react-bootstrap";
 import BookTicket from "./BookTicket";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'
+import { FaArrowRight } from "react-icons/fa6"
 
 const SearchResults = (params) => {
   let { results, locations } = params;
@@ -65,65 +66,61 @@ const SearchResults = (params) => {
     );
   } else {
     return (
-      <>
-        <Row className="row-gap-4">
+      <Container className="d-flex flex-wrap justify-content-center search-results">
           {results.map((result) => {
             return (
-              <Col key={result._id} sm={12} md={6} xl={4}>
-                <Card>
-                  <Card.Body className="flex-column align-items-start ">
-                    <Card.Title>{result.eventName}</Card.Title>
-                    <Card.Text>
-                      Date: {new Date(result.collectionTime).toDateString()}
-                    </Card.Text>
-                    <Card.Text>
-                      Departing:{" "}
-                      {
-                        locations.find(
-                          (loc) => loc._id === result.pickupLocation
-                        ).name
-                      }{" "}
-                      at {result.collectionTime.slice(11, 16)}
-                    </Card.Text>
-                    <Card.Text>
-                      Arriving:{" "}
-                      {
-                        locations.find(
-                          (loc) => loc._id === result.dropoffLocation
-                        ).name
-                      }{" "}
-                      at{" "}
-                      {addTime(
-                        result.collectionTime,
-                        result.estimatedTravelTime
-                      )
-                        .toISOString()
-                        .slice(11, 16)}
-                      (est)
-                    </Card.Text>
-                    <Card.Text>
-                      Tickets remaining: {result.capacity - result.reservations}
-                    </Card.Text>
-                    
-                    <Button
-                      id={result._id}
-                      onClick={(e) => handleClick(e)}
-                      variant="primary"
-                    >
-                      Book a seat
-                    </Button>
-                  </Card.Body>
-                </Card>
-              </Col>
+              <Card className="search-result m-2"> 
+                <Card.Body>
+                  <Row>
+                      <Card.Title className="bus-date mb-3">{new Date(result.collectionTime).toDateString()}</Card.Title>
+                      <div className="d-flex justify-content-center">
+                          <Card.Text className="text-center">
+                            {
+                              locations.find(
+                                (loc) => loc._id === result.pickupLocation
+                              ).name
+                            }{" "}
+                            {result.collectionTime.slice(11, 16)} (EST)
+                          </Card.Text>
+                          <FaArrowRight className="bus-arrow"/>
+                          <Card.Text className="text-center">
+                            {
+                              locations.find(
+                                (loc) => loc._id === result.dropoffLocation
+                              ).name
+                            }{" "}
+                            {addTime(
+                              result.collectionTime,
+                              result.estimatedTravelTime
+                            )
+                              .toISOString()
+                              .slice(11, 16)}
+                            (EST)
+                          </Card.Text>
+                      </div>
+                      <Card.Footer className="bus-tickets mt-3">
+                        Tickets remaining: {result.capacity - result.reservations}
+                      </Card.Footer>
+                      <div className="d-flex justify-content-center align-items-center mt-3">
+                        <Button
+                          id={result._id}
+                          onClick={(e) => handleClick(e)}
+                          className="booking-button"
+                        >
+                          Book a seat
+                        </Button>
+                      </div>
+                  </Row>
+                </Card.Body>
+              </Card>
             );
           })}
-        </Row>
         <BookTicket
-            showBooking={showBooking}
-            setShowBooking={setShowBooking}
-            selectedService={selectedService}
-          />
-      </>
+          showBooking={showBooking}
+          setShowBooking={setShowBooking}
+          selectedService={selectedService}
+        />
+      </Container>
     );
   }
 };

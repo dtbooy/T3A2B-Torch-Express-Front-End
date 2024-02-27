@@ -98,16 +98,16 @@ function BookTicket(params) {
     <>
       <Modal show={showBooking} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Book Tickets for {selectedService?.name}</Modal.Title>
+          <Modal.Title>Book Tickets</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group
               as={Row}
-              className="mb-3"
+              className="mb-3 "
               controlId="bookingPickupLocation"
             >
-              <Form.Label column sm="4">
+              <Form.Label className="ticket-label" column sm="4" >
                 Pickup:
               </Form.Label>
               <Col sm="8">
@@ -123,7 +123,7 @@ function BookTicket(params) {
               className="mb-3"
               controlId="bookingDropoffLocation"
             >
-              <Form.Label column sm="4">
+              <Form.Label className="ticket-label" column sm="4">
                 Dropoff:
               </Form.Label>
               <Col sm="8">
@@ -139,7 +139,7 @@ function BookTicket(params) {
               className="mb-3"
               controlId="bookingDepartureTime"
             >
-              <Form.Label column sm="4">
+              <Form.Label className="ticket-label" column sm="4">
                 Departure Time:
               </Form.Label>
               <Col sm="8">
@@ -155,7 +155,7 @@ function BookTicket(params) {
               </Col>
             </Form.Group>
             <Form.Group as={Col} controlId="numberOfTickets">
-              <Form.Label>Number of Tickets</Form.Label>
+              <Form.Label className="ticket-label">Number of Tickets</Form.Label>
               <Form.Select
                 value={reservations}
                 onChange={(e) => setReservations(e.target.value)}
@@ -169,10 +169,10 @@ function BookTicket(params) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
+          <Button variant="outline-secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleBooking}>
+          <Button className="edit-button" onClick={handleBooking}>
             Book Tickets
           </Button>
         </Modal.Footer>

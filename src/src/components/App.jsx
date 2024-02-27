@@ -54,11 +54,11 @@ function App() {
 
   const updateAccessToken = (token) => {
     setAccessToken(token)
-    Cookies.set('accessToken', token, { sameSite: 'None', secure: true }, { expires: 7 })
+    Cookies.set('accessToken', token, { sameSite: 'None'})
   }
 
   const updateUserCookie = (userData) => {
-    Cookies.set('userData', JSON.stringify(userData), { sameSite: 'None', secure: true })
+    Cookies.set('userData', JSON.stringify(userData), { sameSite: 'None'})
     console.log('Updated user cookie')
   }
 
@@ -78,13 +78,13 @@ function App() {
         {isLoggedIn ? (
           <Route path="/user" element={<Outlet />}>
             <Route path={':userId/mytrips/'} element={<Mytrips />} />
-            <Route path={":userId/profile"} element={<UserProfile user={user} setUser={setUser} updateUserCookie={updateUserCookie}/>} />
+            <Route path={":userId/profile"} element={<UserProfile user={user} setUser={setUser} updateUserCookie={updateUserCookie} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>} />
           </Route>
         ) : null}
         {isLoggedIn && user.is_admin && (
             <Route path="/admin" element={<Outlet />}>
               <Route path="services" element={<Services />} />
-              <Route path="services/new" element={<NewRoute />} />
+              <Route path="services/new" element={<NewRoute accessToken={accessToken}/>} />
               <Route path="users" element={<Users/>}/>
               <Route path="locations" element={<Locations/>}/>
               <Route path="locations/new" element={<NewLocation/>}/>

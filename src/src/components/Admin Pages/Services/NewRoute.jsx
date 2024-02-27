@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { Link, useNavigate } from 'react-router-dom'
 
-const NewRoute = () => {
+const NewRoute = ({accessToken}) => {
   // get locations for pickup and dropoff 
   const [locations, setLocations] = useState([])
 
@@ -65,10 +65,12 @@ const NewRoute = () => {
         const response = await fetch('http://localhost:4001/services/', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `${accessToken}`
           },
           body: JSON.stringify(inputForm)
         })
+        console.log(inputForm)
 
         if (!response.ok) {
           throw new Error('Failed to create service')
