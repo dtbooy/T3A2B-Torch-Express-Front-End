@@ -26,11 +26,15 @@
 // New Location & New Route form Styling
 .newLocation,
 .newRoute {
-  border-color: #f98a26;
+  border: 4px solid $primary-color;
+  background-color: $cream-color;
+  width: 500px;
+  color: #f98a26;
 
   .card-header {
-    background-color: #f98a26;
+    background-color: $primary-color;
     color: #ffffff;
+    font-size: 24px;
   }
 }
 
@@ -45,7 +49,7 @@
 .admin-table {
   th {
     background-color: $primary-color;
-    color: white;
+    color: $secondary-color;
     font-size: 1rem;
     text-align: center;
     align-content: center;

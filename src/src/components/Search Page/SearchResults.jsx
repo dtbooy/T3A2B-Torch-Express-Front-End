@@ -57,12 +57,11 @@ const SearchResults = (params) => {
     return <></>;
   } else if (results == "loading") {
     return (
-      <>
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
+      <Container className="d-flex justify-content-center">
+        <Spinner animation="border loading-bar" role="status">
+          <span className="visually-hidden"></span>
         </Spinner>
-        <h4> Loading results... </h4>
-      </>
+      </Container>
     );
   } else {
     return (

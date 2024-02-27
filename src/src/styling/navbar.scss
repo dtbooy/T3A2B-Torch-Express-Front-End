@@ -25,19 +25,22 @@
 .access-button {
     padding: 8px 15px; 
     min-width: 100px;
-    background-color: transparent;
-    color: $secondary-color; 
-    border-color: $secondary-color;
-    &:hover { 
-        background-color: $secondary-color; 
-        color: $cream-color; 
-        border-color: $cream-color;
-    }
-    &:active{
-        background-color: transparent;
-        border: 1px solid $cream-color;
-    }
+    background-color: transparent !important; 
+    color: $secondary-color !important; 
+    border-color: $secondary-color !important; 
 }
+
+.access-button:hover { 
+    background-color: $secondary-color !important; 
+    color: $cream-color !important; 
+    border-color: $cream-color !important; 
+}
+
+.access-button:active {
+    background-color: $secondary-color !important; 
+    border-color: $cream-color !important; 
+}
+
 
 .dropdown-menu {
     background-color: $cream-color;
@@ -136,8 +139,12 @@
     text-align: center;
 }
 
-.footer{
+.footer {
+    margin-top: 10px;
     color: $primary-color;
+    width: 100%;
+    background-color: black;
+    text-align: center;
 }
 
 @media only screen and (max-width: 992px) {
