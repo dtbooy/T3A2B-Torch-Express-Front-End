@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Button, Card, Modal } from 'react-bootstrap'
+import { Button, Card, Col, Container, Modal, Row } from 'react-bootstrap'
 import UserModal from './UserModal'
 import { useNavigate } from 'react-router-dom'
+import '../../styling/userprofile.scss'
 
-const UserProfile = ({user, setUser, updateUserCookie}) => {
+const UserProfile = ({user, setUser, updateUserCookie, setIsLoggedIn, isLoggedIn}) => {
     let userId = user._id
 // Privacy for Password
     const hidePassword = () => '*'.repeat(10)
@@ -12,19 +13,14 @@ const UserProfile = ({user, setUser, updateUserCookie}) => {
     const nav = useNavigate()
 
     async function deleteUser(userId) {
-        // Prompt for confirmation of deletion
-        const confirmDelete = window.confirm('Are you sure you want to delete this account?  - This cannot be undone. ')
-        if (confirmDelete) {
             try {
                 await fetch(`http://localhost:4001/users/${userId}`, { method: 'DELETE' })
+                setIsLoggedIn(false)
                 // Navigate to home page on deletion
                 nav('/')
-                
             } catch (error) {
                 console.error('Error Deleting:', error)
             }
-        }
-
     }
 
     // Update User Functionality
@@ -59,26 +55,31 @@ const UserProfile = ({user, setUser, updateUserCookie}) => {
     }
 
     return (
-        <>
-            <Card style={{ width: '18rem' }}>
-                <Card.Body>
-                    <Card.Title>User Profile</Card.Title>
-                    <Card.Text>
-                        Name: {user.name}
-                    </Card.Text>
-                    <Card.Text>
-                        Email: {user.email}
-                    </Card.Text>
-                    <Card.Text>
-                        Password: {hidePassword(user.password)}
-                    </Card.Text>
-                    <Card.Text>
-                        D.O.B: {new Date(user.DOB).toLocaleDateString()}
-                    </Card.Text>
-                    <Button variant="primary" onClick={handleEdit}>Edit Profile</Button>
-                    <Button variant="danger" onClick={() => deleteUser(user._id)}>Delete Account</Button>
-                </Card.Body>
-            </Card>
+        <Container className="d-flex justify-content-center align-items-center">
+        <Card className="profile-card">
+          <Card.Header as='h4' className="profile-header">Account</Card.Header>
+          <Card.Body>
+            <Row>
+              <Col xs={6} md={4}>
+                <Card.Text className="info-header">Name:</Card.Text>
+                <Card.Text className="info-header">Email:</Card.Text>
+                <Card.Text className="info-header">Password:</Card.Text>
+                <Card.Text className="info-header">Date of Birth:</Card.Text>
+              </Col>
+              <Col xs={6} md={8}>
+                <Card.Text className="info-field">{user.name}</Card.Text>
+                <Card.Text className="info-field">{user.email}</Card.Text>
+                <Card.Text className="info-field">{hidePassword(user.password)}</Card.Text>
+                <Card.Text className="info-field">{new Date(user.DOB).toLocaleDateString()}</Card.Text>
+              </Col>
+            </Row>
+            <Row className="justify-content-center align-items-center mt-1">
+              <Col xs={12} md={6} className="d-flex justify-content-center">
+                <Button className="edit-button" onClick={handleEdit}>Edit Profile</Button>
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
 
             {/* Modal Component */}
             <Modal show={showEditModal} onHide={handleCloseEditModal}>
@@ -86,10 +87,10 @@ const UserProfile = ({user, setUser, updateUserCookie}) => {
                     <Modal.Title>Edit Profile</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <UserModal user={user} setUser={setUser} updateUser={updateUser} handleCloseEditModal={handleCloseEditModal} />
+                    <UserModal user={user} setUser={setUser} updateUser={updateUser} handleCloseEditModal={handleCloseEditModal} deleteUser={deleteUser} />
                 </Modal.Body>
             </Modal>
-        </>
+        </Container>
     )
 }
 

@@ -78,7 +78,7 @@ function App() {
         {isLoggedIn ? (
           <Route path="/user" element={<Outlet />}>
             <Route path={':userId/mytrips/'} element={<Mytrips />} />
-            <Route path={":userId/profile"} element={<UserProfile user={user} setUser={setUser} updateUserCookie={updateUserCookie}/>} />
+            <Route path={":userId/profile"} element={<UserProfile user={user} setUser={setUser} updateUserCookie={updateUserCookie} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>} />
           </Route>
         ) : null}
         {isLoggedIn && user.is_admin && (
