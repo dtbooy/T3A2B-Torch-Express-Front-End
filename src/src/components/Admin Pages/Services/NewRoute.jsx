@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
 import { Card, Col, Row } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
@@ -9,7 +10,9 @@ const NewRoute = () => {
   const [locations, setLocations] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:4001/locations')
+    fetch('http://localhost:4001/locations',{
+      headers: {'Authorization': Cookies.get("accessToken")}
+    })
       .then((res) => res.json())
       .then((data) => setLocations(data))
       .catch((error) => console.error('Error fetching locations:', error))

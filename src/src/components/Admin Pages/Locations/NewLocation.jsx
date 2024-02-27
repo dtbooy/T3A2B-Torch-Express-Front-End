@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import { useState } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
@@ -47,7 +48,8 @@ const NewLocation = () => {
                 const response = await fetch('http://localhost:4001/locations/', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': Cookies.get("accessToken")
                     },
                     body: JSON.stringify(inputForm)
                 })
