@@ -43,7 +43,7 @@ const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit, hi
     return (
         <Container fluid>
             <div className="card-container">
-            <Table  className="admin-table">
+            <Table responsive="sm" className="admin-table ">
                 <thead>
                     {/* Header for each column */}
                     <tr >
