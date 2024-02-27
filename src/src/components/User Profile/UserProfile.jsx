@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Button, Card, Modal } from 'react-bootstrap'
 import UserModal from './UserModal'
 import { useNavigate } from 'react-router-dom'
+import Cookies from "js-cookie";
 
 const UserProfile = ({user, setUser, updateUserCookie}) => {
     let userId = user._id
@@ -16,10 +17,15 @@ const UserProfile = ({user, setUser, updateUserCookie}) => {
         const confirmDelete = window.confirm('Are you sure you want to delete this account?  - This cannot be undone. ')
         if (confirmDelete) {
             try {
-                await fetch(`http://localhost:4001/users/${userId}`, { method: 'DELETE' })
+                await fetch(`http://localhost:4001/users/${userId}`, {
+                    method: 'DELETE', 
+                    headers : {
+                        Authorization: Cookies.get("accessToken")
+                    }
+                })
                 // Navigate to home page on deletion
                 nav('/')
-                
+                // need to add logout function on account delete---------------------------------------------------------------- DEBUG
             } catch (error) {
                 console.error('Error Deleting:', error)
             }
@@ -34,6 +40,7 @@ const UserProfile = ({user, setUser, updateUserCookie}) => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': Cookies.get("accessToken"),
                 },
                 body: JSON.stringify(updatedUser),
             })
