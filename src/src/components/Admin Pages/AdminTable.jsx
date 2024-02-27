@@ -102,7 +102,7 @@ const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit, hi
                     ))}
                 </Pagination>
             )}
-             <DeleteModal message="Delete? This cannot be undone." show={showDeleteModal} onHide={handleDeleteCancel} onDeleteConfirm={handleDeleteConfirm} />
+             <DeleteModal message="Delete?" show={showDeleteModal} onHide={handleDeleteCancel} onDeleteConfirm={handleDeleteConfirm} />
              </div>
         </Container>
     )

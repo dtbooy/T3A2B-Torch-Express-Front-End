@@ -1,0 +1,21 @@
+@import "variables";
+
+.company-title{
+    color:$primary-color
+}
+
+.reservation-card{
+    max-width: 400px;
+    border: 2px solid $primary-color;
+}
+
+.reservation-date{
+    color: $secondary-color;
+    background-color: $primary-color;
+}
+
+.reservation-locations{
+    color: $secondary-color;
+    font-size: 20px;
+}
+
