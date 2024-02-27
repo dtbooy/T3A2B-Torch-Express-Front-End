@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import SearchResults from "./SearchResults";
 import SearchBar from "./SearchBar";
+import '../../styling/searchpage.scss'
 
 const Search = () => {
   // stores the location names
@@ -19,8 +20,10 @@ const Search = () => {
   return (
     <>
       <h2>Search</h2>
-      <SearchBar locations={locations} setResults={setResults} />
-      <Container>
+      <div className="d-flex justify-content-center mt-4">
+        <SearchBar locations={locations} setResults={setResults} />
+      </div>
+      <Container className="mt-4">
         <SearchResults results={results} locations={locations} />
       </Container>
     </>
