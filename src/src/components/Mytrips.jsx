@@ -57,7 +57,7 @@ const Mytrips = () => {
   } else {
     return (
       <>
-      <h1>My Trips</h1>
+      <h1 className="page-heading">My Trips</h1>
       <Container className="d-flex flex-wrap justify-content-evenly">
           {reservations.map((reservation) => (
             <Card key={reservation._id} className="reservation-card mb-3">
