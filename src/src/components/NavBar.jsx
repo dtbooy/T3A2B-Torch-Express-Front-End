@@ -19,8 +19,8 @@ const NavigationBar = ({setIsLoggedIn, isLoggedIn, isAdmin, user }) => {
           <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/search">Buses</Nav.Link>
             {isLoggedIn && <Nav.Link as={Link} to={`/user/${userId}/mytrips`}>My Trips</Nav.Link>}
-             {isLoggedIn && isAdmin && (<NavDropdown title="Admin" id="basic-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/admin/services">Routes</NavDropdown.Item>
+             {isLoggedIn && isAdmin && (<NavDropdown title="Admin" id="basic-nav-dropdown" >
+              <NavDropdown.Item as={Link} to="/admin/services" className="admin-dropdown">Routes</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/admin/users">Users</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/admin/reservations">Reservations</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/admin/locations">Locations</NavDropdown.Item>
@@ -56,8 +56,8 @@ const NavigationBar = ({setIsLoggedIn, isLoggedIn, isAdmin, user }) => {
               </NavDropdown>
             ) : (
               <>
-                <Nav.Link as={Link} to="/register"><Button variant="outline-primary" className="access-button">Sign Up</Button></Nav.Link>
-                <Nav.Link as={Link} to="/login"><Button variant="outline-info" className="access-button">Login</Button></Nav.Link>
+                <Nav.Link as={Link} to="/register"><Button className="access-button">Sign Up</Button></Nav.Link>
+                <Nav.Link as={Link} to="/login"><Button className="access-button">Login</Button></Nav.Link>
               </>
             )}
           </Nav>

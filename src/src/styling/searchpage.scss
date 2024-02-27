@@ -31,6 +31,7 @@
     width: 400px;
     border: 2px solid $primary-color;
     border-radius: 25px;
+    background-color: $cream-color;
   }
 
 .booking-button{
@@ -59,4 +60,13 @@
 .ticket-label{
     color: $primary-color;
     font-weight: 600;
+}
+
+.modal-content{
+    background-color: $cream-color;
+}
+
+.bris-image{
+    max-height: 300px;
+    margin-bottom: none;
 }

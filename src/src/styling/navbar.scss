@@ -1,19 +1,6 @@
 @import "variables";
 
 
-.access-button {
-    padding: 8px 15px; 
-    min-width: 100px;
-    color: $secondary-color; 
-    border-color: $secondary-color;
-    &:hover { // Add this part for hover styles
-        background-color: $secondary-color; // Change to your desired background color on hover
-        color: $cream-color; 
-        border-color: $cream-color;
-    }
-}
-
-
 .nav-bar {
     border-color: $secondary-color;
     background-color: $primary-color;
@@ -27,12 +14,38 @@
     .nav-link {
         color: $secondary-color;
         margin: 0 15px;
-        // min-width: 120px;
+        font-size: 18px;
+
+        &:hover{
+            text-decoration: underline;
+        }
       }
-    
 }
 
+.access-button {
+    padding: 8px 15px; 
+    min-width: 100px;
+    background-color: transparent;
+    color: $secondary-color; 
+    border-color: $secondary-color;
+    &:hover { 
+        background-color: $secondary-color; 
+        color: $cream-color; 
+        border-color: $cream-color;
+    }
+    &:active{
+        background-color: transparent;
+        border: 1px solid $cream-color;
+    }
+}
 
+.dropdown-menu {
+    background-color: $cream-color;
+}
+
+.dropdown-item:hover{
+    background-color: $primary-color;
+}
 
 .logout-button {
     border-color: $danger-color;
@@ -45,9 +58,9 @@
 }
 
 .navbar-nav .nav-link:not(.logout-button):hover {
-    /* Reset hover effect for elements other than the logout button */
+
     background-color: transparent;
-    color: $secondary-color; /* Or any color you want */
+    color: $secondary-color; 
 }
 
 .profile-dropdown .dropdown-toggle::after{

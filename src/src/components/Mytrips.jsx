@@ -67,6 +67,7 @@ const Mytrips = () => {
                   <QRCode
                     size={200}
                     value={reservation._id}
+                    className="QRCode"
                   />
                 </Card.Text>
                 <Card.Text className="reservation-locations text-center">{reservation?.busService?.pickupLocation?.name} to {reservation?.busService?.dropoffLocation?.name}</Card.Text>
