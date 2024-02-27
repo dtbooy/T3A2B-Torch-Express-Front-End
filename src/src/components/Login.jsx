@@ -20,16 +20,6 @@ const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    try {
-      const res = await fetch("http://localhost:4001/login", {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values)
-      })
-      const data = await res.json()
-      // console.log(data)
-      // console.log(res.status)
-    
     const requiredFields = ['email', 'password']
     const newErrors = {}
 
@@ -68,10 +58,6 @@ const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
         setErrorMessage('An unexpected error occurred.')
       }
     }
-  } catch (err) {
-    // Error: Unhandled exception in API call
-    setErrorMessage('An unexpected error occurred.')
-  }
   }
 
   return (
