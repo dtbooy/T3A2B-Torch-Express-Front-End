@@ -37,7 +37,7 @@ const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
     // If there are no errors, proceed with login
     if (Object.keys(newErrors).length === 0) {
       try {
-        const res = await fetch("http://localhost:4001/login", {
+        const res = await fetch("https://t3a2b-torch-express-api.onrender.com/login", {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(values)
@@ -47,7 +47,7 @@ const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
         if (res.status === 200) {
           console.log(data)
           await updateAccessToken(data.token)
-          Cookies.set('userData', JSON.stringify(data.user), { sameSite: 'None', secure: true })
+          Cookies.set('userData', JSON.stringify(data.user), { sameSite: 'Strict', secure: true })
           setUser(data.user)
           setIsLoggedIn(true)
           nav('/')

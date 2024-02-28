@@ -22,7 +22,7 @@ const SearchBar = (params) => {
       inputForm.date ? "date=" + inputForm.date : ""
     }`;
 
-    fetch("http://localhost:4001/services/search" + searchQuery)
+    fetch("https://t3a2b-torch-express-api.onrender.com/services/search" + searchQuery)
       .then((res) => res.json())
       .then((data) => {
         setResults(data);

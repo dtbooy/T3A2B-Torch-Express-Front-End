@@ -15,7 +15,7 @@ const UserProfile = ({user, setUser, updateUserCookie, setIsLoggedIn, isLoggedIn
 
     async function deleteUser(userId) {
             try {
-                await fetch(`http://localhost:4001/users/${userId}`, {
+                await fetch(`https://t3a2b-torch-express-api.onrender.com/users/${userId}`, {
                     method: 'DELETE', 
                     headers : {
                         Authorization: Cookies.get("accessToken")
@@ -32,7 +32,7 @@ const UserProfile = ({user, setUser, updateUserCookie, setIsLoggedIn, isLoggedIn
     // Update User Functionality
     async function updateUser(updatedUser) {
         try {
-            const response = await fetch(`http://localhost:4001/users/${userId}`, {
+            const response = await fetch(`https://t3a2b-torch-express-api.onrender.com/users/${userId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

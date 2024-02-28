@@ -59,7 +59,7 @@ function BookTicket({ showBooking, setShowBooking, selectedService, setResults }
 
     // Send req to API
     try {
-      let res = await fetch(`http://localhost:4001/reservations`, {
+      let res = await fetch(`https://t3a2b-torch-express-api.onrender.com/reservations`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

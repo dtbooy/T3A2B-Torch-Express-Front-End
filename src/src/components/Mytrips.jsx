@@ -11,7 +11,7 @@ const Mytrips = () => {
   const [reservations, setReservations] = useState([])
 
   useEffect(() => {
-    fetch(`http://localhost:4001/users/${params.userId}/reservations/`, {
+    fetch(`https://t3a2b-torch-express-api.onrender.com/users/${params.userId}/reservations/`, {
       headers: {'Authorization': Cookies.get("accessToken")}
     })
         .then(res => res.json())
@@ -22,7 +22,7 @@ const Mytrips = () => {
 
   const cancelReservation = async id => {
     try {
-      await fetch(`http://localhost:4001/reservations/${id}`, { 
+      await fetch(`https://t3a2b-torch-express-api.onrender.com/reservations/${id}`, { 
         method: 'delete', 
         headers: {'Authorization': Cookies.get("accessToken")}
       }) 
