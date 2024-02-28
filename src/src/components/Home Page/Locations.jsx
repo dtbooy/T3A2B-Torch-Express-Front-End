@@ -6,7 +6,7 @@ const Locations = () => {
     const [locations, setLocations] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:4001/locations")
+        fetch("https://t3a2b-torch-express-api.onrender.com/locations")
           .then((res) => res.json())
           .then((data) => setLocations(data))
       }, [])

@@ -49,7 +49,7 @@ const Register = () => {
     // If there are no errors, submit the form
     if (Object.keys(newErrors).length === 0) {
       try {
-        const res = await fetch('http://localhost:4001/users/signup', {
+        const res = await fetch('https://t3a2b-torch-express-api.onrender.com/users/signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(values),

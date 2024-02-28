@@ -45,7 +45,7 @@ const NewLocation = () => {
         // if no validation errors then submit the form and create new location 
         if (Object.keys(newErrors).length === 0) {
             try {
-                const response = await fetch('http://localhost:4001/locations/', {
+                const response = await fetch('https://t3a2b-torch-express-api.onrender.com/locations/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
