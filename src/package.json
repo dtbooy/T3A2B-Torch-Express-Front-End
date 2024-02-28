@@ -16,6 +16,7 @@
     "jquery": "^3.7.1",
     "js-cookie": "^3.0.5",
     "js-cookies": "^1.0.4",
+    "msw": "^2.2.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
     "react-datepicker": "^6.1.0",
