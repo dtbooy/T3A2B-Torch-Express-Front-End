@@ -68,7 +68,8 @@ function BookTicket({ showBooking, setShowBooking, selectedService, setResults }
         body: JSON.stringify(tickets),
       });
       let response = await res.json()
-      if (!response.ok) {
+      console.log(response)
+      if (response.error) {
         throw new Error(response.error);
       }
       // set success offcanvasProps
