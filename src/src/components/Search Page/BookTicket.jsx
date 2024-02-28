@@ -59,7 +59,7 @@ function BookTicket({ showBooking, setShowBooking, selectedService, setResults }
 
     // Send req to API
     try {
-      const response = await fetch(`http://localhost:4001/reservations`, {
+      let res = await fetch(`http://localhost:4001/reservations`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,10 +67,10 @@ function BookTicket({ showBooking, setShowBooking, selectedService, setResults }
         },
         body: JSON.stringify(tickets),
       });
-      if (!response.ok) {
-        console.log(response)
-        console.log(response.body)
-        throw new Error(response.body.error);
+      let response = await res.json()
+      console.log(response)
+      if (response.error) {
+        throw new Error(response.error);
       }
       // set success offcanvasProps
       setOffcanvasProps({
@@ -96,6 +96,10 @@ function BookTicket({ showBooking, setShowBooking, selectedService, setResults }
     }
     
   };
+  const maxTickets = []
+  for(let i = 0; i < Math.min(selectedService.capacity - selectedService.reservations, 10); i++){
+    maxTickets.push(i+1)
+  }
 
   return (
     <>
@@ -163,10 +167,10 @@ function BookTicket({ showBooking, setShowBooking, selectedService, setResults }
                 value={reservations}
                 onChange={(e) => setReservations(e.target.value)}
               >
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-                <option value={4}>4</option>
+                {maxTickets.map((i) => (
+                <option key={i} value={i}>{i}</option>))
+              }
+
               </Form.Select>
             </Form.Group>
           </Form>
