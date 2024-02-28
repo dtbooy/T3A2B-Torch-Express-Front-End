@@ -1,6 +1,6 @@
 import { Offcanvas } from "react-bootstrap";
 
-const ConfirmationOffcanvas = ({ offcanvasProps, setOffcanvasProps }) => {
+const ConfirmationOffcanvas = ({ offcanvasProps, setOffcanvasProps, clearSearch }) => {
   // To use this component need to set a State in the call component and set:
   // name: Title
   // message: message content
@@ -11,6 +11,9 @@ const ConfirmationOffcanvas = ({ offcanvasProps, setOffcanvasProps }) => {
   const handleOffcanvasClose = () => {
     // close OffCanvas, reset state
     setOffcanvasProps({ show: false });
+    if (offcanvasProps.alertType == "success"){
+    clearSearch()
+    }
   };
 
   return (
@@ -19,7 +22,7 @@ const ConfirmationOffcanvas = ({ offcanvasProps, setOffcanvasProps }) => {
         show={offcanvasProps.show}
         onHide={handleOffcanvasClose}
         scroll={true}
-        backdrop={false}
+        backdrop={true}
         placement="top"
       >
         <div
