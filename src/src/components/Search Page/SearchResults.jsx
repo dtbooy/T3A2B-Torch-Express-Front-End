@@ -21,6 +21,10 @@ const SearchResults = ({ results, locations, setResults }) => {
     if (user) {
       // store selected service details
       let service = results.find((res) => res._id == e.target.id);
+      //Do nothing if sold out
+      if (service.capacity <= service.reservations){
+        return
+      }
       // replace location id's with location names
       service = {
         ...service,
@@ -44,7 +48,6 @@ const SearchResults = ({ results, locations, setResults }) => {
 
   };
 
-  // move this into a utility functions file
   // Calculate arrival time
   function addTime(time, timeOffset) {
     let newTime = new Date(time);
@@ -107,7 +110,9 @@ const SearchResults = ({ results, locations, setResults }) => {
                           onClick={(e) => handleClick(e)}
                           className="booking-button"
                         >
-                          {user ? "Book a seat" : "Login to Book"}
+                          {(result.capacity > result.reservations) ?
+                          user ? "Book a seat" : "Login to Book"
+                         : "Sold Out"}
                         </Button>
                       </div>
                   </Row>
