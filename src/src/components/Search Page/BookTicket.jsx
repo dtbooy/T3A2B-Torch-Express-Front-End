@@ -30,6 +30,12 @@ function BookTicket({ showBooking, setShowBooking, selectedService, setResults }
     setShowBooking(false);
   };
 
+  // on close of Confirmation message - reset ticket selection
+  const clearSearch = () => {
+    // clearsearch results
+    setResults()
+  };
+
   // On booking selection,
   const handleBooking = async () => {
     //Close Modal
@@ -88,7 +94,7 @@ function BookTicket({ showBooking, setShowBooking, selectedService, setResults }
         alertType: "danger",
       });
     }
-    setResults()
+    
   };
 
   return (
@@ -177,6 +183,7 @@ function BookTicket({ showBooking, setShowBooking, selectedService, setResults }
       <ConfirmationOffcanvas
         offcanvasProps={offcanvasProps}
         setOffcanvasProps={setOffcanvasProps}
+        clearSearch={clearSearch}
       />
     </>
   );
