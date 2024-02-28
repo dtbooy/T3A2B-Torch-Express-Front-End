@@ -38,18 +38,18 @@ const LocationModal = ({ editedField, handleChange, handleCloseEditModal, update
     return (
         <Form onSubmit={handleSubmit}>
             <Form.Group>
-                <Form.Label>Name</Form.Label>
-                <Form.Control type="text" name="name" value={editedField.name} onChange={(e) => handleInputChange(e, 'name')} isInvalid={!!errors.name} />
+                <Form.Label htmlFor="name">Name</Form.Label>
+                <Form.Control id="name" type="text" name="name" value={editedField.name} onChange={(e) => handleInputChange(e, 'name')} isInvalid={!!errors.name} />
                 <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
-                <Form.Label>Address</Form.Label>
-                <Form.Control type="text" name="address" value={editedField.address} onChange={(e) => handleInputChange(e, 'address')} isInvalid={!!errors.address} />
+                <Form.Label htmlFor="address">Address</Form.Label>
+                <Form.Control id="address" type="text" name="address" value={editedField.address} onChange={(e) => handleInputChange(e, 'address')} isInvalid={!!errors.address} />
                 <Form.Control.Feedback type="invalid">{errors.address}</Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
-                <Form.Label>Directions</Form.Label>
-                <Form.Control type="text" name="directions" value={editedField.directions} onChange={(e) => handleInputChange(e, 'directions')} isInvalid={!!errors.directions} />
+                <Form.Label htmlFor="directions">Directions</Form.Label>
+                <Form.Control id="directions"type="text" name="directions" value={editedField.directions} onChange={(e) => handleInputChange(e, 'directions')} isInvalid={!!errors.directions} />
                 <Form.Control.Feedback type="invalid">{errors.directions}</Form.Control.Feedback>
             </Form.Group>
             <Modal.Footer className="d-flex justify-content-center">

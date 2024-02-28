@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Modal } from 'react-bootstrap'
+import { Button, Container, Modal } from 'react-bootstrap'
 import AdminTable from './AdminTable'
 import '../../styling/adminpages.scss'
 import Cookies from 'js-cookie'
@@ -9,7 +9,7 @@ import Cookies from 'js-cookie'
 const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, renderRow, prepareData, hideEditButton, propertyPaths }) => {
     const [field, setField] = useState([])
     const [showEditModal, setShowEditModal] = useState(false)
-    const [editedField, setEditedField] = useState({})
+    const [editedField, setEditedField] = useState([])
     // generic filter 
     const [filter, setFilter] = useState({})
     // filtered data
@@ -87,14 +87,14 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
 
 
     return (
-        <div>
+        <Container>
             <h1 className="admin-heading">{heading}</h1>
             {newForm && (
-                <div className="new-button-container">
+                <Container className="new-button-container" aria-label='new-button'>
                     <Link to={newForm}>
                         <Button variant="success">New</Button>
                     </Link>
-                </div>
+                </Container>
             )}
 
             <AdminTable
@@ -117,7 +117,7 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
                 </Modal.Body>
 
             </Modal>
-        </div>
+        </Container>
     )
 }
 
