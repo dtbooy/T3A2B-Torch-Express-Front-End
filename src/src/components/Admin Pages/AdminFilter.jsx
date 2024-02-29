@@ -66,6 +66,7 @@ const AdminFilter = ({ tableHeaders, filter, setFilter, filterProps }) => {
                     [path[0]]: e.target.value,
                   })}
                 }
+                className="table-filter"
               />
               )}
             </Form.Group>
