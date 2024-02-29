@@ -42,13 +42,12 @@ const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit, hi
 
     return (
         <Container fluid>
-            <div className="card-container">
             <Table responsive="sm" className="admin-table ">
                 <thead>
                     {/* Header for each column */}
                     <tr >
                         {tableHeaders.map((header, index) => (
-                            <th key={index}>{header}</th>
+                            <th key={index} className="table-headers">{header}</th>
                         ))}
                         <th></th>
                     </tr>
@@ -103,7 +102,6 @@ const AdminTable = ({ tableHeaders, data, renderRow, deleteField, handleEdit, hi
                 </Pagination>
             )}
              <DeleteModal message="Delete?" show={showDeleteModal} onHide={handleDeleteCancel} onDeleteConfirm={handleDeleteConfirm} />
-             </div>
         </Container>
     )
 }
