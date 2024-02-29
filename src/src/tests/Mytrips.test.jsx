@@ -27,13 +27,6 @@ describe('Mytrip Component', () => {
     // Assert that the MyTrips header is rendered
     expect(screen.getByText('My Trips')).toBeInTheDocument()
   })
-  // it('does not render My Trips header if not logged in', async () => {
-
-  //   // Wait for the component to render
-  //   await waitFor(() => {
-  //     expect(screen.queryByText('My Trips')).not.toBeInTheDocument()
-  //   })
-  // })
 })
 
 
