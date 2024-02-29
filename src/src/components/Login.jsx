@@ -43,7 +43,6 @@ const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
           body: JSON.stringify(values)
         })
         const data = await res.json()
-        console.log(res.status)
         if (res.status === 200) {
           console.log(data)
           await updateAccessToken(data.token)

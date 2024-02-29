@@ -18,12 +18,29 @@ async function login() {
     }),
   })
   const data = await response.json()
-  userData = data.user
+  adminData = data.user
   token = data.token
-  return { userData, token }
+  return { adminData, userToken }
 }
 
-const adminData = {
+async function loginUser() {
+  const response = await fetch('http://127.0.0.1:4001/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email: 'user@example.com',
+      password: '123456',
+    }),
+  })
+  const data = await response.json()
+  userData = data.user
+  token = data.token
+  return { userData, userToken }
+}
+
+let adminData = {
   "_id": "65d435bde8482308c2e3b11b",
   "name": "Test Administrator",
   "email": "admin@example.com",
@@ -38,7 +55,7 @@ const adminData = {
   "__v": 0
 }
 
-const userData = {
+let userData = {
   "_id": "65dd1c93a8300ebb63c80e32",
   "name": "Test User",
   "email": "user@example.com",
