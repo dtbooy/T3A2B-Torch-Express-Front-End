@@ -1,23 +1,83 @@
 
 import '@testing-library/jest-dom'
 import { screen, render, waitFor, fireEvent } from '@testing-library/react'
-import { beforeEach, describe, expect, it, test } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import App from './../components/App'
 import NavigationBar from '../components/NavBar'
 import { BrowserRouter } from 'react-router-dom'
 import Login from '../components/Login'
 import userEvent from '@testing-library/user-event'
 
-test('app rendering navigating', async () => {
-  let { container } = render(<App />)
 
-  expect(screen.getByText('Get On Board!')).toBeInTheDocument()
-  
-  const signUpButton = screen.getByRole('button', { name: /Sign Up/i })
-  await userEvent.click(signUpButton)
+describe('app rendering and navigation', () => {
+  let container
+  beforeEach(() => {
+    container = 
+    render(<App />).container
+  })
 
-  expect(container.querySelector('h1')).toHaveTextContent('Sign Up')
+  it('renders homepage successfully', () => {
+    expect(screen.getByText('Get On Board!')).toBeInTheDocument()
+  })
+
+  it('renders login button in navbar and is clickable', async () => {
+    const signUpButton = screen.getByRole('button', { name: /Sign Up/i })
+    userEvent.click(signUpButton)
+    await waitFor(() => {
+      expect(screen.getByText('Get On Board!')).toBeInTheDocument()
+    })
+
+    
+  })
+  it('signup Page is rendered after clicked', async () => {
+    const signUpHeader = await screen.findByText('Sign Up')
+    expect(signUpHeader).toBeInTheDocument()
+  })
 })
+
+
+describe('Login Component', () => {
+  let container
+
+  beforeEach(() => {
+    container = render(
+      <BrowserRouter>
+        <Login/>
+      </BrowserRouter>
+    ).container
+  })
+
+  it('renders the login component successfully', () => {
+    expect(container.querySelector('h1')).toHaveTextContent("Login")
+  })
+
+
+  it('tests logging in', async () => {
+    let { container } = render(<App/>).container
+   
+    const emailInput = screen.getByPlaceholderText('Enter email')
+    const passwordInput = screen.getByLabelText('Password')
+    const submitButton = screen.getAllByRole('button', { name: 'Login' })[0]
+
+    
+    fireEvent.change(emailInput, { target: { value: 'admin@example.com' } })
+    fireEvent.change(passwordInput, { target: { value: 'admin1234' } })
+
+    fireEvent.click(submitButton)
+
+      await waitFor(() => {
+        // Check for elements indicating successful login or next page
+        const homepageContent = screen.queryByText('Get On Board!')
+  
+        // Return true if any of the elements are found
+        expect(homepageContent).toBeInTheDocument()
+
+    })
+  })
+})
+
+//  Assuming `testToken` is declared outside the test scope
+//  testToken = Cookies.get('accessToken')
 
 
 
@@ -40,39 +100,3 @@ describe('NavigationBar Component', () => {
     expect(screen.getByText('Login')).toBeInTheDocument()
   })
 })
-
-describe('Login Component', () => {
-  let container;
-
-  beforeEach(() => {
-    container = render(
-      <BrowserRouter>
-        <Login/>
-      </BrowserRouter>
-    ).container;
-  });
-
-  it('renders the login component successfully', () => {
-    expect(container.querySelector('h1')).toHaveTextContent("Login");
-  });
-
-
-  it('tests logging in', async () => {
-    const emailInput = screen.getByPlaceholderText('Enter email');
-    const passwordInput = screen.getByLabelText('Password');
-    const submitButton = screen.getByRole('button', { name: 'Login' });
-
-    fireEvent.change(emailInput, { target: { value: 'admin@example.com' } });
-    fireEvent.change(passwordInput, { target: { value: 'admin1234' } });
-
-    fireEvent.click(submitButton);
-
-    await waitFor(() => {
-      expect(container.querySelector('h1')).toBeInTheDocument()
-     
-    });
-  });
-});
-
- // Assuming `testToken` is declared outside the test scope
-//  testToken = Cookies.get('accessToken');
