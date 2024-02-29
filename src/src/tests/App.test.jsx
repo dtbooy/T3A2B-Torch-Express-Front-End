@@ -9,6 +9,6 @@ describe('App Component', () => {
             <App />
         )
 
-        expect(screen.getByText('© Torch Transit 2024')).toBeDefined()
+        expect(screen.getByText('© Torch Express 2024')).toBeDefined()
     })
 })

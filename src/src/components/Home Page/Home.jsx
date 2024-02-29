@@ -33,7 +33,7 @@ const Home = () => {
       </div>
       
       <div className="col-lg-5 d-flex justify-content-lg-end justify-content-center align-items-center">
-        <Image src="/Logo1.png" />
+        <Image src="/Logo1.png" className="img-fluid mt-1"/>
       </div>
     </Row>
   </Container>
@@ -66,7 +66,7 @@ const Home = () => {
           <Col>
             <Card className="home-card">
               <Card.Body className="d-flex flex-column align-items-center">
-                <Card.Title className="text-center">Q2023</Card.Title>
+                <Card.Title className="text-center">Q2032</Card.Title>
                 <Card.Img src="/olympicicon.png" className="homeicon" />
                 <Link to="https://q2032.au/">
                   <Button className="mt-auto custom-button">
