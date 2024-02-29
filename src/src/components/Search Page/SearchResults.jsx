@@ -56,7 +56,7 @@ const SearchResults = ({ results, locations, setResults }) => {
   }
 
   if (results && results.length === 0) {
-    return <h4> No Matches found... </h4>;
+    return <h4 className="result-error"> No Matches found... </h4>;
   } else if (!results) {
     return <></>;
   } else if (results == "loading") {

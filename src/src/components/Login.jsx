@@ -63,7 +63,7 @@ const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
   }
 
   return (
-    <Container className="d-flex  justify-content-center align-items-center vh-100">
+    <Container className="d-flex  justify-content-center align-items-center mt-5">
       <Card className="login-card p-4">
         <h1 className="text-center login-title">Login</h1>
         {errorMessage && <div className="error-message align-content-center">{errorMessage}</div>}

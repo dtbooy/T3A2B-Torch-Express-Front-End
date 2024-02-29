@@ -23,7 +23,8 @@ const UserProfile = ({user, setUser, updateUserCookie, setIsLoggedIn, isLoggedIn
                 })
                 // Navigate to home page on deletion
                 nav('/')
-                // need to add logout function on account delete---------------------------------------------------------------- DEBUG
+                setIsLoggedIn(false)
+                isLoggedIn(false)
             } catch (error) {
                 console.error('Error Deleting:', error)
             }

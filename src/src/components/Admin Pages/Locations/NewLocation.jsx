@@ -20,7 +20,7 @@ const NewLocation = () => {
         const { name, value } = e.target
         setInputForm({
             ...inputForm,
-            [name]: value.trim(),
+            [name]: value,
         })
         // clear error message when field changes
         setErrors({ ...errors, [name]: '' })

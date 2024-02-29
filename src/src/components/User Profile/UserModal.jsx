@@ -107,9 +107,11 @@ const UserModal = ({ user, setUser, updateUser, handleCloseEditModal, deleteUser
                     <Form.Control type="date" name="DOB" value={userData.DOB} onChange={handleChange} isInvalid={!!errors.DOV} />
                     <Form.Control.Feedback type="invalid">{errors.DOB}</Form.Control.Feedback>
                 </Form.Group>
-                <Modal.Footer className="d-flex flex-column align-items-end">
+                <Modal.Footer className="d-flex justify-content-evenly align-items-evenly">
+                <Button variant="outline-secondary" onClick={handleCloseEditModal}>Cancel </Button>
                 <Button className="edit-button" type="submit">Save</Button>
-                <Button className="delete-button" onClick={() => handleDeleteConfirmation(user._id)}>Delete Account</Button></Modal.Footer>
+                </Modal.Footer>
+                <Modal.Footer className="d-flex justify-content-evenly align-items-evenly"><Button className="delete-button" onClick={() => handleDeleteConfirmation(user._id)}>Delete Account</Button></Modal.Footer>
             </Form>
             <DeleteModal message="Are you sure you want to delete your account?" show={showDeleteModal} onHide={handleDeleteCancel} onDeleteConfirm={handleDeleteConfirm} />
         </>
