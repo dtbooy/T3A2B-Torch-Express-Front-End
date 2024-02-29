@@ -17,7 +17,7 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
 
     // Fetch Data from API
     useEffect(() => {
-        fetch(`http://localhost:4001/${endpoint}`,
+        fetch(`https://t3a2b-torch-express-api.onrender.com/${endpoint}`,
             {headers : {'Authorization': Cookies.get("accessToken")}}
         )
             .then(res => res.json())
@@ -28,7 +28,7 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
     // Delete
     async function deleteField(id) {
         try {
-            await fetch(`http://localhost:4001/${endpoint}/${id}`, { 
+            await fetch(`https://t3a2b-torch-express-api.onrender.com/${endpoint}/${id}`, { 
                 method: 'Delete',
                 headers : {'Authorization': Cookies.get("accessToken")}
             })
@@ -58,7 +58,7 @@ const AdminPage = ({ endpoint, heading, newForm, tableHeaders, modalComponent, r
         try {
             const updatedFieldData = prepareData(editedField)
 
-            const response = await fetch(`http://localhost:4001/${endpoint}/${editedField._id}`, {
+            const response = await fetch(`https://t3a2b-torch-express-api.onrender.com/${endpoint}/${editedField._id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', 'Authorization': Cookies.get("accessToken")},
                 body: JSON.stringify(updatedFieldData)

@@ -10,7 +10,7 @@ const NewRoute = ({ accessToken }) => {
   const [locations, setLocations] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:4001/locations',{
+    fetch('https://t3a2b-torch-express-api.onrender.com/locations',{
       headers: {'Authorization': Cookies.get("accessToken")}
     })
       .then((res) => res.json())
@@ -62,7 +62,7 @@ const NewRoute = ({ accessToken }) => {
     // if no validation errors then submit the form and create new service 
     if (Object.keys(newErrors).length === 0) {
       try {
-        const response = await fetch('http://localhost:4001/services/', {
+        const response = await fetch('https://t3a2b-torch-express-api.onrender.com/services/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
