@@ -46,7 +46,7 @@ const Home = () => {
               <Card.Body className="d-flex flex-column align-items-center">
                 <Card.Title className="text-center">Our Buses</Card.Title>
                 <Card.Img src="/buslogo.png" className="homeicon" />
-                <Button onClick={() => setShowBusesModal(true)} className="mt-auto custom-button">
+                <Button onClick={() => setShowBusesModal(true)} className="mt-auto custom-button" aria-label='buses-button'>
                   <GrNext />
                 </Button>
               </Card.Body>
@@ -57,7 +57,7 @@ const Home = () => {
               <Card.Body className="d-flex flex-column align-items-center">
                 <Card.Title className="text-center">Locations</Card.Title>
                 <Card.Img src="/locationicon.png" className="homeicon" />
-                <Button  onClick={() => setShowLocationsModal(true)} className="mt-auto custom-button">
+                <Button  onClick={() => setShowLocationsModal(true)} className="mt-auto custom-button" aria-label='locations-button'>
                   <GrNext />
                 </Button>
               </Card.Body>
@@ -81,7 +81,7 @@ const Home = () => {
               <Card.Body className="d-flex flex-column align-items-center">
                 <Card.Title className="text-center">Contact Us</Card.Title>
                 <Card.Img src="/contacticon.png" className="homeicon" />
-                <Button onClick={handleShow} className="mt-auto custom-button">
+                <Button onClick={handleShow} className="mt-auto custom-button" aria-label='contact-button' >
                   <GrNext />
                 </Button>
               </Card.Body>

@@ -80,8 +80,7 @@ const SearchResults = ({ results, locations, setResults }) => {
                           <Card.Text className="text-center">
                             {
                               locations.find(
-                                (loc) => loc._id === result.pickupLocation
-                              ).name
+                                (loc) => loc._id === result.pickupLocation)?.name
                             }{" "}
                             {result.collectionTime.slice(11, 16)} (EST)
                           </Card.Text>
@@ -89,8 +88,7 @@ const SearchResults = ({ results, locations, setResults }) => {
                           <Card.Text className="text-center">
                             {
                               locations.find(
-                                (loc) => loc._id === result.dropoffLocation
-                              ).name
+                                (loc) => loc._id === result.dropoffLocation)?.name
                             }{" "}
                             {addTime(
                               result.collectionTime,

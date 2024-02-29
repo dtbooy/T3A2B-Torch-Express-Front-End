@@ -1,7 +1,7 @@
 import { BsPersonFill } from 'react-icons/bs'
 
 const ProfileIcon = ({ user }) => {
-    const firstName = user.name.split(' ')[0]
+    const firstName = user.name?.split(' ')[0]
 
     return (
         <div className='icon-container'>

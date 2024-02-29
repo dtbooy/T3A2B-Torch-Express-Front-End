@@ -53,8 +53,8 @@ const Mytrips = () => {
 
   if (reservations.length === 0) {
     return (<>
-      <h1>My Trips</h1>
-      <h2>No Reservations</h2>
+      <h1 className="page-heading">My Trips</h1>
+      <h2 className="error-heading">No Reservations</h2>
     </>)
   } else {
     return (
