@@ -7,7 +7,10 @@ import NavigationBar from '../components/NavBar'
 import { BrowserRouter } from 'react-router-dom'
 import Login from '../components/Login'
 import userEvent from '@testing-library/user-event'
+import Cookies from 'js-cookie'
+import renderWithRouter from './SetupTests/TestUtils'
 
+let token
 
 describe('app rendering and navigation', () => {
   let container
@@ -21,15 +24,15 @@ describe('app rendering and navigation', () => {
   })
 
   it('renders login button in navbar and is clickable', async () => {
-    const signUpButton = screen.getByRole('button', { name: /Sign Up/i })
-    userEvent.click(signUpButton)
+    const loginButton = screen.getByRole('button', { name: "Login" })
+    userEvent.click(loginButton)
     await waitFor(() => {
-      expect(screen.getByText('Get On Board!')).toBeInTheDocument()
+      expect(container.querySelector('h1')).toHaveTextContent("Login")
     })
 
     
   })
-  it('signup Page is rendered after clicked', async () => {
+  it('Login page is rendered after clicked', async () => {
     const signUpHeader = await screen.findByText('Sign Up')
     expect(signUpHeader).toBeInTheDocument()
   })
@@ -40,10 +43,9 @@ describe('Login Component', () => {
   let container
 
   beforeEach(() => {
-    container = render(
-      <BrowserRouter>
-        <Login/>
-      </BrowserRouter>
+    container = renderWithRouter(
+      <App/>,
+      { route: '/login' }
     ).container
   })
 
@@ -53,24 +55,20 @@ describe('Login Component', () => {
 
 
   it('tests logging in', async () => {
-    let { container } = render(<App/>).container
    
-    const emailInput = screen.getByPlaceholderText('Enter email')
+    const emailInput = screen.getByLabelText('Email')
     const passwordInput = screen.getByLabelText('Password')
-    const submitButton = screen.getAllByRole('button', { name: 'Login' })[0]
+    const submitButton = screen.getAllByRole('button', { name: 'Login' })[1]
 
     
-    fireEvent.change(emailInput, { target: { value: 'admin@example.com' } })
-    fireEvent.change(passwordInput, { target: { value: 'admin1234' } })
+    userEvent.type(emailInput, 'admin@example.com')
+    userEvent.type(passwordInput, 'admin1234')
 
-    fireEvent.click(submitButton)
+    userEvent.click(submitButton)
 
       await waitFor(() => {
-        // Check for elements indicating successful login or next page
-        const homepageContent = screen.queryByText('Get On Board!')
-  
-        // Return true if any of the elements are found
-        expect(homepageContent).toBeInTheDocument()
+        expect(Cookies.get('accessToken')).toBeTruthy()
+ 
 
     })
   })
