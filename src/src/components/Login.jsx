@@ -77,7 +77,7 @@ const Login = ({ setIsLoggedIn, setUser, updateAccessToken }) => {
             <PasswordInput value={values.password} onChange={(e) => setValues({ ...values, password: e.target.value })} error={fieldErrors.password}/>
             <Form.Control.Feedback type="invalid">{fieldErrors.password}</Form.Control.Feedback>
           </Form.Group>
-          <Button type="submit" className="w-100 login-button">
+          <Button type="submit" className="w-100 login-button" id="login-submit-button">
             Login
           </Button>
         </Form>
