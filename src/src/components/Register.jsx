@@ -79,7 +79,7 @@ const Register = () => {
   }
 
   return (
-    <Container className="d-flex login-container justify-content-center align-items-center vh-100">
+    <Container className="d-flex login-container justify-content-center align-items-center mt-5">
       <Card className="login-card p-4">
         <h1 className="text-center login-title">Sign Up</h1>
         <Form onSubmit={(e) => handleSubmit(e)}>

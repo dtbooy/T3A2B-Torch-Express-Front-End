@@ -64,7 +64,7 @@ const Mytrips = () => {
           {Array.isArray(reservations) && reservations.map((reservation) => (
             <Card key={reservation._id} className="reservation-card mb-3">
               <Card.Body>
-              <Card.Img src="/Torch Transit.png"></Card.Img>
+              <Card.Img src="/Torch Express.png"></Card.Img>
               <Card.Header as="h3" className="reservation-date text-center">{new Date(reservation?.busService?.collectionTime).toLocaleDateString('en-GB', { day: '2-digit', month: 'long' })} at {new Date(reservation?.busService?.collectionTime).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</Card.Header>
                 <Card.Text className="qr-code text-center mt-3">
                   <QRCode

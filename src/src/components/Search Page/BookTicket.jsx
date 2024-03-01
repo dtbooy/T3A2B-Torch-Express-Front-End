@@ -94,11 +94,11 @@ function BookTicket({ showBooking, setShowBooking, selectedService, setResults }
         alertType: "danger",
       });
     }
-    
+
   };
   const maxTickets = []
-  for(let i = 0; i < Math.min(selectedService.capacity - selectedService.reservations, 10); i++){
-    maxTickets.push(i+1)
+  for (let i = 0; i < Math.min(selectedService.capacity - selectedService.reservations, 10); i++) {
+    maxTickets.push(i + 1)
   }
 
   return (
@@ -153,8 +153,8 @@ function BookTicket({ showBooking, setShowBooking, selectedService, setResults }
                 <Form.Control
                   plaintext
                   readOnly
-                  defaultValue={
-                    selectedService?.collectionTime?.slice(11, 16) +
+                  value={
+                    new Date(selectedService?.collectionTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) +
                     ", " +
                     new Date(selectedService?.collectionTime).toDateString()
                   }
@@ -168,8 +168,8 @@ function BookTicket({ showBooking, setShowBooking, selectedService, setResults }
                 onChange={(e) => setReservations(e.target.value)}
               >
                 {maxTickets.map((i) => (
-                <option key={i} value={i}>{i}</option>))
-              }
+                  <option key={i} value={i}>{i}</option>))
+                }
 
               </Form.Select>
             </Form.Group>

@@ -61,6 +61,8 @@ const NewRoute = ({ accessToken }) => {
 
     // if no validation errors then submit the form and create new service 
     if (Object.keys(newErrors).length === 0) {
+      // turn set collection time to local date
+      const newRoute = { ...inputForm, collectionTime: new Date(inputForm.collectionTime)}
       try {
         const response = await fetch('https://t3a2b-torch-express-api.onrender.com/services/', {
           method: 'POST',
@@ -68,9 +70,8 @@ const NewRoute = ({ accessToken }) => {
             'Content-Type': 'application/json',
             'Authorization': `${accessToken}`
           },
-          body: JSON.stringify(inputForm)
+          body: JSON.stringify(newRoute) 
         })
-        console.log(inputForm)
 
         if (!response.ok) {
           throw new Error('Failed to create service')

@@ -22,7 +22,7 @@ const SearchResults = ({ results, locations, setResults }) => {
       // store selected service details
       let service = results.find((res) => res._id == e.target.id);
       //Do nothing if sold out
-      if (service.capacity <= service.reservations){
+      if (service.capacity <= service.reservations) {
         return
       }
       // replace location id's with location names
@@ -56,7 +56,7 @@ const SearchResults = ({ results, locations, setResults }) => {
   }
 
   if (results && results.length === 0) {
-    return <h4> No Matches found... </h4>;
+    return <h4 className="result-error"> No Matches found... </h4>;
   } else if (!results) {
     return <></>;
   } else if (results == "loading") {
@@ -70,54 +70,52 @@ const SearchResults = ({ results, locations, setResults }) => {
   } else {
     return (
       <Container className="d-flex flex-wrap justify-content-center search-results">
-          {results.map((result) => {
-            return (
-              <Card key={result._id} className="search-result m-2"> 
-                <Card.Body>
-                  <Row>
-                      <Card.Title className="bus-date mb-3">{new Date(result.collectionTime).toDateString()}</Card.Title>
-                      <div className="d-flex justify-content-center">
-                          <Card.Text className="text-center">
-                            {
-                              locations.find(
-                                (loc) => loc._id === result.pickupLocation)?.name
-                            }{" "}
-                            {result.collectionTime.slice(11, 16)} (EST)
-                          </Card.Text>
-                          <FaArrowRight className="bus-arrow"/>
-                          <Card.Text className="text-center">
-                            {
-                              locations.find(
-                                (loc) => loc._id === result.dropoffLocation)?.name
-                            }{" "}
-                            {addTime(
-                              result.collectionTime,
-                              result.estimatedTravelTime
-                            )
-                              .toISOString()
-                              .slice(11, 16)}
-                            (EST)
-                          </Card.Text>
-                      </div>
-                      <Card.Footer className="bus-tickets mt-3">
-                        Tickets remaining: {result.capacity - result.reservations}
-                      </Card.Footer>
-                      <div className="d-flex justify-content-center align-items-center mt-3">
-                        <Button
-                          id={result._id}
-                          onClick={(e) => handleClick(e)}
-                          className="booking-button"
-                        >
-                          {(result.capacity > result.reservations) ?
-                          user ? "Book a seat" : "Login to Book"
-                         : "Sold Out"}
-                        </Button>
-                      </div>
-                  </Row>
-                </Card.Body>
-              </Card>
-            );
-          })}
+        {results.map((result) => {
+          return (
+            <Card key={result._id} className="search-result m-2">
+              <Card.Body>
+                <Row>
+                  <Card.Title className="bus-date mb-3">{new Date(result.collectionTime).toDateString()}</Card.Title>
+                  <div className="d-flex justify-content-center">
+                    <Card.Text className="text-center">
+                      {
+                        locations.find(
+                          (loc) => loc._id === result.pickupLocation)?.name
+                      }{" "}
+                      {new Date(result.collectionTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+                    </Card.Text>
+
+                    <FaArrowRight className="bus-arrow" />
+                    <Card.Text className="text-center">
+                      {
+                        locations.find((loc) => loc._id === result.dropoffLocation)?.name
+                      }{" "}
+                      {
+                        new Date(
+                          new Date(result.collectionTime).getTime() + result.estimatedTravelTime * 60000 // Convert minutes to milliseconds
+                        ).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+                      }
+                    </Card.Text>
+                  </div>
+                  <Card.Footer className="bus-tickets mt-3">
+                    Tickets remaining: {result.capacity - result.reservations}
+                  </Card.Footer>
+                  <div className="d-flex justify-content-center align-items-center mt-3">
+                    <Button
+                      id={result._id}
+                      onClick={(e) => handleClick(e)}
+                      className="booking-button"
+                    >
+                      {(result.capacity > result.reservations) ?
+                        user ? "Book a seat" : "Login to Book"
+                        : "Sold Out"}
+                    </Button>
+                  </div>
+                </Row>
+              </Card.Body>
+            </Card>
+          )
+        })}
         <BookTicket
           showBooking={showBooking}
           setShowBooking={setShowBooking}
@@ -125,8 +123,8 @@ const SearchResults = ({ results, locations, setResults }) => {
           setResults={setResults}
         />
       </Container>
-    );
+    )
   }
-};
+}
 
 export default SearchResults;
