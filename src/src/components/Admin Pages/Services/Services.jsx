@@ -13,7 +13,7 @@ const Services = () => {
         return {
             _id,
             busNumber,
-            collectionTime,
+            collectionTime : new Date(collectionTime),
             estimatedTravelTime,
             capacity,
             pickupLocation,
