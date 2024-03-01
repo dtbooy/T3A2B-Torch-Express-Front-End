@@ -5,7 +5,7 @@ const SearchBar = (params) => {
   const { locations, setResults } = params;
 
   // Holds controlled form inputs
-  const [inputForm, setInputForm] = useState({ date: "2032-08-22" });
+  const [inputForm, setInputForm] = useState({ date: "2032-08-23" });
 
   // Sets form input states
   function handleFormChange(e) {
