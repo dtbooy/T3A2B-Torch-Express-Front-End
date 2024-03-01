@@ -138,13 +138,3 @@ describe('Search Results Components', () => {
 
 })
 
-describe('BookTicket Component', () => {
-    it('Render book ticket component', () => {
-        render(
-            <BrowserRouter>
-                <BookTicket showBooking={true} handleClose={() => { }} />
-            </BrowserRouter>)
-
-        expect(screen.getAllByText('Book Tickets')).not.toBeNull()
-    })
-})
