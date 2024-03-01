@@ -61,7 +61,7 @@ const Mytrips = () => {
       <>
       <h1 className="page-heading">My Trips</h1>
       <Container className="d-flex flex-wrap justify-content-evenly">
-          {reservations.map((reservation) => (
+          {Array.isArray(reservations) && reservations.map((reservation) => (
             <Card key={reservation._id} className="reservation-card mb-3">
               <Card.Body>
               <Card.Img src="/Torch Express.png"></Card.Img>
