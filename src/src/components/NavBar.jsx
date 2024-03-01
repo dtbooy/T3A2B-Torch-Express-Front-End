@@ -12,7 +12,7 @@ const NavigationBar = ({setIsLoggedIn, isLoggedIn, isAdmin, user }) => {
   return (
     <Navbar expand="lg" className='nav-bar'>
       <Container>
-        <Navbar.Brand as={Link} to="/"><img src="/Torch Transit.png" alt="Logo" className='img-fluid header'/></Navbar.Brand>
+        <Navbar.Brand as={Link} to="/"><img src="/Torch Express.png" alt="Logo" className='img-fluid header'/></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className= "mx-auto d-flex justify-content-start w-100">
