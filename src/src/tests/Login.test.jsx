@@ -7,6 +7,7 @@ import NavigationBar from '../components/NavBar'
 import { BrowserRouter } from 'react-router-dom'
 import userEvent from '@testing-library/user-event'
 import renderWithRouter from './SetupTests/TestUtils'
+import Login from '../components/Login'
 
 let container
 
@@ -32,8 +33,9 @@ describe('app rendering and navigation', () => {
 describe('Login Component', () => {
   beforeEach(() => {
     container = renderWithRouter(
-      <App/>,
-      { route: '/login' }
+      <BrowserRouter>
+      <Login />
+      </BrowserRouter>
     ).container
   })
 
@@ -45,7 +47,7 @@ describe('Login Component', () => {
  
   fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'admin@example.com' } });
   fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'admin1234' } });
-  fireEvent.click(screen.getAllByRole('button', { name: 'Login' })[1])
+  fireEvent.click(screen.getByRole('button', { name: 'Login' }))
   
   await waitFor(() => {
     expect(window.location.pathname).toBe('/')
