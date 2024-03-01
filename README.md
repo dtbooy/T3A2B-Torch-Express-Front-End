@@ -5,6 +5,15 @@
 
 [Deployed API - https://t3a2b-torch-express-api.onrender.com](https://t3a2b-torch-express-api.onrender.com)
 
+## Deployment credentials
+### Admin
+email: admin@example.com
+password: admin1234
+
+### User
+email: user@example.com
+password: 123456
+
 # R11 GitHub Repos
 [T3A2-A Repo](https://github.com/dtbooy/T3A2A)
 [T3A2-B Backend Repo](https://github.com/dtbooy/T3A2B-Torch-Express-API)
@@ -316,10 +325,15 @@ User stories are a fundamental component of agile software development methodolo
 # R13 	Trello Board Screenshots - Part B
 
 <img src="./docs/Images/Trello Screenshots/Screenshot 2024-02-19.png" alt="Trello Screenshot">
+
 <img src="./docs/Images/Trello Screenshots/Screenshot 2024-02-20.png" alt="Trello Screenshot">
+
 <img src="./docs/Images/Trello Screenshots/Screenshot 2024-02-21.png" alt="Trello Screenshot">
+
 <img src="./docs/Images/Trello Screenshots/Screenshot 2024-02-22.png" alt="Trello Screenshot">
+
 <img src="./docs/Images/Trello Screenshots/Screenshot 2024-02-23.png" alt="Trello Screenshot">
+
 <img src="./docs/Images/Trello Screenshots/Screenshot 2024-02-27.png" alt="Trello Screenshot">
+
 <img src="./docs/Images/Trello Screenshots/Screenshot 2024-02-29.png" alt="Trello Screenshot">
-<img src="./docs/Images/Trello Screenshots/Screenshot 2024-03-01.png" alt="Trello Screenshot">
